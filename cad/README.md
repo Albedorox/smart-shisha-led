@@ -2,6 +2,36 @@
 
 Erstellt mit SolidCraft (über MCP auf dem Rechner des Nutzers). Planungsgrundlage: `docs/planung/03_mechanical_design.md`, Workflow: `docs/planung/08_cad_mcp_plan.md`.
 
+## Stand v2 (2026-10-24) – Änderungen aus Testdruck 1 (Testring)
+
+Befund des Nutzers am gedruckten Testring v1:
+
+1. Das Glas kippelt. Der Zentrierrand hebt es an; liegt das Glas auf einer Seite auf, steht es auf der anderen ca. 1,5 mm hoch.
+2. Der LED-Ring passt nur sehr knapp in die Einfassung.
+3. Das runde Kabelloch (Ø 6) verdeckt die Lötpads teilweise und ist zu klein.
+
+Änderungen in `v2/` (nur T1 und der daraus abgeleitete Testring sind betroffen; T2 und T4 bleiben v1):
+
+| Parameter | v1 | v2 | Grund |
+|---|---|---|---|
+| `center_clear` | 1 mm | 5 mm | Zentrierrand 4 mm weiter innen (Außen-Ø 105,1 → 97,1) |
+| `center_rim_h` / `center_rim_ch` | 2 / 1 mm | 1 / 0,5 mm | Rand niedriger, damit er die Glaswölbung nicht berührt |
+| `ring_clear` | 0,3 mm | 0,8 mm | Einfassung Ø 86,6 → 87,6 (+1 mm) |
+| `cable_hole_d`, `cable_hole_r` | Rundloch Ø 6 | entfallen | ersetzt durch Rechteck |
+| `cable_slot_l` × `cable_slot_w`, `cable_slot_r` | – | 14 × 6,6 mm, Mitte r 39,7 | rechteckige Aussparung unter allen 4 Pads (DI, 5V, GND, DO; Padreihe ca. 8,6 mm) |
+| `sens_rib_h` | 3 mm | entfallen | wurde nicht mehr verwendet |
+
+**Glas-Hüllkörper:** Die Wölbung ist jetzt als Kugelkappe genähert (7,5 mm tief über dem Fuß-Innenradius 53,55 mm, R ≈ 195 mm). Mit dieser Form ergibt der alte Rand genau die gemessenen ca. 1,5 mm Anheben. Prüfung v2 (Strahlentest gegen die exportierten Netze): Das Glas steht mittig ca. 0,5 mm über dem Rand und berührt ihn erst bei ca. 2 mm Versatz. Luft Glas ↔ LED-Ring-Hüllkörper mindestens 1,1 mm (v1-Angabe 3,8 mm beruhte auf der alten, zu steilen Näherung).
+
+| Datei | Inhalt |
+|---|---|
+| `v2/SmartShisha_Untersetzer.solidcraft` | Quellmodell v2 |
+| `v2/parameter.csv`, `v2/SmartShisha_Untersetzer.script.json` | Parameter und Zeitleiste v2 |
+| `v2/stl/P_Testring_v2.stl` | Zentrier-Testring v2 (zum erneuten Prüfen, ca. 29 cm³) |
+| `v2/stl/T1_Deckplatte_v2.stl` | Deckplatte v2 |
+
+Netzprüfung (trimesh): T1 v2 und Testring v2 geschlossen, Normalen konsistent, ebene Unterseite (T1 ca. 11 470 mm²).
+
 ## Stand v1 (2026-10-24) – Vollteile exportiert
 
 G3 vom Nutzer am 2026-10-24 freigegeben. Die Vollteile T1, T2 und T4 wurden auf Wunsch des Nutzers exportiert, bevor die Testdrucke ausgewertet waren. Deshalb gelten noch die Startwerte für die Passungen (Einschmelzmuttern M2 Ø3,2 / M3 Ø4,0, M3-Durchgang Ø3,4, Gleitpassung 0,3 mm). Weichen die Coupon-Ergebnisse ab, wird neu exportiert (v2).
@@ -22,7 +52,7 @@ G3 vom Nutzer am 2026-10-24 freigegeben. Die Vollteile T1, T2 und T4 wurden auf 
 
 ## Aufbau
 
-- **T1 Deckplatte** (z 12–18, Ø125): Glasauflage oben, Zentrierrand Ø105,1 × 2 mm mit 1 mm Einführfase, LED-Ring liegt in einer 1,6 mm tiefen Einfassung (Ø86,6). 4 × M2-Einschmelzmutter für den Ring, Kabeldurchführung Ø6 unter den Pads, 4 × M3-Einschmelzmutter (Lochkreis r 47) für die Verschraubung mit T2, 1 × M3 für den Sensor.
+- **T1 Deckplatte** (z 12–18, Ø125): Glasauflage oben, Zentrierrand Ø97,1 × 1 mm mit 0,5 mm Fase (v1: Ø105,1 × 2 mm), LED-Ring liegt in einer 1,6 mm tiefen Einfassung (Ø87,6; v1: Ø86,6). 4 × M2-Einschmelzmutter für den Ring, rechteckige Kabelaussparung 14 × 6,6 mm unter den Pads (v1: Ø6), 4 × M3-Einschmelzmutter (Lochkreis r 47) für die Verschraubung mit T2, 1 × M3 für den Sensor.
 - **T2 Unterschale** (z 0–13,2): Boden 2 mm, Wand 2,4 mm, Feder 1 × 1,2 mm in Nut von T1 (Spiel 0,3 mm), 4 Schraubdome Ø8 mit Senkung von unten, 4 Mulden für Silikonfüße, 2 Ablauflöcher.
   - **Stromeingang (+X):** USB-C-Breakout 21,45 × 12,5 mm (rotes Modul mit 5,1 kΩ an CC, Lochabstand 16 mm laut Datenblatt) auf zwei Sockeln mit Kernloch Ø2,2 für M2,5-Schrauben (selbstschneidend, ca. 6 mm). Die Platine steckt mit der Kante in einer Tasche in der Wand, die Buchse sitzt in einer Öffnung 10 × 4,6 mm nahezu bündig mit der Außenfläche. Der Stecker braucht so keine große Öffnung für die Umspritzung. Angeschlossen werden nur VBUS und GND.
   - **Programmieranschluss (−X):** ESP32-C3 SuperMini in einem Rahmen auf einer Mittelrippe (1,5 mm Luft für Lötstellen), USB-C direkt an einer Wandöffnung 12,5 × 7,5 mm für den Stecker. Fixierung mit Heißkleber oder Schaumklebeband. Beim Programmieren Powerbank abziehen (R-15).
