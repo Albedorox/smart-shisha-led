@@ -23,7 +23,7 @@ Noch **keine** Druckdateien (STL/3MF/STEP). Export erst nach Prüfung und Freiga
 ## Prüfungen
 
 - Abstandsprüfung (`inspect.clearance`): keine Überlappungen. Glas ↔ LED-Ring 3,77 mm, SW-420 ↔ Boden T2 0,5 mm.
-- Druckrichtung: T1 mit der Glasauflage nach unten, T2 mit dem Boden nach unten; beide ohne Stützmaterial vorgesehen (Druckeinstellungen: `docs/planung/03_mechanical_design.md` §13).
+- Druckrichtung: T1 mit der Glasauflage nach oben (flache Unterseite auf dem Bett), T2 mit dem Boden auf dem Bett; beide ohne Stützmaterial vorgesehen (Druckeinstellungen: `docs/planung/03_mechanical_design.md` §13).
 
 ## Offen vor den Vollteilen
 
