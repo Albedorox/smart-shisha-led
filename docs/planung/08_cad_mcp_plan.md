@@ -34,7 +34,25 @@ Beobachtungen zur Umgebung: Rechner mit Windows (Programmpfade `C:\Program Files
 
 Folgerung: Der Katalog deckt alle in 03 benötigten Operationen ab (Drehkörper für Zentrierrand und Platten, Taschen, Bohrungen für Einschmelzmuttern, Schraubdome, Rastnasen, Nut/Feder, Interferenzprüfung, Export STEP + 3MF/STL). Der Ersatzweg CadQuery (D-16) wird nicht mehr benötigt, bleibt aber als Rückfallebene dokumentiert.
 
-## 3. Funktionstests (Beginn von B5, nur nach Freigabe)
+## 2a. Ergebnisse der Funktionstests (2026-10-24, nach Freigabe Phase B)
+
+Durchgeführt in einem separaten Wegwerf-Design „V_Funktionstest“ (beim Start war in SolidCraft nur ein leeres, ungespeichertes Design offen).
+
+| Nr. | Ergebnis |
+|---|---|
+| V-02 | ✓ Parameter `d`, Kreis per Bemaßung an `d` gebunden, Extrusion; Volumen plausibel |
+| V-03 | ✓ `set_parameter d = 30` → Neuberechnung ohne Fehler, Bounding Box ± 15 mm |
+| V-04 | ✓ Bohrung (`solid.hole` braucht `diameter`), Drehkörper aus Skizze mit **Ausdrücken in den Koordinaten** (`sketch.line` mit `"ri + 10"`) – folgt Parameteränderungen |
+| V-05 | ✓ Fase |
+| V-06 | ✓ `inspect.interference` meldet Überlappungen mit Volumen; Berührung zählt nicht als Überlappung |
+| V-07 | ✓ `plastic.boss` (teilweise: Dom mit Bohrung); Rastnase/Nut-Feder nicht separat getestet |
+| V-08 | ✓ Export STEP, 3MF, STL. **Einschränkung:** SolidCraft darf per MCP nur in seinen eigenen Temp-Ordner schreiben (`…\AppData\Local\Temp\solidcraft-mcp-…`); andere Ordner erst nach Start mit `--allow-path DIR`. Übertragung ins Repo daher über diesen Temp-Ordner |
+| V-09 | ✓ Unabhängige Prüfung mit trimesh: STL und 3MF geschlossen (watertight), Normalen konsistent, Bounding Box exakt |
+| V-10 | offen: `file.slicers` findet nur Cura 4.13.1, nicht PrusaSlicer. Nutzer slict selbst in PrusaSlicer aus der STL |
+
+Erkenntnisse für die Modellierung: Eine Skizze auf der XZ-Ebene ohne `flip` hat die Skizzen-y-Achse nach **−Z**; mit `flip: true` zeigt sie nach +Z. `sketch.circle.center` akzeptiert nur Zahlen, die Parameterbindung erfolgt über `sketch.dimension` mit Ausdruck; Lochpositionen über `sketch.point` mit Ausdrücken.
+
+## 3. Funktionstests (Protokoll-Vorlage)
 
 Alle Tests in einem **neuen, separaten** Wegwerf-Design (vorher speichern lassen, falls beim Nutzer ein Design offen ist). Ergebnisse werden hier nachgetragen.
 

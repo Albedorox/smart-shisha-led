@@ -1,0 +1,48 @@
+name,unit,expression,value,comment,favorite
+glass_contact_d,mm,109.1 mm,109.1,gemessen Nutzer 2026-10-24 (3 Stellen),false
+glass_contact_w,mm,2 mm,2,gemessen ca.,false
+center_clear,mm,1 mm,1,S: radiales Spiel Zentrierrand-Glas,false
+center_rim_w,mm,2.5 mm,2.5,S,false
+center_rim_h,mm,2 mm,2,S,false
+center_rim_ch,mm,1 mm,1,S: Einfuehrfase,false
+outer_d,mm,125 mm,125,Nutzer bestaetigt (D-31),false
+edge_ch,mm,1.5 mm,1.5,S: Fase Aussenkante oben,false
+top_t,mm,6 mm,6,S: Deckplatte,false
+ring_od,mm,86 mm,86,gemessen,false
+ring_id,mm,71.8 mm,71.8,gemessen,false
+ring_pcb_t,mm,1.6 mm,1.6,A: M-03b,false
+led_h,mm,1.6 mm,1.6,A: M-03b,false
+ring_recess,mm,ring_pcb_t,1.6,Einfassung = Platinendicke,false
+ring_clear,mm,0.3 mm,0.3,S,false
+ring_hole_dx,mm,64.65 mm,64.65,gemessen Lochmitten,false
+ring_hole_dy,mm,49.6 mm,49.6,gemessen Lochmitten,false
+ins_m2_d,mm,3.2 mm,3.2,A: Datenblatt Einschmelzmutter M2,false
+cable_hole_d,mm,6 mm,6,S,false
+cable_hole_r,mm,(ring_od + ring_id) / 4,39.45,unter den Pads (90 Grad),false
+base_t,mm,2 mm,2,S,false
+cavity_h,mm,10 mm,10,S,false
+wall_t,mm,2.4 mm,2.4,S,false
+tongue_w,mm,1 mm,1,S: Feder an T2,false
+tongue_h,mm,1.2 mm,1.2,S,false
+fit_slide,mm,0.3 mm,0.3,S: Coupon T-CAD-08,false
+ins_m3_d,mm,4 mm,4,A: Datenblatt Einschmelzmutter M3,false
+ins_m3_depth,mm,4.5 mm,4.5,A,false
+screw_r,mm,47 mm,47,S: Lochkreisradius T1/T2,false
+boss_d,mm,8 mm,8,S,false
+screw_clear_d,mm,3.4 mm,3.4,M3 Durchgang,false
+cbore_d,mm,6.2 mm,6.2,Kopfsenkung M3,false
+cbore_h,mm,3 mm,3,,false
+sensor_r,mm,47 mm,47,"S: Sensor-Einsatz bei 270 Grad, unter massivem Bereich (ausserhalb Einfassung)",false
+drain_d,mm,3 mm,3,,false
+foot_d,mm,10.5 mm,10.5,Silikonpuffer 10 mm,false
+foot_rec,mm,1 mm,1,,false
+foot_r,mm,50 mm,50,,false
+outer_r,mm,outer_d / 2,62.5,abgeleitet,false
+rim_or,mm,(glass_contact_d - glass_contact_w) / 2 - center_clear,52.55,abgeleitet,false
+rim_ir,mm,rim_or - center_rim_w,50.05,abgeleitet,false
+z_t1,mm,base_t + cavity_h,12,Unterkante T1,false
+z_top,mm,z_t1 + top_t,18,Glasauflage,false
+rec_r,mm,ring_od / 2 + ring_clear,43.3,Radius Einfassung,false
+usb_w,mm,9.5 mm,9.5,A: Oeffnung USB-C-Buchse (M-07b),false
+usb_h,mm,3.8 mm,3.8,A,false
+usb_zc,mm,base_t + 4 mm,6,A: Mittelhoehe Buchse,false

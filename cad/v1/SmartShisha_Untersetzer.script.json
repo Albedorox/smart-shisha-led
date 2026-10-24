@@ -1,0 +1,2952 @@
+{
+  "about": {
+    "design": "SmartShisha_Untersetzer",
+    "format": "solidcraft/29",
+    "replay": "solidcraft-cli eval script.json (timeline.add steps need a build that reads this design format)",
+    "version": "0.18.3"
+  },
+  "commands": [
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "gemessen Nutzer 2026-10-24 (3 Stellen)",
+        "expression": "109.1 mm",
+        "name": "glass_contact_d",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "gemessen ca.",
+        "expression": "2 mm",
+        "name": "glass_contact_w",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S: radiales Spiel Zentrierrand-Glas",
+        "expression": "1 mm",
+        "name": "center_clear",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S",
+        "expression": "2.5 mm",
+        "name": "center_rim_w",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S",
+        "expression": "2 mm",
+        "name": "center_rim_h",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S: Einfuehrfase",
+        "expression": "1 mm",
+        "name": "center_rim_ch",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "Nutzer bestaetigt (D-31)",
+        "expression": "125 mm",
+        "name": "outer_d",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S: Fase Aussenkante oben",
+        "expression": "1.5 mm",
+        "name": "edge_ch",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S: Deckplatte",
+        "expression": "6 mm",
+        "name": "top_t",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "gemessen",
+        "expression": "86 mm",
+        "name": "ring_od",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "gemessen",
+        "expression": "71.8 mm",
+        "name": "ring_id",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "A: M-03b",
+        "expression": "1.6 mm",
+        "name": "ring_pcb_t",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "A: M-03b",
+        "expression": "1.6 mm",
+        "name": "led_h",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "Einfassung = Platinendicke",
+        "expression": "ring_pcb_t",
+        "name": "ring_recess",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S",
+        "expression": "0.3 mm",
+        "name": "ring_clear",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "gemessen Lochmitten",
+        "expression": "64.65 mm",
+        "name": "ring_hole_dx",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "gemessen Lochmitten",
+        "expression": "49.6 mm",
+        "name": "ring_hole_dy",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "A: Datenblatt Einschmelzmutter M2",
+        "expression": "3.2 mm",
+        "name": "ins_m2_d",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S",
+        "expression": "6 mm",
+        "name": "cable_hole_d",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "unter den Pads (90 Grad)",
+        "expression": "(ring_od + ring_id) / 4",
+        "name": "cable_hole_r",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S",
+        "expression": "2 mm",
+        "name": "base_t",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S",
+        "expression": "10 mm",
+        "name": "cavity_h",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S",
+        "expression": "2.4 mm",
+        "name": "wall_t",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S: Feder an T2",
+        "expression": "1 mm",
+        "name": "tongue_w",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S",
+        "expression": "1.2 mm",
+        "name": "tongue_h",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S: Coupon T-CAD-08",
+        "expression": "0.3 mm",
+        "name": "fit_slide",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "A: Datenblatt Einschmelzmutter M3",
+        "expression": "4 mm",
+        "name": "ins_m3_d",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "A",
+        "expression": "4.5 mm",
+        "name": "ins_m3_depth",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S: Lochkreisradius T1/T2",
+        "expression": "47 mm",
+        "name": "screw_r",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S",
+        "expression": "8 mm",
+        "name": "boss_d",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "M3 Durchgang",
+        "expression": "3.4 mm",
+        "name": "screw_clear_d",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "Kopfsenkung M3",
+        "expression": "6.2 mm",
+        "name": "cbore_d",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "expression": "3 mm",
+        "name": "cbore_h",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "S: Sensor-Einsatz bei 270 Grad, unter massivem Bereich (ausserhalb Einfassung)",
+        "expression": "47 mm",
+        "name": "sensor_r",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "expression": "3 mm",
+        "name": "drain_d",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "Silikonpuffer 10 mm",
+        "expression": "10.5 mm",
+        "name": "foot_d",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "expression": "1 mm",
+        "name": "foot_rec",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "expression": "50 mm",
+        "name": "foot_r",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "abgeleitet",
+        "expression": "outer_d / 2",
+        "name": "outer_r",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "abgeleitet",
+        "expression": "(glass_contact_d - glass_contact_w) / 2 - center_clear",
+        "name": "rim_or",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "abgeleitet",
+        "expression": "rim_or - center_rim_w",
+        "name": "rim_ir",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "Unterkante T1",
+        "expression": "base_t + cavity_h",
+        "name": "z_t1",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "Glasauflage",
+        "expression": "z_t1 + top_t",
+        "name": "z_top",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "Radius Einfassung",
+        "expression": "ring_od / 2 + ring_clear",
+        "name": "rec_r",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "A: Oeffnung USB-C-Buchse (M-07b)",
+        "expression": "9.5 mm",
+        "name": "usb_w",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "A",
+        "expression": "3.8 mm",
+        "name": "usb_h",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "parameters.add",
+      "params": {
+        "comment": "A: Mittelhoehe Buchse",
+        "expression": "base_t + 4 mm",
+        "name": "usb_zc",
+        "unit": "mm"
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "id": 1,
+          "name": "S_T1_Profil",
+          "plane": {
+            "base": {
+              "name": "XZ",
+              "type": "origin"
+            },
+            "type": "flipped"
+          },
+          "sketch": {
+            "constraints": [],
+            "counters": {
+              "l": 16,
+              "p": 16
+            },
+            "curves": [
+              {
+                "a": 1,
+                "b": 2,
+                "construction": false,
+                "id": "l1",
+                "type": "line"
+              },
+              {
+                "a": 2,
+                "b": 3,
+                "construction": false,
+                "id": "l2",
+                "type": "line"
+              },
+              {
+                "a": 3,
+                "b": 4,
+                "construction": false,
+                "id": "l3",
+                "type": "line"
+              },
+              {
+                "a": 4,
+                "b": 5,
+                "construction": false,
+                "id": "l4",
+                "type": "line"
+              },
+              {
+                "a": 5,
+                "b": 6,
+                "construction": false,
+                "id": "l5",
+                "type": "line"
+              },
+              {
+                "a": 6,
+                "b": 7,
+                "construction": false,
+                "id": "l6",
+                "type": "line"
+              },
+              {
+                "a": 7,
+                "b": 8,
+                "construction": false,
+                "id": "l7",
+                "type": "line"
+              },
+              {
+                "a": 8,
+                "b": 9,
+                "construction": false,
+                "id": "l8",
+                "type": "line"
+              },
+              {
+                "a": 9,
+                "b": 10,
+                "construction": false,
+                "id": "l9",
+                "type": "line"
+              },
+              {
+                "a": 10,
+                "b": 11,
+                "construction": false,
+                "id": "l10",
+                "type": "line"
+              },
+              {
+                "a": 11,
+                "b": 12,
+                "construction": false,
+                "id": "l11",
+                "type": "line"
+              },
+              {
+                "a": 12,
+                "b": 13,
+                "construction": false,
+                "id": "l12",
+                "type": "line"
+              },
+              {
+                "a": 13,
+                "b": 14,
+                "construction": false,
+                "id": "l13",
+                "type": "line"
+              },
+              {
+                "a": 14,
+                "b": 15,
+                "construction": false,
+                "id": "l14",
+                "type": "line"
+              },
+              {
+                "a": 15,
+                "b": 16,
+                "construction": false,
+                "id": "l15",
+                "type": "line"
+              },
+              {
+                "a": 16,
+                "b": 1,
+                "construction": false,
+                "id": "l16",
+                "type": "line"
+              }
+            ],
+            "points": [
+              {
+                "fixed": true,
+                "id": "origin",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "z_t1"
+                },
+                "fixed": true,
+                "id": "p1",
+                "pos": [
+                  0.0,
+                  12.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r - wall_t - fit_slide",
+                  "y": "z_t1"
+                },
+                "fixed": true,
+                "id": "p2",
+                "pos": [
+                  59.800000000000004,
+                  12.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r - wall_t - fit_slide",
+                  "y": "z_t1 + tongue_h + fit_slide"
+                },
+                "fixed": true,
+                "id": "p3",
+                "pos": [
+                  59.800000000000004,
+                  13.5
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r - wall_t + tongue_w + fit_slide",
+                  "y": "z_t1 + tongue_h + fit_slide"
+                },
+                "fixed": true,
+                "id": "p4",
+                "pos": [
+                  61.4,
+                  13.5
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r - wall_t + tongue_w + fit_slide",
+                  "y": "z_t1"
+                },
+                "fixed": true,
+                "id": "p5",
+                "pos": [
+                  61.4,
+                  12.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r",
+                  "y": "z_t1"
+                },
+                "fixed": true,
+                "id": "p6",
+                "pos": [
+                  62.5,
+                  12.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r",
+                  "y": "z_top - edge_ch"
+                },
+                "fixed": true,
+                "id": "p7",
+                "pos": [
+                  62.5,
+                  16.5
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r - edge_ch",
+                  "y": "z_top"
+                },
+                "fixed": true,
+                "id": "p8",
+                "pos": [
+                  61.0,
+                  18.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "rim_or",
+                  "y": "z_top"
+                },
+                "fixed": true,
+                "id": "p9",
+                "pos": [
+                  52.55,
+                  18.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "rim_or",
+                  "y": "z_top + center_rim_h - center_rim_ch"
+                },
+                "fixed": true,
+                "id": "p10",
+                "pos": [
+                  52.55,
+                  19.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "rim_or - center_rim_ch",
+                  "y": "z_top + center_rim_h"
+                },
+                "fixed": true,
+                "id": "p11",
+                "pos": [
+                  51.55,
+                  20.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "rim_ir",
+                  "y": "z_top + center_rim_h"
+                },
+                "fixed": true,
+                "id": "p12",
+                "pos": [
+                  50.05,
+                  20.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "rim_ir",
+                  "y": "z_top"
+                },
+                "fixed": true,
+                "id": "p13",
+                "pos": [
+                  50.05,
+                  18.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "rec_r",
+                  "y": "z_top"
+                },
+                "fixed": true,
+                "id": "p14",
+                "pos": [
+                  43.3,
+                  18.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "rec_r",
+                  "y": "z_top - ring_recess"
+                },
+                "fixed": true,
+                "id": "p15",
+                "pos": [
+                  43.3,
+                  16.4
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "z_top - ring_recess"
+                },
+                "fixed": true,
+                "id": "p16",
+                "pos": [
+                  0.0,
+                  16.4
+                ]
+              }
+            ]
+          },
+          "suppressed": false,
+          "type": "sketch"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "angle": "360 deg",
+          "axis": {
+            "axis": "Z",
+            "type": "world"
+          },
+          "body_names": [
+            "T1_Deckplatte"
+          ],
+          "convention": "sketch_normal",
+          "id": 2,
+          "name": "T1_Grundkoerper",
+          "operation": "new_body",
+          "param_names": [
+            "d1"
+          ],
+          "profiles": {
+            "type": "all"
+          },
+          "sketch": 1,
+          "suppressed": false,
+          "type": "revolve"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "id": 3,
+          "name": "S_T1_Durchgang",
+          "param_names": [
+            "d2"
+          ],
+          "plane": {
+            "base": {
+              "name": "XY",
+              "type": "origin"
+            },
+            "distance": "z_t1",
+            "type": "offset"
+          },
+          "sketch": {
+            "constraints": [
+              {
+                "c": 0,
+                "id": "k1",
+                "param": "d3",
+                "type": "diameter",
+                "value": 3.2
+              },
+              {
+                "c": 1,
+                "id": "k2",
+                "param": "d4",
+                "type": "diameter",
+                "value": 3.2
+              },
+              {
+                "c": 2,
+                "id": "k3",
+                "param": "d5",
+                "type": "diameter",
+                "value": 3.2
+              },
+              {
+                "c": 3,
+                "id": "k4",
+                "param": "d6",
+                "type": "diameter",
+                "value": 3.2
+              },
+              {
+                "c": 4,
+                "id": "k5",
+                "param": "d7",
+                "type": "diameter",
+                "value": 6.0
+              }
+            ],
+            "counters": {
+              "c": 5,
+              "k": 5
+            },
+            "curves": [
+              {
+                "c": 1,
+                "construction": false,
+                "id": "c1",
+                "r": 1.6,
+                "type": "circle"
+              },
+              {
+                "c": 2,
+                "construction": false,
+                "id": "c2",
+                "r": 1.6,
+                "type": "circle"
+              },
+              {
+                "c": 3,
+                "construction": false,
+                "id": "c3",
+                "r": 1.6,
+                "type": "circle"
+              },
+              {
+                "c": 4,
+                "construction": false,
+                "id": "c4",
+                "r": 1.6,
+                "type": "circle"
+              },
+              {
+                "c": 5,
+                "construction": false,
+                "id": "c5",
+                "r": 3.0,
+                "type": "circle"
+              }
+            ],
+            "points": [
+              {
+                "fixed": true,
+                "id": "origin",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "ring_hole_dx / 2",
+                  "y": "ring_hole_dy / 2"
+                },
+                "fixed": true,
+                "id": "m2a",
+                "pos": [
+                  32.325,
+                  24.8
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-ring_hole_dx / 2",
+                  "y": "ring_hole_dy / 2"
+                },
+                "fixed": true,
+                "id": "m2b",
+                "pos": [
+                  -32.325,
+                  24.8
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-ring_hole_dx / 2",
+                  "y": "-ring_hole_dy / 2"
+                },
+                "fixed": true,
+                "id": "m2c",
+                "pos": [
+                  -32.325,
+                  -24.8
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "ring_hole_dx / 2",
+                  "y": "-ring_hole_dy / 2"
+                },
+                "fixed": true,
+                "id": "m2d",
+                "pos": [
+                  32.325,
+                  -24.8
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "cable_hole_r"
+                },
+                "fixed": true,
+                "id": "kab",
+                "pos": [
+                  0.0,
+                  39.45
+                ]
+              }
+            ]
+          },
+          "suppressed": false,
+          "type": "sketch"
+        },
+        "params": [
+          {
+            "expression": "ins_m2_d",
+            "name": "d3",
+            "unit": "mm"
+          },
+          {
+            "expression": "ins_m2_d",
+            "name": "d4",
+            "unit": "mm"
+          },
+          {
+            "expression": "ins_m2_d",
+            "name": "d5",
+            "unit": "mm"
+          },
+          {
+            "expression": "ins_m2_d",
+            "name": "d6",
+            "unit": "mm"
+          },
+          {
+            "expression": "cable_hole_d",
+            "name": "d7",
+            "unit": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "extent": {
+            "convention": "total_distance",
+            "direction": "positive",
+            "distance": "top_t"
+          },
+          "id": 4,
+          "name": "T1_M2_und_Kabelloch",
+          "operation": "cut",
+          "param_names": [
+            "d8"
+          ],
+          "profiles": {
+            "type": "all"
+          },
+          "sketch": 3,
+          "suppressed": false,
+          "targets": [
+            "T1_Deckplatte"
+          ],
+          "type": "extrude"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "id": 5,
+          "name": "S_T1_M3",
+          "param_names": [
+            "d9"
+          ],
+          "plane": {
+            "base": {
+              "name": "XY",
+              "type": "origin"
+            },
+            "distance": "z_t1",
+            "type": "offset"
+          },
+          "sketch": {
+            "constraints": [
+              {
+                "c": 0,
+                "id": "k1",
+                "param": "d10",
+                "type": "diameter",
+                "value": 4.0
+              },
+              {
+                "c": 1,
+                "id": "k2",
+                "param": "d11",
+                "type": "diameter",
+                "value": 4.0
+              },
+              {
+                "c": 2,
+                "id": "k3",
+                "param": "d12",
+                "type": "diameter",
+                "value": 4.0
+              },
+              {
+                "c": 3,
+                "id": "k4",
+                "param": "d13",
+                "type": "diameter",
+                "value": 4.0
+              },
+              {
+                "c": 4,
+                "id": "k5",
+                "param": "d14",
+                "type": "diameter",
+                "value": 4.0
+              }
+            ],
+            "counters": {
+              "c": 5,
+              "k": 5
+            },
+            "curves": [
+              {
+                "c": 1,
+                "construction": false,
+                "id": "c1",
+                "r": 2.0,
+                "type": "circle"
+              },
+              {
+                "c": 2,
+                "construction": false,
+                "id": "c2",
+                "r": 2.0,
+                "type": "circle"
+              },
+              {
+                "c": 3,
+                "construction": false,
+                "id": "c3",
+                "r": 2.0,
+                "type": "circle"
+              },
+              {
+                "c": 4,
+                "construction": false,
+                "id": "c4",
+                "r": 2.0,
+                "type": "circle"
+              },
+              {
+                "c": 5,
+                "construction": false,
+                "id": "c5",
+                "r": 2.0,
+                "type": "circle"
+              }
+            ],
+            "points": [
+              {
+                "fixed": true,
+                "id": "origin",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "screw_r * 0.70710678",
+                  "y": "screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "s1",
+                "pos": [
+                  33.234018660000004,
+                  33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-screw_r * 0.70710678",
+                  "y": "screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "s2",
+                "pos": [
+                  -33.234018660000004,
+                  33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-screw_r * 0.70710678",
+                  "y": "-screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "s3",
+                "pos": [
+                  -33.234018660000004,
+                  -33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "screw_r * 0.70710678",
+                  "y": "-screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "s4",
+                "pos": [
+                  33.234018660000004,
+                  -33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "-sensor_r"
+                },
+                "fixed": true,
+                "id": "sen",
+                "pos": [
+                  0.0,
+                  -30.0
+                ]
+              }
+            ]
+          },
+          "suppressed": false,
+          "type": "sketch"
+        },
+        "params": [
+          {
+            "expression": "ins_m3_d",
+            "name": "d10",
+            "unit": "mm"
+          },
+          {
+            "expression": "ins_m3_d",
+            "name": "d11",
+            "unit": "mm"
+          },
+          {
+            "expression": "ins_m3_d",
+            "name": "d12",
+            "unit": "mm"
+          },
+          {
+            "expression": "ins_m3_d",
+            "name": "d13",
+            "unit": "mm"
+          },
+          {
+            "expression": "ins_m3_d",
+            "name": "d14",
+            "unit": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "extent": {
+            "convention": "total_distance",
+            "direction": "positive",
+            "distance": "ins_m3_depth"
+          },
+          "id": 6,
+          "name": "T1_M3_Einsaetze",
+          "operation": "cut",
+          "param_names": [
+            "d15"
+          ],
+          "profiles": {
+            "type": "all"
+          },
+          "sketch": 5,
+          "suppressed": false,
+          "targets": [
+            "T1_Deckplatte"
+          ],
+          "type": "extrude"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "id": 7,
+          "name": "S_T2_Profil",
+          "plane": {
+            "base": {
+              "name": "XZ",
+              "type": "origin"
+            },
+            "type": "flipped"
+          },
+          "sketch": {
+            "constraints": [
+              {
+                "id": "k1",
+                "p": 0,
+                "q": 8,
+                "type": "coincident"
+              }
+            ],
+            "counters": {
+              "k": 1,
+              "l": 8,
+              "p": 7
+            },
+            "curves": [
+              {
+                "a": 8,
+                "b": 1,
+                "construction": false,
+                "id": "l1",
+                "type": "line"
+              },
+              {
+                "a": 1,
+                "b": 2,
+                "construction": false,
+                "id": "l2",
+                "type": "line"
+              },
+              {
+                "a": 2,
+                "b": 3,
+                "construction": false,
+                "id": "l3",
+                "type": "line"
+              },
+              {
+                "a": 3,
+                "b": 4,
+                "construction": false,
+                "id": "l4",
+                "type": "line"
+              },
+              {
+                "a": 4,
+                "b": 5,
+                "construction": false,
+                "id": "l5",
+                "type": "line"
+              },
+              {
+                "a": 5,
+                "b": 6,
+                "construction": false,
+                "id": "l6",
+                "type": "line"
+              },
+              {
+                "a": 6,
+                "b": 7,
+                "construction": false,
+                "id": "l7",
+                "type": "line"
+              },
+              {
+                "a": 7,
+                "b": 8,
+                "construction": false,
+                "id": "l8",
+                "type": "line"
+              }
+            ],
+            "points": [
+              {
+                "fixed": true,
+                "id": "origin",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r"
+                },
+                "fixed": true,
+                "id": "p1",
+                "pos": [
+                  62.5,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r",
+                  "y": "z_t1"
+                },
+                "fixed": true,
+                "id": "p2",
+                "pos": [
+                  62.5,
+                  12.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r - wall_t + tongue_w",
+                  "y": "z_t1"
+                },
+                "fixed": true,
+                "id": "p3",
+                "pos": [
+                  61.1,
+                  12.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r - wall_t + tongue_w",
+                  "y": "z_t1 + tongue_h"
+                },
+                "fixed": true,
+                "id": "p4",
+                "pos": [
+                  61.1,
+                  13.2
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r - wall_t",
+                  "y": "z_t1 + tongue_h"
+                },
+                "fixed": true,
+                "id": "p5",
+                "pos": [
+                  60.1,
+                  13.2
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "outer_r - wall_t",
+                  "y": "base_t"
+                },
+                "fixed": true,
+                "id": "p6",
+                "pos": [
+                  60.1,
+                  2.0
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "base_t"
+                },
+                "fixed": true,
+                "id": "p7",
+                "pos": [
+                  0.0,
+                  2.0
+                ]
+              },
+              {
+                "fixed": false,
+                "id": "l1.start",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              }
+            ]
+          },
+          "suppressed": false,
+          "type": "sketch"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "angle": "360 deg",
+          "axis": {
+            "axis": "Z",
+            "type": "world"
+          },
+          "body_names": [
+            "T2_Unterschale"
+          ],
+          "convention": "sketch_normal",
+          "id": 8,
+          "name": "T2_Grundkoerper",
+          "operation": "new_body",
+          "param_names": [
+            "d16"
+          ],
+          "profiles": {
+            "type": "all"
+          },
+          "sketch": 7,
+          "suppressed": false,
+          "type": "revolve"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "id": 9,
+          "name": "S_T2_Dome",
+          "param_names": [
+            "d17"
+          ],
+          "plane": {
+            "base": {
+              "name": "XY",
+              "type": "origin"
+            },
+            "distance": "base_t",
+            "type": "offset"
+          },
+          "sketch": {
+            "constraints": [
+              {
+                "c": 0,
+                "id": "k1",
+                "param": "d18",
+                "type": "diameter",
+                "value": 8.0
+              },
+              {
+                "c": 1,
+                "id": "k2",
+                "param": "d19",
+                "type": "diameter",
+                "value": 8.0
+              },
+              {
+                "c": 2,
+                "id": "k3",
+                "param": "d20",
+                "type": "diameter",
+                "value": 8.0
+              },
+              {
+                "c": 3,
+                "id": "k4",
+                "param": "d21",
+                "type": "diameter",
+                "value": 8.0
+              }
+            ],
+            "counters": {
+              "c": 4,
+              "k": 4
+            },
+            "curves": [
+              {
+                "c": 1,
+                "construction": false,
+                "id": "c1",
+                "r": 4.0,
+                "type": "circle"
+              },
+              {
+                "c": 2,
+                "construction": false,
+                "id": "c2",
+                "r": 4.0,
+                "type": "circle"
+              },
+              {
+                "c": 3,
+                "construction": false,
+                "id": "c3",
+                "r": 4.0,
+                "type": "circle"
+              },
+              {
+                "c": 4,
+                "construction": false,
+                "id": "c4",
+                "r": 4.0,
+                "type": "circle"
+              }
+            ],
+            "points": [
+              {
+                "fixed": true,
+                "id": "origin",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "screw_r * 0.70710678",
+                  "y": "screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "b1",
+                "pos": [
+                  33.234018660000004,
+                  33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-screw_r * 0.70710678",
+                  "y": "screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "b2",
+                "pos": [
+                  -33.234018660000004,
+                  33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-screw_r * 0.70710678",
+                  "y": "-screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "b3",
+                "pos": [
+                  -33.234018660000004,
+                  -33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "screw_r * 0.70710678",
+                  "y": "-screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "b4",
+                "pos": [
+                  33.234018660000004,
+                  -33.234018660000004
+                ]
+              }
+            ]
+          },
+          "suppressed": false,
+          "type": "sketch"
+        },
+        "params": [
+          {
+            "expression": "boss_d",
+            "name": "d18",
+            "unit": "mm"
+          },
+          {
+            "expression": "boss_d",
+            "name": "d19",
+            "unit": "mm"
+          },
+          {
+            "expression": "boss_d",
+            "name": "d20",
+            "unit": "mm"
+          },
+          {
+            "expression": "boss_d",
+            "name": "d21",
+            "unit": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "extent": {
+            "convention": "total_distance",
+            "direction": "positive",
+            "distance": "cavity_h"
+          },
+          "id": 10,
+          "name": "T2_Schraubdome",
+          "operation": "join",
+          "param_names": [
+            "d22"
+          ],
+          "profiles": {
+            "type": "all"
+          },
+          "sketch": 9,
+          "suppressed": false,
+          "targets": [
+            "T2_Unterschale"
+          ],
+          "type": "extrude"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "id": 11,
+          "name": "S_T2_Schraube",
+          "plane": {
+            "name": "XY",
+            "type": "origin"
+          },
+          "sketch": {
+            "constraints": [
+              {
+                "c": 0,
+                "id": "k1",
+                "param": "d23",
+                "type": "diameter",
+                "value": 3.4
+              },
+              {
+                "c": 1,
+                "id": "k2",
+                "param": "d24",
+                "type": "diameter",
+                "value": 3.4
+              },
+              {
+                "c": 2,
+                "id": "k3",
+                "param": "d25",
+                "type": "diameter",
+                "value": 3.4
+              },
+              {
+                "c": 3,
+                "id": "k4",
+                "param": "d26",
+                "type": "diameter",
+                "value": 3.4
+              }
+            ],
+            "counters": {
+              "c": 4,
+              "k": 4
+            },
+            "curves": [
+              {
+                "c": 1,
+                "construction": false,
+                "id": "c1",
+                "r": 1.7,
+                "type": "circle"
+              },
+              {
+                "c": 2,
+                "construction": false,
+                "id": "c2",
+                "r": 1.7,
+                "type": "circle"
+              },
+              {
+                "c": 3,
+                "construction": false,
+                "id": "c3",
+                "r": 1.7,
+                "type": "circle"
+              },
+              {
+                "c": 4,
+                "construction": false,
+                "id": "c4",
+                "r": 1.7,
+                "type": "circle"
+              }
+            ],
+            "points": [
+              {
+                "fixed": true,
+                "id": "origin",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "screw_r * 0.70710678",
+                  "y": "screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "h1",
+                "pos": [
+                  33.234018660000004,
+                  33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-screw_r * 0.70710678",
+                  "y": "screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "h2",
+                "pos": [
+                  -33.234018660000004,
+                  33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-screw_r * 0.70710678",
+                  "y": "-screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "h3",
+                "pos": [
+                  -33.234018660000004,
+                  -33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "screw_r * 0.70710678",
+                  "y": "-screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "h4",
+                "pos": [
+                  33.234018660000004,
+                  -33.234018660000004
+                ]
+              }
+            ]
+          },
+          "suppressed": false,
+          "type": "sketch"
+        },
+        "params": [
+          {
+            "expression": "screw_clear_d",
+            "name": "d23",
+            "unit": "mm"
+          },
+          {
+            "expression": "screw_clear_d",
+            "name": "d24",
+            "unit": "mm"
+          },
+          {
+            "expression": "screw_clear_d",
+            "name": "d25",
+            "unit": "mm"
+          },
+          {
+            "expression": "screw_clear_d",
+            "name": "d26",
+            "unit": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "extent": {
+            "convention": "total_distance",
+            "direction": "positive",
+            "distance": "z_t1"
+          },
+          "id": 12,
+          "name": "T2_Schraubloecher",
+          "operation": "cut",
+          "param_names": [
+            "d27"
+          ],
+          "profiles": {
+            "type": "all"
+          },
+          "sketch": 11,
+          "suppressed": false,
+          "targets": [
+            "T2_Unterschale"
+          ],
+          "type": "extrude"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "id": 13,
+          "name": "S_T2_Senkung",
+          "plane": {
+            "name": "XY",
+            "type": "origin"
+          },
+          "sketch": {
+            "constraints": [
+              {
+                "c": 0,
+                "id": "k1",
+                "param": "d28",
+                "type": "diameter",
+                "value": 6.2
+              },
+              {
+                "c": 1,
+                "id": "k2",
+                "param": "d29",
+                "type": "diameter",
+                "value": 6.2
+              },
+              {
+                "c": 2,
+                "id": "k3",
+                "param": "d30",
+                "type": "diameter",
+                "value": 6.2
+              },
+              {
+                "c": 3,
+                "id": "k4",
+                "param": "d31",
+                "type": "diameter",
+                "value": 6.2
+              }
+            ],
+            "counters": {
+              "c": 4,
+              "k": 4
+            },
+            "curves": [
+              {
+                "c": 1,
+                "construction": false,
+                "id": "c1",
+                "r": 3.1,
+                "type": "circle"
+              },
+              {
+                "c": 2,
+                "construction": false,
+                "id": "c2",
+                "r": 3.1,
+                "type": "circle"
+              },
+              {
+                "c": 3,
+                "construction": false,
+                "id": "c3",
+                "r": 3.1,
+                "type": "circle"
+              },
+              {
+                "c": 4,
+                "construction": false,
+                "id": "c4",
+                "r": 3.1,
+                "type": "circle"
+              }
+            ],
+            "points": [
+              {
+                "fixed": true,
+                "id": "origin",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "screw_r * 0.70710678",
+                  "y": "screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "g1",
+                "pos": [
+                  33.234018660000004,
+                  33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-screw_r * 0.70710678",
+                  "y": "screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "g2",
+                "pos": [
+                  -33.234018660000004,
+                  33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-screw_r * 0.70710678",
+                  "y": "-screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "g3",
+                "pos": [
+                  -33.234018660000004,
+                  -33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "screw_r * 0.70710678",
+                  "y": "-screw_r * 0.70710678"
+                },
+                "fixed": true,
+                "id": "g4",
+                "pos": [
+                  33.234018660000004,
+                  -33.234018660000004
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "foot_r"
+                },
+                "fixed": true,
+                "id": "f1",
+                "pos": [
+                  50.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "foot_r"
+                },
+                "fixed": true,
+                "id": "f2",
+                "pos": [
+                  0.0,
+                  50.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-foot_r"
+                },
+                "fixed": true,
+                "id": "f3",
+                "pos": [
+                  -50.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "-foot_r"
+                },
+                "fixed": true,
+                "id": "f4",
+                "pos": [
+                  0.0,
+                  -50.0
+                ]
+              }
+            ]
+          },
+          "suppressed": false,
+          "type": "sketch"
+        },
+        "params": [
+          {
+            "expression": "cbore_d",
+            "name": "d28",
+            "unit": "mm"
+          },
+          {
+            "expression": "cbore_d",
+            "name": "d29",
+            "unit": "mm"
+          },
+          {
+            "expression": "cbore_d",
+            "name": "d30",
+            "unit": "mm"
+          },
+          {
+            "expression": "cbore_d",
+            "name": "d31",
+            "unit": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "extent": {
+            "convention": "total_distance",
+            "direction": "positive",
+            "distance": "cbore_h"
+          },
+          "id": 14,
+          "name": "T2_Kopfsenkungen",
+          "operation": "cut",
+          "param_names": [
+            "d32"
+          ],
+          "profiles": {
+            "type": "all"
+          },
+          "sketch": 13,
+          "suppressed": false,
+          "targets": [
+            "T2_Unterschale"
+          ],
+          "type": "extrude"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "id": 15,
+          "name": "S_T2_Fuesse",
+          "plane": {
+            "name": "XY",
+            "type": "origin"
+          },
+          "sketch": {
+            "constraints": [
+              {
+                "c": 0,
+                "id": "k1",
+                "param": "d33",
+                "type": "diameter",
+                "value": 10.5
+              },
+              {
+                "c": 1,
+                "id": "k2",
+                "param": "d34",
+                "type": "diameter",
+                "value": 10.5
+              },
+              {
+                "c": 2,
+                "id": "k3",
+                "param": "d35",
+                "type": "diameter",
+                "value": 10.5
+              },
+              {
+                "c": 3,
+                "id": "k4",
+                "param": "d36",
+                "type": "diameter",
+                "value": 10.5
+              }
+            ],
+            "counters": {
+              "c": 4,
+              "k": 4
+            },
+            "curves": [
+              {
+                "c": 1,
+                "construction": false,
+                "id": "c1",
+                "r": 5.25,
+                "type": "circle"
+              },
+              {
+                "c": 2,
+                "construction": false,
+                "id": "c2",
+                "r": 5.25,
+                "type": "circle"
+              },
+              {
+                "c": 3,
+                "construction": false,
+                "id": "c3",
+                "r": 5.25,
+                "type": "circle"
+              },
+              {
+                "c": 4,
+                "construction": false,
+                "id": "c4",
+                "r": 5.25,
+                "type": "circle"
+              }
+            ],
+            "points": [
+              {
+                "fixed": true,
+                "id": "origin",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "foot_r"
+                },
+                "fixed": true,
+                "id": "f1",
+                "pos": [
+                  50.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "foot_r"
+                },
+                "fixed": true,
+                "id": "f2",
+                "pos": [
+                  0.0,
+                  50.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-foot_r"
+                },
+                "fixed": true,
+                "id": "f3",
+                "pos": [
+                  -50.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "-foot_r"
+                },
+                "fixed": true,
+                "id": "f4",
+                "pos": [
+                  0.0,
+                  -50.0
+                ]
+              }
+            ]
+          },
+          "suppressed": false,
+          "type": "sketch"
+        },
+        "params": [
+          {
+            "expression": "foot_d",
+            "name": "d33",
+            "unit": "mm"
+          },
+          {
+            "expression": "foot_d",
+            "name": "d34",
+            "unit": "mm"
+          },
+          {
+            "expression": "foot_d",
+            "name": "d35",
+            "unit": "mm"
+          },
+          {
+            "expression": "foot_d",
+            "name": "d36",
+            "unit": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "extent": {
+            "convention": "total_distance",
+            "direction": "positive",
+            "distance": "foot_rec"
+          },
+          "id": 16,
+          "name": "T2_Fussmulden",
+          "operation": "cut",
+          "param_names": [
+            "d37"
+          ],
+          "profiles": {
+            "type": "all"
+          },
+          "sketch": 15,
+          "suppressed": false,
+          "targets": [
+            "T2_Unterschale"
+          ],
+          "type": "extrude"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "id": 17,
+          "name": "S_T2_Ablauf",
+          "plane": {
+            "name": "XY",
+            "type": "origin"
+          },
+          "sketch": {
+            "constraints": [
+              {
+                "c": 0,
+                "id": "k1",
+                "param": "d38",
+                "type": "diameter",
+                "value": 3.0
+              },
+              {
+                "c": 1,
+                "id": "k2",
+                "param": "d39",
+                "type": "diameter",
+                "value": 3.0
+              }
+            ],
+            "counters": {
+              "c": 2,
+              "k": 2
+            },
+            "curves": [
+              {
+                "c": 1,
+                "construction": false,
+                "id": "c1",
+                "r": 1.5,
+                "type": "circle"
+              },
+              {
+                "c": 2,
+                "construction": false,
+                "id": "c2",
+                "r": 1.5,
+                "type": "circle"
+              }
+            ],
+            "points": [
+              {
+                "fixed": true,
+                "id": "origin",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "fixed": false,
+                "id": "a1",
+                "pos": [
+                  -21.05,
+                  50.81
+                ]
+              },
+              {
+                "fixed": false,
+                "id": "a2",
+                "pos": [
+                  21.05,
+                  -50.81
+                ]
+              }
+            ]
+          },
+          "suppressed": false,
+          "type": "sketch"
+        },
+        "params": [
+          {
+            "expression": "drain_d",
+            "name": "d38",
+            "unit": "mm"
+          },
+          {
+            "expression": "drain_d",
+            "name": "d39",
+            "unit": "mm"
+          }
+        ]
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "extent": {
+            "convention": "total_distance",
+            "direction": "positive",
+            "distance": "base_t"
+          },
+          "id": 18,
+          "name": "T2_Ablaufloecher",
+          "operation": "cut",
+          "param_names": [
+            "d40"
+          ],
+          "profiles": {
+            "type": "all"
+          },
+          "sketch": 17,
+          "suppressed": false,
+          "targets": [
+            "T2_Unterschale"
+          ],
+          "type": "extrude"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "id": 19,
+          "name": "S_T2_USB",
+          "param_names": [
+            "d41"
+          ],
+          "plane": {
+            "base": {
+              "name": "YZ",
+              "type": "origin"
+            },
+            "distance": "outer_r - wall_t - 2 mm",
+            "type": "offset"
+          },
+          "sketch": {
+            "constraints": [],
+            "counters": {
+              "l": 4,
+              "p": 4
+            },
+            "curves": [
+              {
+                "a": 1,
+                "b": 2,
+                "construction": false,
+                "id": "l1",
+                "type": "line"
+              },
+              {
+                "a": 2,
+                "b": 3,
+                "construction": false,
+                "id": "l2",
+                "type": "line"
+              },
+              {
+                "a": 3,
+                "b": 4,
+                "construction": false,
+                "id": "l3",
+                "type": "line"
+              },
+              {
+                "a": 4,
+                "b": 1,
+                "construction": false,
+                "id": "l4",
+                "type": "line"
+              }
+            ],
+            "points": [
+              {
+                "fixed": true,
+                "id": "origin",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-usb_w / 2",
+                  "y": "usb_zc - usb_h / 2"
+                },
+                "fixed": true,
+                "id": "p1",
+                "pos": [
+                  -4.75,
+                  4.1
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "usb_w / 2",
+                  "y": "usb_zc - usb_h / 2"
+                },
+                "fixed": true,
+                "id": "p2",
+                "pos": [
+                  4.75,
+                  4.1
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "usb_w / 2",
+                  "y": "usb_zc + usb_h / 2"
+                },
+                "fixed": true,
+                "id": "p3",
+                "pos": [
+                  4.75,
+                  7.9
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "-usb_w / 2",
+                  "y": "usb_zc + usb_h / 2"
+                },
+                "fixed": true,
+                "id": "p4",
+                "pos": [
+                  -4.75,
+                  7.9
+                ]
+              }
+            ]
+          },
+          "suppressed": false,
+          "type": "sketch"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "extent": {
+            "convention": "total_distance",
+            "direction": "positive",
+            "distance": "wall_t + 4 mm"
+          },
+          "id": 20,
+          "name": "T2_USB_Oeffnung",
+          "operation": "cut",
+          "param_names": [
+            "d42"
+          ],
+          "profiles": {
+            "type": "all"
+          },
+          "sketch": 19,
+          "suppressed": false,
+          "targets": [
+            "T2_Unterschale"
+          ],
+          "type": "extrude"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "id": 21,
+          "name": "S_H_Ring",
+          "plane": {
+            "base": {
+              "name": "XZ",
+              "type": "origin"
+            },
+            "type": "flipped"
+          },
+          "sketch": {
+            "constraints": [],
+            "counters": {
+              "l": 4,
+              "p": 4
+            },
+            "curves": [
+              {
+                "a": 1,
+                "b": 2,
+                "construction": false,
+                "id": "l1",
+                "type": "line"
+              },
+              {
+                "a": 2,
+                "b": 3,
+                "construction": false,
+                "id": "l2",
+                "type": "line"
+              },
+              {
+                "a": 3,
+                "b": 4,
+                "construction": false,
+                "id": "l3",
+                "type": "line"
+              },
+              {
+                "a": 4,
+                "b": 1,
+                "construction": false,
+                "id": "l4",
+                "type": "line"
+              }
+            ],
+            "points": [
+              {
+                "fixed": true,
+                "id": "origin",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "ring_id / 2",
+                  "y": "z_top - ring_recess"
+                },
+                "fixed": true,
+                "id": "p1",
+                "pos": [
+                  35.9,
+                  16.4
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "ring_od / 2",
+                  "y": "z_top - ring_recess"
+                },
+                "fixed": true,
+                "id": "p2",
+                "pos": [
+                  43.0,
+                  16.4
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "ring_od / 2",
+                  "y": "z_top - ring_recess + ring_pcb_t + led_h"
+                },
+                "fixed": true,
+                "id": "p3",
+                "pos": [
+                  43.0,
+                  19.6
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "ring_id / 2",
+                  "y": "z_top - ring_recess + ring_pcb_t + led_h"
+                },
+                "fixed": true,
+                "id": "p4",
+                "pos": [
+                  35.9,
+                  19.6
+                ]
+              }
+            ]
+          },
+          "suppressed": false,
+          "type": "sketch"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "angle": "360 deg",
+          "axis": {
+            "axis": "Z",
+            "type": "world"
+          },
+          "body_names": [
+            "H_LED_Ring"
+          ],
+          "convention": "sketch_normal",
+          "id": 22,
+          "name": "Huelle_LED_Ring",
+          "operation": "new_body",
+          "param_names": [
+            "d43"
+          ],
+          "profiles": {
+            "type": "all"
+          },
+          "sketch": 21,
+          "suppressed": false,
+          "type": "revolve"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "id": 23,
+          "name": "S_H_Glas",
+          "plane": {
+            "base": {
+              "name": "XZ",
+              "type": "origin"
+            },
+            "type": "flipped"
+          },
+          "sketch": {
+            "constraints": [],
+            "counters": {
+              "l": 9,
+              "p": 9
+            },
+            "curves": [
+              {
+                "a": 1,
+                "b": 2,
+                "construction": false,
+                "id": "l1",
+                "type": "line"
+              },
+              {
+                "a": 2,
+                "b": 3,
+                "construction": false,
+                "id": "l2",
+                "type": "line"
+              },
+              {
+                "a": 3,
+                "b": 4,
+                "construction": false,
+                "id": "l3",
+                "type": "line"
+              },
+              {
+                "a": 4,
+                "b": 5,
+                "construction": false,
+                "id": "l4",
+                "type": "line"
+              },
+              {
+                "a": 5,
+                "b": 6,
+                "construction": false,
+                "id": "l5",
+                "type": "line"
+              },
+              {
+                "a": 6,
+                "b": 7,
+                "construction": false,
+                "id": "l6",
+                "type": "line"
+              },
+              {
+                "a": 7,
+                "b": 8,
+                "construction": false,
+                "id": "l7",
+                "type": "line"
+              },
+              {
+                "a": 8,
+                "b": 9,
+                "construction": false,
+                "id": "l8",
+                "type": "line"
+              },
+              {
+                "a": 9,
+                "b": 1,
+                "construction": false,
+                "id": "l9",
+                "type": "line"
+              }
+            ],
+            "points": [
+              {
+                "fixed": true,
+                "id": "origin",
+                "pos": [
+                  0.0,
+                  0.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "glass_contact_d / 2 - glass_contact_w / 2",
+                  "y": "z_top"
+                },
+                "fixed": true,
+                "id": "p1",
+                "pos": [
+                  53.55,
+                  18.0
+                ]
+              },
+              {
+                "exprs": {
+                  "x": "glass_contact_d / 2 + glass_contact_w / 2",
+                  "y": "z_top"
+                },
+                "fixed": true,
+                "id": "p2",
+                "pos": [
+                  55.55,
+                  18.0
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "z_top + 30"
+                },
+                "fixed": true,
+                "id": "p3",
+                "pos": [
+                  75.0,
+                  48.0
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "z_top + 30"
+                },
+                "fixed": true,
+                "id": "p4",
+                "pos": [
+                  0.0,
+                  48.0
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "z_top + 7.5"
+                },
+                "fixed": true,
+                "id": "p5",
+                "pos": [
+                  0.0,
+                  25.5
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "z_top + 7.2"
+                },
+                "fixed": true,
+                "id": "p6",
+                "pos": [
+                  25.0,
+                  25.2
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "z_top + 6"
+                },
+                "fixed": true,
+                "id": "p7",
+                "pos": [
+                  40.0,
+                  24.0
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "z_top + 4.5"
+                },
+                "fixed": true,
+                "id": "p8",
+                "pos": [
+                  48.0,
+                  22.5
+                ]
+              },
+              {
+                "exprs": {
+                  "y": "z_top + 2"
+                },
+                "fixed": true,
+                "id": "p9",
+                "pos": [
+                  52.5,
+                  20.0
+                ]
+              }
+            ]
+          },
+          "suppressed": false,
+          "type": "sketch"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "angle": "360 deg",
+          "axis": {
+            "axis": "Z",
+            "type": "world"
+          },
+          "body_names": [
+            "H_Glas"
+          ],
+          "convention": "sketch_normal",
+          "id": 24,
+          "name": "Huelle_Glas_naeherung",
+          "operation": "new_body",
+          "param_names": [
+            "d44"
+          ],
+          "profiles": {
+            "type": "all"
+          },
+          "sketch": 23,
+          "suppressed": false,
+          "type": "revolve"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "body_names": [
+            "H_SuperMini"
+          ],
+          "corner": [
+            -55.0,
+            -9.05,
+            "(base_t + 2.2 mm) - (4.4 mm) / 2"
+          ],
+          "height": "4.4",
+          "id": 25,
+          "length": "22.7",
+          "name": "Huelle_SuperMini",
+          "operation": "new_body",
+          "param_names": [
+            "d45",
+            "d46",
+            "d47"
+          ],
+          "suppressed": false,
+          "type": "box",
+          "width": "18.1"
+        }
+      }
+    },
+    {
+      "command": "timeline.add",
+      "params": {
+        "feature": {
+          "body_names": [
+            "H_SW420"
+          ],
+          "corner": [
+            -6.799999999999999,
+            "(-sensor_r) - (14.2 mm) / 2",
+            "(z_t1 - 1.5 mm - 4 mm) - (8 mm) / 2"
+          ],
+          "height": "8",
+          "id": 26,
+          "length": "31.2",
+          "name": "Huelle_SW420",
+          "operation": "new_body",
+          "param_names": [
+            "d48",
+            "d49",
+            "d50"
+          ],
+          "suppressed": false,
+          "type": "box",
+          "width": "14.2"
+        }
+      }
+    }
+  ]
+}
