@@ -20,6 +20,7 @@ Befund des Nutzers am gedruckten Testring v1:
 | `cable_hole_d`, `cable_hole_r` | Rundloch Ø 6 | entfallen | ersetzt durch Rechteck |
 | `cable_slot_l` × `cable_slot_w`, `cable_slot_r` | – | 14 × 6,6 mm, Mitte r 39,7 | rechteckige Aussparung unter allen 4 Pads (DI, 5V, GND, DO; Padreihe ca. 8,6 mm) |
 | `sens_rib_h` | 3 mm | entfallen | wurde nicht mehr verwendet |
+| `fit_slide` | 0,3 mm | 0,2 mm | Coupon: Stift Ø10 passt am besten in Ø10,4 (Nut T1 für die Feder von T2) |
 
 **Glas-Hüllkörper:** Die Wölbung ist jetzt als Kugelkappe genähert (7,5 mm tief über dem Fuß-Innenradius 53,55 mm, R ≈ 195 mm). Mit dieser Form ergibt der alte Rand genau die gemessenen ca. 1,5 mm Anheben. Prüfung v2 (Strahlentest gegen die exportierten Netze): Das Glas steht mittig ca. 0,5 mm über dem Rand und berührt ihn erst bei ca. 2 mm Versatz. Luft Glas ↔ LED-Ring-Hüllkörper mindestens 1,1 mm (v1-Angabe 3,8 mm beruhte auf der alten, zu steilen Näherung).
 
@@ -29,6 +30,8 @@ Befund des Nutzers am gedruckten Testring v1:
 | `v2/parameter.csv`, `v2/SmartShisha_Untersetzer.script.json` | Parameter und Zeitleiste v2 |
 | `v2/stl/P_Testring_v2.stl` | Zentrier-Testring v2 (zum erneuten Prüfen, ca. 29 cm³) |
 | `v2/stl/T1_Deckplatte_v2.stl` | Deckplatte v2 |
+
+**Coupon-Ergebnisse (Nutzer 2026-10-24):** Stift Ø10 → Bohrung Ø10,4 (`fit_slide` 0,2), M3-Schraube → Ø3,4 (`screw_clear_d` bleibt). Einschmelzmuttern noch nicht getestet; angenommen wird jeweils die mittlere Bohrung, also die bisherigen Werte (`ins_m2_d` 3,2, `ins_m3_d` 4,0). `fit_slide` wirkt nur auf die Nut in T1; T2 ist geometrisch unverändert (gleiches Netz wie v1). Den Testring v2 druckt der Nutzer nicht; die Änderungen gelten als angenommen.
 
 Netzprüfung (trimesh): T1 v2 und Testring v2 geschlossen, Normalen konsistent, ebene Unterseite (T1 ca. 11 470 mm²).
 
@@ -68,7 +71,7 @@ G3 vom Nutzer am 2026-10-24 freigegeben. Die Vollteile T1, T2 und T4 wurden auf 
 
 ## Offen
 
-- Coupon-Ergebnisse übernehmen (`ins_m2_d`, `ins_m3_d`, `screw_clear_d`, `fit_slide`), ggf. v2 exportieren
+- Einschmelzmuttern am Coupon prüfen (`ins_m2_d`, `ins_m3_d`); bisher angenommen
 - Breakout nach Lieferung nachmessen: Lochabstand, Lochdurchmesser, Überstand und Höhe der Buchse
 - Höhe LED-Ring + LEDs (M-03b) – derzeit 1,6 + 1,6 mm angenommen
 - Glasboden ist nur als Näherung modelliert; Bestätigung über den Zentrier-Testring

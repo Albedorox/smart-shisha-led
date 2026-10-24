@@ -162,7 +162,7 @@
     {
       "command": "parameters.add",
       "params": {
-        "comment": "A: Datenblatt Einschmelzmutter M2",
+        "comment": "Coupon: mittlere Bohrung angenommen (nicht getestet)",
         "expression": "3.2 mm",
         "name": "ins_m2_d",
         "unit": "mm"
@@ -216,8 +216,8 @@
     {
       "command": "parameters.add",
       "params": {
-        "comment": "S: Coupon T-CAD-08",
-        "expression": "0.3 mm",
+        "comment": "Coupon T-CAD-08: Stift 10 in Bohrung 10,4 am besten (Nutzer 2026-10-24)",
+        "expression": "0.2 mm",
         "name": "fit_slide",
         "unit": "mm"
       }
@@ -225,7 +225,7 @@
     {
       "command": "parameters.add",
       "params": {
-        "comment": "A: Datenblatt Einschmelzmutter M3",
+        "comment": "Coupon: mittlere Bohrung angenommen (nicht getestet)",
         "expression": "4 mm",
         "name": "ins_m3_d",
         "unit": "mm"
@@ -261,7 +261,7 @@
     {
       "command": "parameters.add",
       "params": {
-        "comment": "M3 Durchgang",
+        "comment": "Coupon T-CAD-08: M3 in 3,4 am besten (Nutzer 2026-10-24)",
         "expression": "3.4 mm",
         "name": "screw_clear_d",
         "unit": "mm"
