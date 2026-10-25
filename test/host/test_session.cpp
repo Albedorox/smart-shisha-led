@@ -84,6 +84,8 @@ TEST("T-FW-18 Name wird beim Zugbeginn übernommen") {
   name(s, "A");
   s.eval(true);
   name(s, "B");
+  CHECK(std::string(s.ses.pullName()) == "A");
+  CHECK(std::string(s.ses.currentName()) == "B");
   while (s.done.empty()) s.eval(false);
   CHECK(std::string(s.ses.entry(0).name) == "A");
   s.pullFor(1500);
