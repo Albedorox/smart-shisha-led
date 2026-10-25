@@ -1,0 +1,73 @@
+name,unit,expression,comment
+glass_contact_d,mm,109.1 mm,gemessen Nutzer 2026-10-24 (3 Stellen)
+glass_contact_w,mm,2 mm,gemessen ca.
+center_clear,mm,3 mm,S: radiales Spiel Zentrierrand-Glas
+center_rim_w,mm,4.5 mm,S
+center_rim_h,mm,1.2 mm,S
+center_rim_ch,mm,0.7 mm,S: Einfuehrfase
+outer_d,mm,125 mm,Nutzer bestaetigt (D-31)
+edge_ch,mm,1.5 mm,S: Fase Aussenkante oben
+top_t,mm,6 mm,S: Deckplatte
+ring_od,mm,86 mm,gemessen
+ring_id,mm,71.8 mm,gemessen
+ring_pcb_t,mm,1.6 mm,A: M-03b
+led_h,mm,1.6 mm,A: M-03b
+ring_recess,mm,ring_pcb_t,Einfassung = Platinendicke
+ring_clear,mm,0.8 mm,S
+ring_hole_dx,mm,64.65 mm,gemessen Lochmitten
+ring_hole_dy,mm,49.6 mm,gemessen Lochmitten
+ins_m2_d,mm,3.2 mm,Coupon: mittlere Bohrung angenommen (nicht getestet)
+base_t,mm,2 mm,S
+cavity_h,mm,10 mm,S
+wall_t,mm,2.4 mm,S
+tongue_w,mm,1 mm,S: Feder an T2
+tongue_h,mm,1.2 mm,S
+fit_slide,mm,0.3 mm,"Coupon T-CAD-08: Stift 10 in Bohrung 10,4 am besten (Nutzer 2026-10-24)"
+ins_m3_d,mm,4 mm,Coupon: mittlere Bohrung angenommen (nicht getestet)
+ins_m3_depth,mm,4.5 mm,A
+screw_r,mm,47 mm,S: Lochkreisradius T1/T2
+boss_d,mm,8 mm,S
+screw_clear_d,mm,3.4 mm,"Coupon T-CAD-08: M3 in 3,4 am besten (Nutzer 2026-10-24)"
+cbore_d,mm,6.2 mm,Kopfsenkung M3
+cbore_h,mm,3 mm,
+sensor_r,mm,47 mm,"S: Sensor-Einsatz bei 270 Grad, unter massivem Bereich (ausserhalb Einfassung)"
+drain_d,mm,3 mm,
+foot_d,mm,10.5 mm,Silikonpuffer 10 mm
+foot_rec,mm,1 mm,
+foot_r,mm,50 mm,
+outer_r,mm,outer_d / 2,abgeleitet
+rim_or,mm,(glass_contact_d - glass_contact_w) / 2 - center_clear,abgeleitet
+rim_ir,mm,rim_or - center_rim_w,abgeleitet
+z_t1,mm,base_t + cavity_h,Unterkante T1
+z_top,mm,z_t1 + top_t,Glasauflage
+rec_r,mm,ring_od / 2 + ring_clear,Radius Einfassung
+usb_w,mm,10 mm,"Buchse 8,94 + Spiel; Stecker-Umspritzung bleibt aussen"
+usb_h,mm,4.6 mm,"Buchse 3,26 + Spiel"
+mcu_l,mm,22.7 mm,gemessen SuperMini Platine
+mcu_w,mm,18.1 mm,gemessen
+mcu_pcb_t,mm,1.6 mm,A
+mcu_usb_over,mm,1.3 mm,"gemessen: 24,0 mit USB - 22,7"
+mcu_usb_h,mm,3.2 mm,A: USB-C-Buchse Hoehe
+mcu_sup_h,mm,1.5 mm,S: Luft fuer Loetstellen unten
+usb_zc,mm,base_t + mcu_sup_h + 1.6 mm + 1.6 mm,"A: Buchse obenliegend auf 1,6-mm-Platine"
+mcu_clear,mm,0.3 mm,S: Platinentasche
+mcu_frame_t,mm,1.2 mm,S
+mcu_x0,mm,-(outer_r - wall_t) + mcu_usb_over + 0.5 mm,"Platinenkante USB-Seite (USB-Buchse 0,5 mm vor Innenwand)"
+mcu_usb_zc,mm,base_t + mcu_sup_h + mcu_pcb_t + mcu_usb_h / 2,Mittelhoehe SuperMini-USB
+prog_w,mm,12.5 mm,S: Wandoeffnung fuer USB-C-Stecker (Umspritzung)
+prog_h,mm,7.5 mm,S
+sens_l,mm,31.2 mm,gemessen SW-420
+sens_w,mm,14.2 mm,gemessen SW-420
+sens_spacer_h,mm,1.5 mm,S: T4 Distanzring
+usbb_l,mm,21.45 mm,Datenblatt rotes Modul (Bild Nutzer 2026-10-24)
+usbb_d,mm,12.5 mm,Datenblatt
+usbb_hole_dy,mm,16 mm,Datenblatt Lochabstand
+usbb_hole_x,mm,2.5 mm,"Datenblatt: 12,5 - 10,0 ab Buchsenkante"
+usbb_screw_d,mm,2.2 mm,"S: Kernloch M2,5 selbstschneidend"
+usbb_x0,mm,outer_r - wall_t,"Platinenkante in Wandtasche, Buchse ragt in die Wand"
+cable_slot_l,mm,14 mm,"S: Loetpad-Aussparung tangential (4 Pads ca. 8,6 mm + Loetstellen), Testdruck 1"
+cable_slot_w,mm,6.6 mm,S: Loetpad-Aussparung radial
+cable_slot_r,mm,39.7 mm,"S: Mitte der Aussparung (Pads am Aussenrand, Foto)"
+center_rim_ch_w,mm,2.5 mm,"S v3: Schraege aussen (radial), folgt der Glaswoelbung"
+groove_ch,mm,0.3 mm,S v3: Einfuehrfase Nut T1 (gegen Elefantenfuss)
+tongue_ch,mm,0.3 mm,S v3: Fase Federkante T2

@@ -2,6 +2,41 @@
 
 Erstellt mit SolidCraft (über MCP auf dem Rechner des Nutzers). Planungsgrundlage: `docs/planung/03_mechanical_design.md`, Workflow: `docs/planung/08_cad_mcp_plan.md`.
 
+## Stand v3 (2026-10-25) – Änderungen aus dem ersten Vollteil-Druck
+
+Befund des Nutzers am gedruckten T1/T2 v2:
+
+1. Das Glas rutscht ca. 8 mm zu jeder Seite, bis der Zentrierrand es aufhält. Der Rand sitzt zu weit innen und ist zu niedrig.
+2. Die Sensorstifte (2 × 2 mm, 8,5 mm hoch) brechen ab.
+3. Der SuperMini liegt lose im Rahmen. Stiftleisten sind vorgesehen, aber nicht nötig.
+4. Die Nut in T1 ist zu knapp. Ihre flache Decke hängt beim Druck durch, das Filament drückt sich in den Spalt, und T1 lässt sich nicht aufsetzen.
+
+Änderungen in `v3/` (T1, T2 und der Testring; T4 bleibt v1):
+
+| Teil | Änderung | Parameter |
+|---|---|---|
+| T1 Zentrierrand | Er sitzt 2 mm weiter außen (Außen-Ø 101,1 statt 97,1) und ist 4,5 mm breit. Innen ist er 1,2 mm hoch, nach außen fällt er schräg auf 0,5 mm ab und folgt so der Glaswölbung mit ca. 0,3 mm Luft. Ein höherer Rand würde nach der Näherung wieder auf der Wölbung aufsitzen (v1: 1,5 mm Anheben). | `center_clear` 5 → 3, `center_rim_w` 2,5 → 4,5, `center_rim_h` 1 → 1,2, `center_rim_ch` 0,5 → 0,7 (senkrecht), neu `center_rim_ch_w` 2,5 (radial) |
+| T1 Nut | 0,3 mm Spiel je Seite und oben (vorher 0,2). Die Decke ist ein 45°-Dach, damit sie ohne Stützmaterial nicht durchhängt. Am Nuteingang gibt es Fasen 0,3 mm gegen den Elefantenfuß. | `fit_slide` 0,2 → 0,3, neu `groove_ch` 0,3 |
+| T2 Feder | Oben beidseitig 0,3 mm angefast (Einführhilfe). | neu `tongue_ch` 0,3 |
+| T2 Sensorstifte | Der äußere Stift ist über eine Rippe (2 × 3,4 mm, volle Höhe) mit der Wand verbunden. Der innere Stift hat zur Mitte hin eine Stützrippe (2 × 4 × 5 mm). Die Rippen liegen auf der vom Sensor abgewandten Seite, also dort, wohin der Sensor beim Verdrehen drückt. | Features `T2_Sensor_Rippe_aussen`, `T2_Sensor_Rippe_innen` |
+| T2 SuperMini | Die Rahmenwände reichen jetzt bis zur Platinenoberkante (z 5,1). An der Antennenseite federt eine Schnappzunge (0,8 × 8 mm, aus einer 1,4 mm tiefen Tasche im Boden, damit sie lang genug federt). Ihre Nase (0,4 mm über der Platine, 45°-Einlauf) hält die Platine. Einsetzen: zuerst die USB-Seite zur Wandöffnung, dann die Antennenseite herunterdrücken, bis es einrastet. | Features `T2_MCU_*_hoch`, `T2_MCU_Schnapper_*`, `Chamfer1` |
+
+**Stiftleisten:** Mit nach unten gelöteten Stiftleisten ist der SuperMini 12,7 mm hoch. Im Gehäuse sind zwischen Boden und T1 nur 10 mm Platz. Die Leisten müssen daher ab, und die Kabel werden direkt an die Pads gelötet (wie bisher geplant). Alternativ müsste das Gehäuse etwa 3 mm höher werden.
+
+**Glaswölbung:** Sie ist weiterhin als Kugelkappe genähert (7,5 mm tief, R ≈ 195 mm). Laut dieser Näherung berührt das Glas den neuen Rand nach etwa 1 mm Versatz; ab dann müsste es sich anheben, um weiterzurutschen. Spätestens nach 3 mm stößt der Glasfuß an die Außenkante des Rands. Dass das Glas bei v2 frei rutschte, deutet darauf hin, dass die echte Wölbung am Rand eher höher ist als die Näherung, was dem neuen Rand nicht schadet. Der Testring v3 (ca. 29 cm³) prüft das ohne komplette Deckplatte.
+
+| Datei | Inhalt |
+|---|---|
+| `v3/SmartShisha_Untersetzer.solidcraft` | Quellmodell v3 |
+| `v3/parameter.csv`, `v3/SmartShisha_Untersetzer.script.json` | Parameter und Zeitleiste v3 |
+| `v3/stl/T1_Deckplatte_v3.stl` | Deckplatte v3 (Glasauflage nach oben drucken) |
+| `v3/stl/T2_Unterschale_v3.stl` | Unterschale v3 (Boden auf dem Bett) |
+| `v3/stl/P_Testring_v3.stl` | Zentrier-Testring v3 |
+| `v3/ansicht_schnitt_rand_nut.png` | Schnitt Zentrierrand mit Glasnäherung sowie Nut/Feder |
+| `v3/ansicht_esp32_schnapper.png`, `v3/ansicht_sensorstift.png` | Ansichten SuperMini-Halter und Sensorstift |
+
+Prüfung (trimesh): T1, T2 und Testring geschlossen, Normalen konsistent. Keine Überschneidung T1 ↔ T2, Platine SuperMini ↔ T2 und SW-420 ↔ T2. Nut/Feder: 0,3 mm seitlich, 0,3 mm oben (1,1 mm bis zur Dachspitze).
+
 ## Stand v2 (2026-10-24) – Änderungen aus Testdruck 1 (Testring)
 
 Befund des Nutzers am gedruckten Testring v1:
