@@ -42,7 +42,7 @@ Kabel direkt anlöten, Lötstellen mit Schrumpfschlauch isolieren.
 
 Am einfachsten ohne Arduino IDE direkt im Browser: siehe [flashen.md](flashen.md). Alternativ mit der Arduino IDE:
 
-1. Arduino IDE mit ESP32-Core (Espressif) und der Bibliothek „Adafruit NeoPixel“.
+1. Arduino IDE mit ESP32-Core (Espressif) und den Bibliotheken „Adafruit NeoPixel“ und „ArduinoJson“ (Version 7).
 2. Board „ESP32C3 Dev Module“, „USB CDC On Boot: Enabled“.
 3. `ShishaLed/ShishaLed.ino` öffnen und hochladen (Powerbank dabei abziehen).
 4. Empfindlichkeit am Poti des SW-420 einstellen: Im seriellen Monitor (115200 Baud) erscheint jeder erkannte Zug mit Dauer.
@@ -51,7 +51,8 @@ Am einfachsten ohne Arduino IDE direkt im Browser: siehe [flashen.md](flashen.md
 
 1. Powerbank anschließen. Das Gerät öffnet das offene WLAN **ShishaLed**.
 2. Mit dem Handy verbinden und **http://192.168.4.1** öffnen.
-3. In der Web-App: Name eingeben, Zugzeit und Top 5 ansehen, Modus (Smart / Dauerlicht / Aus), Helligkeit, Farbe, Verlauf und Nachlauf einstellen. Einstellungen bleiben nach dem Ausschalten erhalten; die Rangliste nicht.
+3. Die Web-App hat unten die Reiter **Start** (laufender Zug, Ring, Modus), **Licht** (Modus, Dauerlichtfarbe, Helligkeit, Bereitschaftsglimmen), **Spieler** (Name), **Rangliste** und **Mehr** mit **Farbverlauf** (Zeit bis Gelb/Rot), **Sensor** (Impulse, Nachlaufzeit, Diagnosemodus), **System** und **Hilfe**. Auf breiten Bildschirmen stehen alle Bereiche in einer Seitenleiste.
+4. Alle Einstellungen, der Name und die Rangliste gehen beim Ausschalten verloren (bewusst, Lastenheft SYS-03). Nach dem Einschalten gelten die Standardwerte.
 
 ## Annahmen (nachträglich prüfen)
 

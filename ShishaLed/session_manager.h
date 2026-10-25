@@ -24,6 +24,8 @@ class SessionManager {
   // Name gilt ab dem nächsten Zugbeginn (SES-05)
   utf8::NameResult setName(const char* utf8Name, size_t len);
   const char* currentName() const { return currentName_; }
+  // Name des laufenden bzw. zuletzt begonnenen Zuges (beim Zugbeginn übernommen)
+  const char* pullName() const { return pullName_; }
 
   void onPullStarted(uint32_t seq);
   void onPullCompleted(const PullRecord& rec, bool diagnostic);

@@ -6,8 +6,9 @@
 
 namespace app {
 
-constexpr const char* FW_VERSION = "0.2.0-roh";
-constexpr const char* AP_SSID    = "ShishaLed";   // offenes WLAN, Web-App unter 192.168.4.1
+constexpr const char* FW_VERSION  = "0.3.0";
+constexpr const char* DEVICE_NAME = "Smart Shisha LED-Untersetzer";
+constexpr const char* AP_SSID     = "ShishaLed";  // offenes WLAN (Nutzer 2026-10-25, statt 06: Shisha-LED-Control)
 
 // Hardware (02 §2). SENSOR_ACTIVE_LOW nach B0 / T-HW-04 bestätigen.
 constexpr uint8_t PIN_SENSOR        = 0;

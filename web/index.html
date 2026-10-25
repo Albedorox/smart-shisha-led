@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Shisha LED</title>
+<style>
+:root{--bg:#0E1012;--surface:#181B1F;--surface-2:#22262B;--line:#2E333A;--text:#ECEFF3;--muted:#9AA3AD;--accent:#4FC3F7;--green:#3DDC84;--yellow:#FFD54F;--red:#FF5252;--danger:#FF5252;--r:12px;--nav-h:64px;--safe-b:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:1rem/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
+button,input,select{font:inherit;color:inherit}
+a{color:var(--accent)}
+h2{font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:24px 0 8px}
+h2:first-child{margin-top:0}
+p{margin:0 0 8px}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:.85rem}
+.hidden{display:none!important}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Kopfzeile */
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.hbar{display:flex;align-items:center;gap:8px;min-height:56px;padding:0 8px 0 16px;max-width:760px;margin:0 auto}
+.hbar h1{flex:1;min-width:0;margin:0;font-size:1.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.back{display:none;width:44px;height:44px;margin-left:-12px;border:0;background:none;font-size:1.6rem;line-height:1;cursor:pointer}
+body.sub .back{display:block}
+.conn{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted);white-space:nowrap}
+.dot{width:10px;height:10px;border-radius:50%;background:#555;flex:none}
+.conn[data-s=ok] .dot{background:var(--green)}
+.conn[data-s=warn] .dot{background:var(--yellow)}
+.conn[data-s=lost] .dot{background:var(--red)}
+.pulse{width:28px;height:28px;flex:none;opacity:.25;transition:opacity .15s}
+.pulse.on{opacity:1}
+.help{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;text-decoration:none;color:var(--muted);font-weight:700}
+.stripe{height:4px;background:transparent;transition:background .2s}
+.banner{background:#4A1515;color:#FFDADA;padding:10px 16px;font-size:.9rem}
+.banner div{max-width:728px;margin:0 auto}
+
+/* Inhalt */
+main{max-width:592px;margin:0 auto;padding:16px 16px calc(var(--nav-h) + var(--safe-b) + 24px)}
+section[data-route]{display:none}
+section.active{display:block}
+.card{background:var(--surface);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.row{display:flex;align-items:center;gap:12px;min-width:0}
+.row>*{min-width:0}
+.grow{flex:1;min-width:0}
+.between{justify-content:space-between}
+.stack>*+*{margin-top:12px}
+body.stale .live{opacity:.45}
+.stalenote{display:none;font-size:.8rem;color:var(--yellow);margin-bottom:8px}
+body.stale .stalenote{display:block}
+
+/* Bausteine */
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:4px 12px;border-radius:999px;background:var(--surface-2);font-size:.85rem;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip.pull{color:#111}
+button.chip{border:0;cursor:pointer;min-height:44px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:10px;border:0;background:var(--surface-2);cursor:pointer;text-decoration:none;color:var(--text);max-width:100%}
+.btn.primary{background:var(--accent);color:#06222E;font-weight:600}
+.btn.danger{background:none;border:1px solid var(--danger);color:var(--danger)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.link{display:flex;align-items:center;justify-content:space-between;min-height:44px;color:var(--text);text-decoration:none}
+.link::after{content:"›";color:var(--muted);font-size:1.3rem;margin-left:8px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surface-2);border-radius:10px;padding:4px;gap:4px}
+.seg button{min-height:44px;border:0;border-radius:8px;background:none;cursor:pointer;font-size:.95rem;padding:0 4px}
+.seg button[aria-pressed=true]{background:var(--accent);color:#06222E;font-weight:600}
+.seg.busy{opacity:.6}
+.big{font-size:3.5rem;font-weight:600;line-height:1.1;text-align:center;margin:8px 0}
+.hint{border-radius:10px;padding:10px 12px;font-size:.9rem;margin-bottom:8px;background:#3A3214;color:#FFE9A8}
+.hint.err{background:#3D1717;color:#FFC9C9}
+.hint.ok{background:#14301F;color:#BFF2D2}
+.field-err{color:var(--danger);font-size:.85rem;min-height:0;margin-top:4px}
+input[type=text],input[type=number]{width:100%;min-width:0;min-height:44px;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2)}
+input[type=number]{width:84px;flex:none;text-align:right}
+input.invalid{border-color:var(--danger)}
+input[type=range]{flex:1;min-width:0;height:44px;accent-color:var(--accent);margin:0}
+input[type=color]{width:56px;height:44px;border:0;padding:0;background:none;flex:none}
+.slider label{width:24px;flex:none;color:var(--muted)}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px}
+.switch input{width:48px;height:28px;flex:none;accent-color:var(--accent)}
+.swatches{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin:12px 0}
+.swatches button{aspect-ratio:1;min-height:32px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
+.preview{height:72px;border-radius:10px;display:flex;align-items:flex-end;padding:8px 12px;font-size:.85rem;text-shadow:0 1px 2px #000}
+.ring{display:block;margin:8px auto;width:180px;height:180px}
+.ring.small{width:96px;height:96px;margin:0}
+.bar{position:relative;height:14px;border-radius:7px;margin:20px 0 6px}
+.bar .mk{position:absolute;top:-6px;width:2px;height:26px;background:var(--text);opacity:.6}
+.bar .ptr{position:absolute;top:-8px;width:4px;height:30px;margin-left:-2px;border-radius:2px;background:#fff;box-shadow:0 0 4px #000}
+.barlbl{position:relative;height:18px;font-size:.75rem;color:var(--muted)}
+.barlbl span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;text-align:right;overflow-wrap:anywhere}
+.lb{list-style:none;margin:0;padding:0}
+.lb li{display:grid;grid-template-columns:2.2em 1fr auto;gap:4px 8px;padding:12px 0;border-top:1px solid var(--line);align-items:baseline}
+.lb li:first-child{border-top:0}
+.lb .rk{font-weight:700}
+.lb li:nth-child(1) .rk{color:#FFD54F}.lb li:nth-child(2) .rk{color:#CFD8DC}.lb li:nth-child(3) .rk{color:#E0A16B}
+.lb .nm{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.lb .nm.full{white-space:normal;overflow-wrap:anywhere}
+.lb .meta{grid-column:2/4;font-size:.8rem;color:var(--muted)}
+.lb li.new{animation:flash 2s}
+@keyframes flash{from{background:#1F3B4A}to{background:transparent}}
+.minibars{display:flex;align-items:flex-end;gap:2px;height:40px;margin:8px 0}
+.minibars i{flex:1;background:var(--accent);min-height:2px;border-radius:2px 2px 0 0}
+.indicator{display:flex;align-items:center;gap:12px;font-size:1.3rem;font-weight:700}
+.indicator .lamp{width:24px;height:24px;border-radius:50%;background:#444;flex:none}
+.indicator.on .lamp{background:var(--yellow);box-shadow:0 0 12px var(--yellow)}
+details{background:var(--surface);border-radius:var(--r);margin-bottom:8px}
+summary{min-height:48px;display:flex;align-items:center;padding:0 16px;cursor:pointer;font-weight:600}
+details>div{padding:0 16px 16px;color:var(--muted)}
+.diag-frame{outline:2px solid var(--yellow);outline-offset:6px;border-radius:var(--r)}
+.chart{width:100%;height:auto;display:block}
+.radio{display:flex;flex-wrap:wrap;gap:8px}
+.radio label{display:flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border-radius:10px;background:var(--surface-2);cursor:pointer}
+.counter{text-align:right;font-size:.8rem;color:var(--muted);margin-top:4px}
+.skel{display:inline-block;min-width:4em;border-radius:6px;background:linear-gradient(90deg,#22262B,#2c3137,#22262B);color:transparent!important}
+
+/* Navigation */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface-2);border-top:1px solid var(--line);padding-bottom:var(--safe-b)}
+nav.tabs ul{display:grid;grid-template-columns:repeat(5,1fr);margin:0 auto;padding:0;list-style:none;max-width:592px}
+nav.tabs li.extra{display:none}
+nav.tabs a,nav.tabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:var(--nav-h);border:0;background:none;color:var(--muted);text-decoration:none;font-size:.72rem;cursor:pointer;width:100%;padding:0 2px}
+nav.tabs svg{width:24px;height:24px}
+nav.tabs [aria-current=page]{color:var(--accent)}
+.sheet-bg{position:fixed;inset:0;z-index:40;background:#0009}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:41;background:var(--surface);border-radius:16px 16px 0 0;padding:8px 16px calc(16px + var(--safe-b));max-width:592px;margin:0 auto}
+.sheet a{display:flex;align-items:center;justify-content:space-between;min-height:56px;border-bottom:1px solid var(--line);color:var(--text);text-decoration:none;font-size:1.05rem}
+.sheet a:last-child{border-bottom:0}
+.sheet a::after{content:"›";color:var(--muted);font-size:1.3rem}
+
+/* Dialog und Toast */
+.dlg-bg{position:fixed;inset:0;z-index:50;background:#000a;display:grid;place-items:center;padding:16px}
+.dlg{background:var(--surface);border-radius:16px;padding:20px;max-width:400px;width:100%}
+.dlg h3{margin:0 0 8px;font-size:1.15rem}
+.dlg .btns{justify-content:flex-end}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--nav-h) + var(--safe-b) + 12px);z-index:60;background:#2D343C;padding:12px 16px;border-radius:10px;box-shadow:0 4px 16px #0008;display:flex;align-items:center;gap:12px;max-width:calc(100% - 32px)}
+.toast.err{background:#5A1D1D}
+
+@media (min-width:900px){
+  nav.tabs{top:0;right:auto;width:220px;border-top:0;border-right:1px solid var(--line);padding:72px 8px 0}
+  nav.tabs ul{display:block}
+  nav.tabs li.extra{display:block}
+  nav.tabs li.more{display:none}
+  nav.tabs a{flex-direction:row;justify-content:flex-start;gap:12px;height:48px;padding:0 12px;font-size:.95rem;border-radius:10px}
+  nav.tabs [aria-current=page]{background:#1d2a31}
+  header,main,.banner{margin-left:220px}
+  main{max-width:752px;padding-bottom:32px}
+  .toast{bottom:24px}
+  body.sub .back{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hbar">
+    <button class="back" type="button" aria-label="Zurück" id="back">‹</button>
+    <h1 id="title">Shisha LED</h1>
+    <div class="conn" id="conn" data-s="init" role="status"><span class="dot"></span><span id="connTxt">Verbinde …</span></div>
+    <svg class="pulse" id="pulse" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h4l2-6 4 12 3-9 2 3h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <a class="help" href="#/hilfe" aria-label="Hilfe">?</a>
+  </div>
+  <div class="stripe" id="stripe"></div>
+</header>
+<div class="banner hidden" id="banner" role="alert"><div>Verbindung zum Untersetzer verloren. Mit WLAN <b id="bannerSsid">ShishaLed</b> verbunden?</div></div>
+<div id="announce" class="hidden" aria-live="polite"></div>
+
+<main>
+<!-- 1 Start -->
+<section data-route="start" data-title="Shisha LED">
+  <div class="stalenote">Stand vor <span class="ageS">0</span> s</div>
+  <div class="card live">
+    <div class="row between"><span class="chip" id="phaseChip">Bereit</span><span class="muted small grow" style="text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="pullBy"></span></div>
+    <div class="big num" id="timer">–,– s</div>
+    <svg class="ring" id="ringStart" viewBox="0 0 100 100" aria-hidden="true"></svg>
+    <div class="bar" id="bar"><span class="mk" id="mkY"></span><span class="mk" id="mkR"></span><span class="ptr" id="ptr"></span></div>
+    <div class="barlbl"><span style="left:0;transform:none">0 s</span><span id="lblY"></span><span id="lblR"></span></div>
+    <p class="small muted" id="barText" style="margin-top:6px"></p>
+  </div>
+  <div id="startHints"></div>
+  <h2>Modus</h2>
+  <div class="seg" data-mode-seg role="group" aria-label="Lichtmodus"><button type="button" data-mode="smart">Smart</button><button type="button" data-mode="steady">Dauerlicht</button><button type="button" data-mode="off">Aus</button></div>
+  <a class="link" href="#/licht"><span class="num" id="briLine">Helligkeit</span></a>
+  <div class="card live">
+    <h2>Letzter Zug</h2>
+    <p id="lastPull">Noch kein Zug</p>
+    <p class="muted small num" id="pullCount"></p>
+    <a class="link" href="#/rangliste">Zur Rangliste</a>
+  </div>
+  <div class="row"><span class="muted">Spieler:</span><a class="chip" href="#/spieler" id="playerChip" style="text-decoration:none;color:var(--text)">Unbekannt ✎</a></div>
+</section>
+
+<!-- 2 Licht -->
+<section data-route="licht" data-title="Licht">
+  <h2>Modus</h2>
+  <div class="seg" data-mode-seg role="group" aria-label="Lichtmodus"><button type="button" data-mode="smart">Smart</button><button type="button" data-mode="steady">Dauerlicht</button><button type="button" data-mode="off">Aus</button></div>
+  <p class="small muted" id="modeExpl" style="margin-top:8px"></p>
+  <h2>Dauerlichtfarbe</h2>
+  <div class="hint hidden" id="colorOnlySteady">Wirkt nur im Modus Dauerlicht. Die Farbe kann vorab eingestellt werden.</div>
+  <div class="preview" id="colPrev"><span id="colHex">#FFA03C</span></div>
+  <div class="swatches" id="swatches"></div>
+  <div class="stack">
+    <div class="row slider"><label for="rR">R</label><input type="range" id="rR" min="0" max="255" data-ch="r"><input type="number" id="nR" min="0" max="255" inputmode="numeric" data-ch="r" aria-label="Rot"></div>
+    <div class="row slider"><label for="rG">G</label><input type="range" id="rG" min="0" max="255" data-ch="g"><input type="number" id="nG" min="0" max="255" inputmode="numeric" data-ch="g" aria-label="Grün"></div>
+    <div class="row slider"><label for="rB">B</label><input type="range" id="rB" min="0" max="255" data-ch="b"><input type="number" id="nB" min="0" max="255" inputmode="numeric" data-ch="b" aria-label="Blau"></div>
+  </div>
+  <div class="field-err" id="colErr"></div>
+  <div class="row" style="margin-top:8px"><input type="color" id="colPick" aria-label="Farbwähler"><span class="muted small">Farbwähler öffnen</span></div>
+  <h2>Helligkeit</h2>
+  <div class="row"><input type="range" id="briR" min="0" max="255" aria-label="Helligkeit"><input type="number" id="briN" min="0" max="255" inputmode="numeric" aria-label="Helligkeit Zahl"><span class="num muted small" id="briPct" style="width:3.5em;flex:none;text-align:right"></span></div>
+  <div class="field-err" id="briErr"></div>
+  <div class="hint hidden" id="briLimited">Helligkeit durch Stromgrenze reduziert.</div>
+  <div class="hint hidden" id="briZero">Helligkeit 0: LEDs bleiben dunkel.</div>
+  <label class="switch"><span>Bereitschaftsglimmen<br><span class="small muted">eine LED leuchtet schwach, wenn kein Zug läuft</span></span><input type="checkbox" id="glow"></label>
+  <h2>Aktuelle LED-Ausgabe</h2>
+  <div class="row live"><svg class="ring small" id="ringLicht" viewBox="0 0 100 100" aria-hidden="true"></svg><span class="muted small" id="ledTxt"></span></div>
+  <h2>Farbgrenzen</h2>
+  <a class="link" href="#/farbverlauf"><span id="limitsTxt">Gelb ab – · Rot ab –</span></a>
+  <div class="btns"><button class="btn danger" type="button" id="resetLight">Beleuchtung auf Standard</button></div>
+</section>
+
+<!-- 6 Spieler -->
+<section data-route="spieler" data-title="Spieler">
+  <h2>Aktueller Spieler</h2>
+  <p style="font-size:1.8rem;font-weight:700;overflow-wrap:anywhere" id="curName">–</p>
+  <p class="muted small hidden" id="noName">Kein Name gesetzt.</p>
+  <h2>Neuer Name</h2>
+  <input type="text" id="nameIn" autocomplete="off" autocapitalize="words" enterkeyhint="done" placeholder="Name eingeben" aria-describedby="nameErr">
+  <div class="counter num" id="nameCnt">0/24</div>
+  <div class="field-err" id="nameErr"></div>
+  <div class="btns"><button class="btn primary" type="button" id="nameOk" disabled>Übernehmen</button><button class="btn" type="button" id="nameReset">Zurücksetzen</button></div>
+  <p class="small muted" style="margin-top:16px">Der Name wird beim Beginn des nächsten Zuges übernommen. Bereits erfasste Züge ändern sich nicht.</p>
+  <div class="hint hidden" id="namePull"></div>
+  <div id="recentWrap" class="hidden"><h2>Zuletzt verwendet</h2><div class="row" style="flex-wrap:wrap;gap:8px" id="recent"></div></div>
+</section>
+
+<!-- 5 Rangliste -->
+<section data-route="rangliste" data-title="Rangliste">
+  <div class="stalenote">Stand vor <span class="ageS">0</span> s</div>
+  <h2 style="font-size:1.1rem;color:var(--text)">The Longest Pull</h2>
+  <p class="muted small num" id="lbCount"></p>
+  <div class="hint hidden" id="lbPull"></div>
+  <div class="card live"><ol class="lb" id="lbList"></ol><p class="muted hidden" id="lbEmpty" style="margin:0">Noch keine Züge in dieser Sitzung. Der erste Zug erscheint hier automatisch.</p></div>
+  <p class="small muted">ⓘ Die Rangliste wird beim Ausschalten gelöscht. Die Dauer enthält die Nachlaufzeit des Sensors.</p>
+  <div class="btns"><button class="btn danger" type="button" id="lbReset">Leaderboard zurücksetzen</button></div>
+</section>
+
+<!-- 4 Farbverlauf -->
+<section data-route="farbverlauf" data-title="Farbverlauf" data-sub>
+  <div class="card">
+    <svg class="chart" id="chart" viewBox="0 0 320 170" aria-label="Verlaufskurve"></svg>
+    <div class="row" style="flex-wrap:wrap;gap:8px;margin-top:8px" id="gChips"></div>
+  </div>
+  <h2>Zeit bis Gelb</h2>
+  <div class="row"><input type="range" id="yR" min="5" max="300" aria-label="Zeit bis Gelb"><span class="num" id="yV" style="width:4.5em;flex:none;text-align:right"></span></div>
+  <h2>Zeit bis Rot</h2>
+  <div class="row"><input type="range" id="rR2" min="6" max="600" aria-label="Zeit bis Rot"><span class="num" id="rV" style="width:4.5em;flex:none;text-align:right"></span></div>
+  <div class="field-err" id="gErr"></div>
+  <h2>Vorschau (nur im Browser)</h2>
+  <div class="row"><span id="pvSw" style="width:48px;height:32px;border-radius:8px;background:#0f0;flex:none"></span><span class="num grow" id="pvT">0,0 s</span><button class="btn" type="button" id="pvBtn">▶ Abspielen</button></div>
+  <p class="small" style="margin-top:16px" id="gState">Aktiv</p>
+  <div class="btns"><button class="btn primary" type="button" id="gApply" disabled>Übernehmen</button><button class="btn" type="button" id="gDiscard" disabled>Verwerfen</button><button class="btn danger" type="button" id="gReset">Standardwerte (3 s / 6 s)</button></div>
+</section>
+
+<!-- 3 Sensor -->
+<section data-route="sensor" data-title="Sensor" data-sub>
+  <div class="stalenote">Stand vor <span class="ageS">0</span> s</div>
+  <div id="sensorWrap">
+  <div class="card live">
+    <div class="indicator" id="sInd"><span class="lamp"></span><span id="sIndTxt">Ruhe</span></div>
+    <p class="muted small" style="margin-top:8px" id="sLast"></p>
+    <p class="small" id="sPull"></p>
+    <p class="muted small" style="margin:0">Kurze Impulse sind in der Anzeige evtl. nicht sichtbar, werden aber erfasst.</p>
+  </div>
+  <h2>Impulse</h2>
+  <p class="num live" id="sCount"></p>
+  <div class="minibars live" id="sBars" aria-hidden="true"></div>
+  <p class="muted small num" id="sSample"></p>
+  <h2>Nachlaufzeit</h2>
+  <div class="row"><input type="range" id="tR" min="4" max="100" aria-label="Nachlaufzeit"><span class="num" id="tV" style="width:4.5em;flex:none;text-align:right"></span></div>
+  <p class="muted small num" id="tTxt"></p>
+  <div class="field-err" id="tErr"></div>
+  <label class="switch"><span>Diagnosemodus<br><span class="small muted">Züge zählen nicht für die Rangliste</span></span><input type="checkbox" id="diag"></label>
+  <h2>Sensorstatus</h2>
+  <div class="hint ok" id="sStatus">Keine Auffälligkeiten</div>
+  <details><summary>Tipps zu Position und Empfindlichkeit</summary><div>
+    <p>Der SW-420 erkennt Erschütterungen (Blubbern des Wassers), nicht den Luftstrom.</p>
+    <p>Empfindlichkeit am blauen Poti einstellen: Dauersignal → gegen den Uhrzeigersinn drehen; keine Impulse beim Ziehen → im Uhrzeigersinn.</p>
+    <p>Typische Fehlauslöser: Abstellen des Glases, Stöße gegen den Tisch. Für Tests den Diagnosemodus nutzen.</p>
+  </div></details>
+  <div class="btns"><button class="btn danger" type="button" id="resetSensor">Sensor-Einstellungen auf Standard</button></div>
+  </div>
+</section>
+
+<!-- 7 System -->
+<section data-route="system" data-title="System" data-sub>
+  <div class="card"><dl class="kv" id="sysKv"></dl></div>
+  <h2>Aktualisierung (diese Seite)</h2>
+  <div class="radio" id="pollRadio">
+    <label><input type="radio" name="poll" value="250" checked>250 ms</label>
+    <label><input type="radio" name="poll" value="500">500 ms</label>
+    <label><input type="radio" name="poll" value="1000">1 s</label>
+  </div>
+  <p class="small muted" style="margin-top:16px">ⓘ Alle Einstellungen, Namen und die Rangliste gehen beim Ausschalten verloren.</p>
+  <p class="small muted">ⓘ Jedes verbundene Gerät kann Einstellungen ändern.</p>
+  <div class="btns"><button class="btn danger" type="button" id="resetAll">Alle Einstellungen auf Standard</button></div>
+  <a class="link" href="#/rangliste">Rangliste zurücksetzen? Zur Rangliste</a>
+</section>
+
+<!-- 8 Hilfe -->
+<section data-route="hilfe" data-title="Hilfe" data-sub>
+  <details><summary>Verbinden</summary><div><p>WLAN <b class="ssid">ShishaLed</b> wählen (offen, ohne Passwort), Browser öffnen und <b>192.168.4.1</b> eingeben.</p><p>Manche Smartphones melden „Kein Internet“. Verbindung trotzdem halten; lädt die Seite nicht, mobile Daten kurz ausschalten.</p></div></details>
+  <details><summary>Lichtmodi</summary><div><p><b>Smart:</b> leuchtet nur beim Zug, Farbe wechselt mit der Zugdauer.</p><p><b>Dauerlicht:</b> feste Farbe, Züge werden weiter gemessen.</p><p><b>Aus:</b> dunkel, die Messung läuft weiter.</p></div></details>
+  <details><summary>Farbgrenzen</summary><div><p id="helpLimits">Grün → Gelb → Rot.</p></div></details>
+  <details><summary>Zugerkennung</summary><div><p>Der Sensor erkennt Erschütterungen (Blubbern, Vibrationen), nicht den Luftstrom. Abstellen des Glases oder Stöße können Züge auslösen.</p></div></details>
+  <details><summary>Nachlaufzeit</summary><div><p>So lange gilt ein Zug nach der letzten Erschütterung noch als aktiv. Sie ist in der gemessenen Zugdauer enthalten.</p></div></details>
+  <details><summary>Rangliste</summary><div><p>Top 5 der Sitzung. Sie wird beim Neustart oder per Reset gelöscht.</p></div></details>
+  <details><summary>Datenverlust nach Neustart</summary><div><p>Nach dem Ausschalten sind alle Einstellungen, der Name und die Rangliste weg. Es gelten wieder die Standardwerte.</p></div></details>
+  <details><summary>Sicherheit und Pflege</summary><div><p>Nur 5-V-USB-Netzteil oder Powerbank verwenden. Kabel nicht unter Zug setzen. Untersetzer nicht in Wasser tauchen, nur feucht abwischen. Keine Kohle oder heißen Teile auf den Untersetzer legen.</p><p>Offenes WLAN: Jedes verbundene Gerät kann Einstellungen ändern.</p><p>Die LED-Vorschau zeigt die berechnete Ausgabe; die echte Farbe hängt von den LEDs ab.</p></div></details>
+  <p class="small muted num" style="margin-top:16px" id="helpVer">Firmware –</p>
+</section>
+</main>
+
+<nav class="tabs" aria-label="Hauptnavigation">
+  <ul>
+    <li><a href="#/start"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Start</a></li>
+    <li><a href="#/licht"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 20h6M10 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Licht</a></li>
+    <li><a href="#/spieler"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Spieler</a></li>
+    <li><a href="#/rangliste"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V11M12 21V4M19 21v-7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>Rangliste</a></li>
+    <li class="extra"><a href="#/farbverlauf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18c4 0 5-12 9-12s5 12 9 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Farbverlauf</a></li>
+    <li class="extra"><a href="#/sensor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h4l2-6 4 12 3-9 2 3h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Sensor</a></li>
+    <li class="extra"><a href="#/system"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>System</a></li>
+    <li class="extra"><a href="#/hilfe"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Hilfe</a></li>
+    <li class="more"><button type="button" id="moreBtn" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="19" cy="12" r="2" fill="currentColor"/></svg>Mehr</button></li>
+  </ul>
+</nav>
+<div class="sheet-bg hidden" id="sheetBg"></div>
+<div class="sheet hidden" id="sheet" role="dialog" aria-label="Weitere Bereiche">
+  <a href="#/farbverlauf">Farbverlauf</a><a href="#/sensor">Sensor</a><a href="#/system">System</a><a href="#/hilfe">Hilfe</a>
+</div>
+<div class="dlg-bg hidden" id="dlgBg"><div class="dlg" role="alertdialog" aria-modal="true" aria-labelledby="dlgT" aria-describedby="dlgX"><h3 id="dlgT"></h3><p class="muted" id="dlgX"></p><div class="btns"><button class="btn" type="button" id="dlgNo">Abbrechen</button><button class="btn danger" type="button" id="dlgYes"></button></div></div></div>
+<div class="toast hidden" id="toast" role="status" aria-live="polite"><span id="toastTxt"></span><button class="btn hidden" type="button" id="toastRetry" style="min-height:36px">Wiederholen</button></div>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+const ROUTES = ["start", "licht", "spieler", "rangliste", "farbverlauf", "sensor", "system", "hilfe"];
+const MORE = ["farbverlauf", "sensor", "system", "hilfe"];
+const MODE_TXT = {smart: "Smart", steady: "Dauerlicht", off: "Aus"};
+const MODE_EXPL = {smart: "Leuchtet nur beim Zug, Farbe nach Zugdauer.", steady: "Feste Farbe, Messung läuft weiter.", off: "LEDs aus, Messung läuft weiter."};
+const SWATCHES = [["Warmweiß", 255, 160, 60], ["Weiß", 255, 255, 255], ["Rot", 255, 0, 0], ["Orange", 255, 100, 0], ["Gelb", 255, 220, 0], ["Grün", 0, 255, 0], ["Cyan", 0, 255, 255], ["Blau", 0, 60, 255]];
+
+let S = null, statusAt = 0, fails = 0, pollMs = 250, pollTimer = 0, backoff = 0;
+let L = null, lbVer = -1, ownCfgVer = -1, lastPhase = null, newSeq = 0;
+const sensorHist = [];
+const recentNames = [];
+
+// ---------- Hilfsfunktionen ----------
+const sec1 = ms => (ms / 1000).toFixed(1).replace(".", ",") + " s";
+const sec2 = ms => (ms / 1000).toFixed(2).replace(".", ",") + " s";
+const pct = b => Math.round(b * 100 / 255) + " %";
+const hex = (r, g, b) => "#" + [r, g, b].map(v => v.toString(16).padStart(2, "0")).join("").toUpperCase();
+const css = c => `rgb(${c.r},${c.g},${c.b})`;
+function set(el, txt) { if (typeof el === "string") el = $(el); if (el.textContent !== txt) el.textContent = txt; }
+function show(el, on) { if (typeof el === "string") el = $(el); el.classList.toggle("hidden", !on); }
+function ago(ms) {
+  const s = Math.floor(ms / 1000);
+  if (s < 10) return "gerade eben";
+  if (s < 60) return `vor ${s} s`;
+  const m = Math.floor(s / 60);
+  if (m < 60) return `vor ${m} min`;
+  return `vor ${Math.floor(m / 60)} h ${m % 60} min`;
+}
+function since(ms) {
+  const s = Math.floor(ms / 1000), h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, ss = s % 60;
+  return "+" + (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(ss).padStart(2, "0");
+}
+function uptime(ms) {
+  const m = Math.floor(ms / 60000), h = Math.floor(m / 60);
+  return h ? `${h} h ${m % 60} min` : `${m} min`;
+}
+function lerp(a, b, n, d) { return Math.round(a + (b - a) * n / d); }
+function gradient(t, y, r) { // wie color_math.cpp
+  if (t <= 0) return {r: 0, g: 255, b: 0};
+  if (t < y) return {r: lerp(0, 255, t, y), g: 255, b: 0};
+  if (t < r) return {r: 255, g: lerp(255, 0, t - y, r - y), b: 0};
+  return {r: 255, g: 0, b: 0};
+}
+function editing(el) { return document.activeElement === el || el.dataset.dirty === "1"; }
+
+// ---------- LED-Ring (24 Punkte) ----------
+function buildRing(svg) {
+  for (let i = 0; i < 24; i++) {
+    const a = (i / 24) * 2 * Math.PI - Math.PI / 2;
+    const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    c.setAttribute("cx", (50 + 40 * Math.cos(a)).toFixed(2));
+    c.setAttribute("cy", (50 + 40 * Math.sin(a)).toFixed(2));
+    c.setAttribute("r", "5.2");
+    c.setAttribute("stroke", "#3a4048");
+    c.setAttribute("stroke-width", "1");
+    svg.appendChild(c);
+  }
+}
+function paintRing(svg, led) {
+  const dots = svg.children;
+  const k = led.effectiveBrightness / 255;
+  const vis = 0.25 + 0.75 * k;            // auf dem Display sichtbar halten
+  for (let i = 0; i < dots.length; i++) {
+    const on = led.on && (!led.glow || i === 0);
+    const fill = on ? `rgba(${led.glow ? "0,255,0" : led.r + "," + led.g + "," + led.b},${led.glow ? 0.35 : vis.toFixed(2)})` : "#15181b";
+    if (dots[i].getAttribute("fill") !== fill) dots[i].setAttribute("fill", fill);
+  }
+}
+
+// ---------- Routing ----------
+function route() {
+  let r = (location.hash.match(/^#\/(\w+)/) || [])[1];
+  if (!ROUTES.includes(r)) r = "start";
+  $$("section[data-route]").forEach(s => s.classList.toggle("active", s.dataset.route === r));
+  const sec = document.querySelector(`section[data-route="${r}"]`);
+  set("title", sec.dataset.title);
+  document.body.classList.toggle("sub", sec.hasAttribute("data-sub"));
+  const tabRoute = MORE.includes(r) ? "more" : r;
+  $$("nav.tabs a").forEach(a => { if (a.getAttribute("href") === "#/" + r) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+  if (tabRoute === "more") $("moreBtn").setAttribute("aria-current", "page"); else $("moreBtn").removeAttribute("aria-current");
+  closeSheet();
+  if (dlgCancel) dlgCancel();
+  if (r === "rangliste") loadLeaderboard();
+  window.scrollTo(0, 0);
+  if (S) render();
+}
+$("back").onclick = () => { if (history.length > 1) history.back(); else location.hash = "#/start"; };
+$("moreBtn").onclick = () => { show("sheet", true); show("sheetBg", true); $("sheet").querySelector("a").focus(); };
+function closeSheet() { show("sheet", false); show("sheetBg", false); }
+$("sheetBg").onclick = closeSheet;
+
+// ---------- Dialog und Toast ----------
+let dlgCancel = null;  // schließt einen offenen Dialog (z. B. bei Zurück-Taste)
+function confirmDlg(title, text, yes) {
+  return new Promise(res => {
+    set("dlgT", title); set("dlgX", text); set("dlgYes", yes);
+    show("dlgBg", true);
+    $("dlgNo").focus();
+    const done = v => { show("dlgBg", false); dlgCancel = null; $("dlgYes").onclick = $("dlgNo").onclick = null; document.removeEventListener("keydown", key); res(v); };
+    dlgCancel = () => done(false);
+    const key = e => {
+      if (e.key === "Escape") done(false);
+      if (e.key === "Tab") { e.preventDefault(); (document.activeElement === $("dlgNo") ? $("dlgYes") : $("dlgNo")).focus(); }
+    };
+    document.addEventListener("keydown", key);
+    $("dlgYes").onclick = () => done(true);
+    $("dlgNo").onclick = () => done(false);
+  });
+}
+let toastT = 0;
+function toast(txt, err, retry) {
+  set("toastTxt", txt);
+  $("toast").classList.toggle("err", !!err);
+  show("toastRetry", !!retry);
+  $("toastRetry").onclick = retry ? () => { show("toast", false); retry(); } : null;
+  show("toast", true);
+  clearTimeout(toastT);
+  toastT = setTimeout(() => show("toast", false), retry ? 6000 : 2000);
+}
+function announce(txt) { $("announce").textContent = txt; }
+
+// ---------- Netzwerk ----------
+async function getJson(url, timeout) {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), timeout);
+  try {
+    const r = await fetch(url, {cache: "no-store", signal: ctl.signal});
+    const j = await r.json();
+    if (!r.ok || !j.ok) throw new Error("http");
+    return j;
+  } finally { clearTimeout(t); }
+}
+let pending = null, inflight = false;
+// Schreibende Anfrage: nie parallel; eine neue ersetzt eine noch wartende.
+function post(url, body, opts) {
+  opts = opts || {};
+  return new Promise(resolve => {
+    if (pending) pending.resolve(null);
+    pending = {url, body, opts, resolve};
+    pump();
+  });
+}
+async function pump() {
+  if (inflight || !pending) return;
+  const job = pending; pending = null; inflight = true;
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), 3000);
+  let res = null;
+  try {
+    const r = await fetch(job.url, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(job.body), signal: ctl.signal});
+    const j = await r.json().catch(() => null);
+    if (r.ok && j && j.ok) {
+      res = j;
+      if (j.configVersion != null) ownCfgVer = j.configVersion;
+      if (j.config && S) { S.config = j.config; S.configVersion = j.configVersion; S.mode = j.config.mode; render(); }
+      if (job.opts.ok) toast(job.opts.ok);
+    } else if (r.status === 400 && j && j.error) {
+      res = {error: j.error};
+      if (job.opts.onError) job.opts.onError(j.error); else toast(j.error.message, true);
+    } else throw new Error("http");
+  } catch (e) {
+    res = {error: {code: "send_failed"}};
+    if (job.opts.onFail) job.opts.onFail();
+    toast("Änderung nicht übernommen – erneut versuchen", true, () => post(job.url, job.body, job.opts));
+  } finally {
+    clearTimeout(t); inflight = false;
+    job.resolve(res);
+    pump();
+  }
+}
+const postConfig = (body, opts) => post("/api/config", body, opts);
+
+async function poll() {
+  clearTimeout(pollTimer);
+  if (document.visibilityState === "hidden") return;
+  try {
+    const j = await getJson("/api/status", 1500);
+    onStatus(j);
+    fails = 0; backoff = 0;
+  } catch (e) {
+    fails++;
+    if (fails >= 2) backoff = Math.min(backoff ? backoff * 2 : 1000, 5000);
+  }
+  updateConn();
+  pollTimer = setTimeout(poll, backoff || pollMs);
+}
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") poll(); });
+
+function updateConn() {
+  const age = performance.now() - statusAt;
+  let s = "init", txt = "Verbinde …";
+  if (S) {
+    if (fails >= 2 || age > 2000) { s = "lost"; txt = "Getrennt"; }
+    else if (fails === 1) { s = "warn"; txt = "Verbindung instabil"; }
+    else { s = "ok"; txt = "Verbunden"; }
+  }
+  const was = $("conn").dataset.s;
+  $("conn").dataset.s = s;
+  set("connTxt", txt);
+  const lost = s === "lost";
+  show("banner", lost);
+  document.body.classList.toggle("stale", !!S && age > 2000);
+  $$(".ageS").forEach(e => set(e, String(Math.floor(age / 1000))));
+  $$("main button, main input").forEach(el => { if (el.dataset.lockable !== "0") el.toggleAttribute("data-offline", lost); });
+  if (was === "lost" && s === "ok") toast("Wieder verbunden");
+}
+setInterval(updateConn, 500);
+
+function onStatus(j) {
+  const prev = S;
+  S = j; statusAt = performance.now();
+  if (prev && j.configVersion !== prev.configVersion && j.configVersion !== ownCfgVer) {
+    toast("Einstellungen wurden auf einem anderen Gerät geändert");
+  }
+  if (j.session.lbVersion !== lbVer) loadLeaderboard();
+  // Sensor-Historie für Mini-Balken
+  sensorHist.push(j.sensor.pulsesInWindow);
+  if (sensorHist.length > 20) sensorHist.shift();
+  // Ansage nur bei Zustandswechsel
+  if (lastPhase && j.phase !== lastPhase) {
+    if (j.phase === "pull") announce("Zug erkannt");
+    else if (lastPhase === "pull" && j.session.lastPull) announce("Zug beendet: " + sec1(j.session.lastPull.durationMs));
+  }
+  lastPhase = j.phase;
+  render();
+}
+
+async function loadLeaderboard() {
+  try {
+    const j = await getJson("/api/leaderboard", 1500);
+    const prevSeqs = L ? L.entries.map(e => e.endedAtMs) : null;
+    L = j; lbVer = j.lbVersion;
+    newSeq = 0;
+    if (prevSeqs) { const n = j.entries.find(e => !prevSeqs.includes(e.endedAtMs)); if (n) newSeq = n.endedAtMs; }
+    renderLeaderboard();
+  } catch (e) { /* nächster Status versucht es erneut */ }
+}
+
+// ---------- Darstellung ----------
+function liveElapsed() {
+  if (!S || !S.pull.active) return 0;
+  const age = performance.now() - statusAt;
+  if (age > 2000) return S.pull.elapsedMs;           // veraltet: nicht weiterzählen
+  return S.pull.elapsedMs + Math.min(age, 500);
+}
+
+function render() {
+  if (!S) return;
+  const c = S.config, led = S.led;
+  // Kopfzeile
+  const pulling = S.phase === "pull";
+  $("stripe").style.background = pulling ? css(led) : "transparent";
+  $("pulse").classList.toggle("on", S.sensor.levelActive || (S.sensor.hasPulse && S.sensor.lastPulseAgoMs < 300));
+  $$(".ssid").forEach(e => set(e, S.system.ssid));
+  set("bannerSsid", S.system.ssid);
+  // Modus-Schalter
+  $$("[data-mode-seg]").forEach(seg => { if (!seg.classList.contains("busy")) seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === c.mode))); });
+
+  renderStart(); renderLicht(); renderSpieler(); renderSensor(); renderSystem(); renderGradientIfClean();
+  if (L) renderLbPull();
+  set("helpVer", "Firmware " + S.system.fwVersion);
+  set("helpLimits", `Grün beim Zugbeginn → Gelb ab ${sec1(c.yellowMs)} → Rot ab ${sec1(c.redMs)}.`);
+}
+
+function renderStart() {
+  const c = S.config, led = S.led, chip = $("phaseChip");
+  const phaseTxt = {idle: "Bereit", pull: "Zug erkannt", fade: "Fade-out"}[S.phase] || "Unbekannter Zustand";
+  if (!(S.phase in {idle: 1, pull: 1, fade: 1})) console.warn("Unbekannte Phase", S.phase);
+  set(chip, phaseTxt);
+  chip.classList.toggle("pull", S.phase === "pull");
+  chip.style.background = S.phase === "pull" ? css(led) : "";
+  set("pullBy", S.pull.active && S.pull.player ? "Zug von " + S.pull.player : (S.phase === "fade" && S.session.lastPull ? "Zug beendet " + sec1(S.session.lastPull.durationMs) : ""));
+  const el = liveElapsed();
+  set("timer", S.pull.active ? sec1(el) : "–,– s");
+  paintRing($("ringStart"), led);
+  // Verlaufsbalken
+  const span = c.redMs * 1.25, p = v => Math.min(100, v * 100 / span).toFixed(2) + "%";
+  const yP = c.yellowMs * 100 / span, rP = c.redMs * 100 / span;
+  $("bar").style.background = `linear-gradient(90deg,#00C853 0%,#FFEB3B ${yP}%,#F44336 ${rP}%,#F44336 100%)`;
+  $("mkY").style.left = p(c.yellowMs); $("mkR").style.left = p(c.redMs);
+  $("ptr").style.left = p(el);
+  show("ptr", S.pull.active);
+  const ly = $("lblY"), lr = $("lblR");
+  ly.style.left = p(c.yellowMs); lr.style.left = p(c.redMs);
+  set(ly, "Gelb " + sec1(c.yellowMs).replace(" s", "")); set(lr, "Rot " + sec1(c.redMs).replace(" s", ""));
+  let bt;
+  if (!S.pull.active) bt = `Gelb ab ${sec1(c.yellowMs)} · Rot ab ${sec1(c.redMs)}`;
+  else if (el < c.yellowMs) bt = "Gelb in " + sec1(c.yellowMs - el);
+  else if (el < c.redMs) bt = "Rot in " + sec1(c.redMs - el);
+  else bt = "Rot erreicht";
+  set("barText", bt);
+  // Hinweise
+  const hints = [];
+  if (c.mode === "steady") hints.push(["", "LEDs zeigen Dauerlicht – Züge werden weiter gemessen."]);
+  if (c.mode === "off") hints.push(["", "LEDs aus – Messung läuft weiter."]);
+  if (c.diagnostic) hints.push(["", "Diagnosemodus aktiv: Züge zählen nicht für die Rangliste."]);
+  if (S.sensor.fault === "stuck_active") hints.push(["err", "Sensor-Dauersignal – Empfindlichkeit am Poti verringern."]);
+  if (led.limited) hints.push(["", "Helligkeit durch Stromgrenze reduziert."]);
+  const key = JSON.stringify(hints);
+  const box = $("startHints");
+  if (box.dataset.key !== key) {
+    box.dataset.key = key; box.textContent = "";
+    hints.forEach(([cls, t]) => { const d = document.createElement("div"); d.className = "hint " + cls; d.textContent = t; box.appendChild(d); });
+  }
+  set("briLine", `Helligkeit ${c.brightness}/255 (${pct(c.brightness)})`);
+  const lp = S.session.lastPull;
+  if (lp) {
+    const agoMs = S.uptimeMs - lp.endedAtMs;
+    set("lastPull", `${lp.player} · ${sec1(lp.durationMs)}${lp.truncated ? " max." : ""} · ${ago(agoMs)}${lp.diagnostic ? " (Diagnose)" : ""}`);
+  } else set("lastPull", "Noch kein Zug");
+  const n = S.session.pullCount;
+  set("pullCount", n === 1 ? "1 Zug in dieser Sitzung" : `${n} Züge in dieser Sitzung`);
+  set("playerChip", S.player.current + " ✎");
+}
+
+// ----- Licht -----
+function draftColor() { return {r: +$("rR").value, g: +$("rG").value, b: +$("rB").value}; }
+function paintColorPreview() {
+  const col = draftColor(), b = +$("briR").value;
+  const k = 0.25 + 0.75 * b / 255;
+  $("colPrev").style.background = `rgba(${col.r},${col.g},${col.b},${k.toFixed(2)})`;
+  set("colHex", hex(col.r, col.g, col.b));
+  $("colPick").value = hex(col.r, col.g, col.b).toLowerCase();
+}
+function renderLicht() {
+  const c = S.config, led = S.led;
+  set("modeExpl", MODE_EXPL[c.mode] || "");
+  show("colorOnlySteady", c.mode !== "steady");
+  const chans = {r: ["rR", "nR"], g: ["rG", "nG"], b: ["rB", "nB"]};
+  let changed = false;
+  for (const ch in chans) {
+    const [r, n] = chans[ch].map($);
+    if (!editing(r) && !editing(n) && !editing($("colPick"))) {
+      if (+r.value !== c.steadyColor[ch] || n.value === "") { r.value = n.value = c.steadyColor[ch]; changed = true; }
+    }
+  }
+  if (!editing($("briR")) && !editing($("briN"))) {
+    if (+$("briR").value !== c.brightness || $("briN").value === "") { $("briR").value = $("briN").value = c.brightness; changed = true; }
+  }
+  if (changed || !$("colPrev").style.background) paintColorPreview();
+  set("briPct", pct(+$("briR").value));
+  show("briLimited", led.limited);
+  show("briZero", +$("briR").value === 0);
+  if (!editing($("glow"))) $("glow").checked = c.idleGlow;
+  paintRing($("ringLicht"), led);
+  set("ledTxt", led.on ? `${hex(led.r, led.g, led.b)} · wirksam ${led.effectiveBrightness}/255` : "dunkel");
+  set("limitsTxt", `Gelb ab ${sec1(c.yellowMs)} · Rot ab ${sec1(c.redMs)} – anpassen`);
+}
+function initLicht() {
+  SWATCHES.forEach(([name, r, g, b]) => {
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.style.background = `rgb(${r},${g},${b})`; btn.title = name; btn.setAttribute("aria-label", name);
+    btn.onclick = () => {
+      ["R", "G", "B"].forEach((k, i) => { $("r" + k).value = $("n" + k).value = [r, g, b][i]; });
+      paintColorPreview();
+      postConfig({steadyColor: {r, g, b}}, {ok: "Farbe: " + name});
+    };
+    $("swatches").appendChild(btn);
+  });
+  const sendColor = () => {
+    const col = draftColor();
+    ["rR", "rG", "rB", "nR", "nG", "nB", "colPick"].forEach(id => delete $(id).dataset.dirty);
+    postConfig({steadyColor: col}, {ok: "Farbe gespeichert", onError: e => set("colErr", e.message)});
+  };
+  ["R", "G", "B"].forEach(k => {
+    const r = $("r" + k), n = $("n" + k);
+    r.oninput = () => { r.dataset.dirty = "1"; n.value = r.value; paintColorPreview(); };
+    r.onchange = () => { set("colErr", ""); sendColor(); };
+    n.oninput = () => { n.dataset.dirty = "1"; };
+    n.onchange = () => {
+      const v = n.value.trim();
+      if (!/^\d+$/.test(v) || +v > 255) { n.classList.add("invalid"); set("colErr", "Wert zwischen 0 und 255 eingeben"); return; }
+      n.classList.remove("invalid"); set("colErr", ""); r.value = v; paintColorPreview(); sendColor();
+    };
+  });
+  $("colPick").oninput = e => {
+    $("colPick").dataset.dirty = "1";
+    const v = e.target.value; const rgb = [1, 3, 5].map(i => parseInt(v.substr(i, 2), 16));
+    ["R", "G", "B"].forEach((k, i) => { $("r" + k).value = $("n" + k).value = rgb[i]; });
+    paintColorPreview();
+  };
+  $("colPick").onchange = sendColor;
+  // Helligkeit: beim Ziehen höchstens alle 300 ms, final beim Loslassen
+  let briLast = 0, briTimer = 0;
+  const sendBri = final => {
+    const v = +$("briR").value;
+    briLast = performance.now();
+    if (final) { delete $("briR").dataset.dirty; delete $("briN").dataset.dirty; }
+    postConfig({brightness: v}, final ? {onError: e => set("briErr", e.message)} : {});
+  };
+  $("briR").oninput = () => {
+    $("briR").dataset.dirty = "1";
+    $("briN").value = $("briR").value; set("briPct", pct(+$("briR").value)); show("briZero", +$("briR").value === 0); paintColorPreview();
+    clearTimeout(briTimer);
+    const wait = 300 - (performance.now() - briLast);
+    if (wait <= 0) sendBri(false); else briTimer = setTimeout(() => sendBri(false), wait);
+  };
+  $("briR").onchange = () => { clearTimeout(briTimer); set("briErr", ""); sendBri(true); };
+  $("briN").oninput = () => { $("briN").dataset.dirty = "1"; };
+  $("briN").onchange = () => {
+    const v = $("briN").value.trim();
+    if (!/^\d+$/.test(v) || +v > 255) { $("briN").classList.add("invalid"); set("briErr", "Wert zwischen 0 und 255 eingeben"); return; }
+    $("briN").classList.remove("invalid"); set("briErr", ""); $("briR").value = v; sendBri(true);
+  };
+  $("glow").onchange = () => postConfig({idleGlow: $("glow").checked}, {ok: $("glow").checked ? "Bereitschaftsglimmen an" : "Bereitschaftsglimmen aus"});
+  $("resetLight").onclick = async () => {
+    if (await confirmDlg("Beleuchtung zurücksetzen?", "Modus, Helligkeit und Dauerlichtfarbe auf Standard setzen?", "Zurücksetzen")) {
+      ["rR", "rG", "rB", "nR", "nG", "nB", "briR", "briN", "colPick"].forEach(id => delete $(id).dataset.dirty);
+      postConfig({reset: "lighting"}, {ok: "Standardwerte wiederhergestellt"});
+    }
+  };
+}
+function initModeSegs() {
+  $$("[data-mode-seg]").forEach(seg => seg.querySelectorAll("button").forEach(b => {
+    b.onclick = async () => {
+      const m = b.dataset.mode;
+      $$("[data-mode-seg]").forEach(s => { s.classList.add("busy"); s.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.mode === m))); });
+      await postConfig({mode: m}, {ok: "Modus: " + MODE_TXT[m]});
+      $$("[data-mode-seg]").forEach(s => s.classList.remove("busy"));
+      render();
+    };
+  }));
+}
+
+// ----- Spieler -----
+function cleanName(v) { return v.replace(/[\u0000-\u001F\u007F]/g, ""); }
+function validateName() {
+  const inp = $("nameIn");
+  const cleaned = cleanName(inp.value);
+  let msg = "";
+  if (cleaned !== inp.value) { inp.value = cleaned; msg = "Steuerzeichen wurden entfernt."; }
+  const n = Array.from(inp.value.trim()).length;
+  set("nameCnt", `${n}/24`);
+  const tooLong = n > 24;
+  inp.classList.toggle("invalid", tooLong);
+  if (tooLong) msg = "Maximal 24 Zeichen";
+  else if (!msg && inp.value.length && !inp.value.trim()) msg = "Leerer Name wird als „Unbekannt“ gespeichert.";
+  set("nameErr", msg);
+  $("nameOk").disabled = tooLong || (S && inp.value.trim() === S.player.current);
+}
+async function sendName(name) {
+  const r = await post("/api/name", {name}, {onError: e => set("nameErr", e.message)});
+  if (r && r.ok) {
+    S.player.current = r.player;
+    if (r.player !== "Unbekannt" && !recentNames.includes(r.player)) { recentNames.unshift(r.player); recentNames.length = Math.min(recentNames.length, 5); }
+    toast(r.appliesFromNextPull ? "Gilt ab dem nächsten Zug" : "Name übernommen");
+    $("nameIn").value = ""; validateName(); render(); renderRecent();
+  }
+}
+function renderRecent() {
+  const box = $("recent"); box.textContent = "";
+  recentNames.forEach(n => { const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = n; b.onclick = () => sendName(n); box.appendChild(b); });
+  show("recentWrap", recentNames.length > 0);
+}
+function renderSpieler() {
+  set("curName", S.player.current);
+  show("noName", S.player.current === "Unbekannt");
+  const np = $("namePull");
+  if (S.pull.active && S.pull.player) { set(np, `Aktuell läuft ein Zug von ${S.pull.player} – dein neuer Name gilt ab dem nächsten Zug.`); show(np, true); }
+  else show(np, false);
+  if (document.activeElement !== $("nameIn")) validateName();
+}
+function initSpieler() {
+  $("nameIn").oninput = validateName;
+  $("nameIn").onkeydown = e => { if (e.key === "Enter" && !$("nameOk").disabled) sendName($("nameIn").value); };
+  $("nameOk").onclick = () => sendName($("nameIn").value);
+  $("nameReset").onclick = () => sendName("");
+}
+
+// ----- Rangliste -----
+function renderLeaderboard() {
+  if (!L) return;
+  const list = $("lbList");
+  list.textContent = "";
+  L.entries.forEach(e => {
+    const li = document.createElement("li");
+    if (e.endedAtMs === newSeq) li.className = "new";
+    const rk = document.createElement("span"); rk.className = "rk"; rk.textContent = e.rank + ".";
+    const nm = document.createElement("span"); nm.className = "nm"; nm.textContent = e.player; nm.title = e.player;
+    nm.onclick = () => nm.classList.toggle("full");
+    const du = document.createElement("span"); du.className = "num"; du.textContent = sec1(e.durationMs) + (e.truncated ? " max." : "");
+    const meta = document.createElement("span"); meta.className = "meta num"; meta.dataset.ended = e.endedAtMs;
+    li.append(rk, nm, du, meta); list.appendChild(li);
+  });
+  show("lbEmpty", L.entries.length === 0);
+  show(list, L.entries.length > 0);
+  set("lbCount", L.pullCount === 1 ? "1 Zug erfasst" : `${L.pullCount} Züge erfasst`);
+  renderLbPull();
+}
+function renderLbPull() {
+  const up = S ? S.uptimeMs : L.uptimeMs;
+  $$("#lbList .meta").forEach(m => set(m, `${since(+m.dataset.ended)} seit Start · ${ago(up - +m.dataset.ended)}`));
+  const box = $("lbPull");
+  if (S && S.pull.active) {
+    const el = liveElapsed();
+    const fifth = L.entries.length >= 5 ? L.entries[4].durationMs : 0;
+    set(box, `Zug läuft: ${S.pull.player || "Unbekannt"} · ${sec1(el)}${el > fifth ? " – auf Rekordkurs" : ""}`);
+    show(box, true);
+  } else show(box, false);
+}
+$("lbReset").onclick = async () => {
+  if (await confirmDlg("Rangliste zurücksetzen?", "Alle Einträge und der Zähler werden gelöscht. Ein laufender Zug wird danach normal gewertet.", "Zurücksetzen")) {
+    const r = await post("/api/leaderboard/reset", {confirm: true});
+    if (r && r.ok) { toast("Rangliste zurückgesetzt"); loadLeaderboard(); }
+  }
+};
+
+// ----- Farbverlauf -----
+let gDraft = null;
+function gServer() { return S ? {y: S.config.yellowMs, r: S.config.redMs} : {y: 3000, r: 6000}; }
+function gValid(d) { return d.r >= d.y + 100; }
+function gDirty() { const s = gServer(); return gDraft && (gDraft.y !== s.y || gDraft.r !== s.r); }
+function renderGradientIfClean() { if (!gDirty()) { gDraft = gServer(); renderGradient(); } }
+function renderGradient() {
+  const d = gDraft || gServer();
+  if (document.activeElement !== $("yR")) $("yR").value = d.y / 100;
+  if (document.activeElement !== $("rR2")) $("rR2").value = d.r / 100;
+  set("yV", sec1(d.y)); set("rV", sec1(d.r));
+  const ok = gValid(d), dirty = gDirty();
+  set("gErr", ok ? "" : "Rot muss mindestens 0,1 s nach Gelb erreicht werden.");
+  $("gApply").disabled = !ok || !dirty;
+  $("gDiscard").disabled = !dirty;
+  set("gState", !ok ? "Entwurf ungültig" : dirty ? "Entwurf – nicht gespeichert" : "Aktiv");
+  drawChart(d);
+  const chips = $("gChips");
+  const key = d.y + "/" + d.r;
+  if (chips.dataset.key !== key) {
+    chips.dataset.key = key; chips.textContent = "";
+    [["Grün", "0 s", "#00FF00"], ["Gelb", sec1(d.y), "#FFFF00"], ["Rot", sec1(d.r), "#FF0000"]].forEach(([n, t, col]) => {
+      const c = document.createElement("span"); c.className = "chip";
+      const dot = document.createElement("span"); dot.style.cssText = `width:10px;height:10px;border-radius:50%;background:${col}`;
+      c.append(dot, document.createTextNode(`${n} ${t}`)); chips.appendChild(c);
+    });
+  }
+}
+function drawChart(d) {
+  const W = 320, X0 = 34, X1 = 312, Y0 = 120, Y1 = 10, span = Math.max(d.r, d.y + 100) * 1.25;
+  const x = t => X0 + (X1 - X0) * t / span, y = v => Y0 - (Y0 - Y1) * v / 255;
+  const pts = ch => { let s = ""; for (let i = 0; i <= 64; i++) { const t = span * i / 64; const c = gradient(t, d.y, Math.max(d.r, d.y + 1)); s += `${x(t).toFixed(1)},${y(c[ch]).toFixed(1)} `; } return s; };
+  const yp = (d.y / span * 100).toFixed(1), rp = (d.r / span * 100).toFixed(1);
+  $("chart").innerHTML =
+    `<defs><linearGradient id="gb"><stop offset="0" stop-color="#00FF00"/><stop offset="${yp}%" stop-color="#FFFF00"/><stop offset="${rp}%" stop-color="#FF0000"/><stop offset="1" stop-color="#FF0000"/></linearGradient></defs>` +
+    `<line x1="${X0}" y1="${Y0}" x2="${X1}" y2="${Y0}" stroke="#555"/><line x1="${X0}" y1="${Y1}" x2="${X0}" y2="${Y0}" stroke="#555"/>` +
+    `<text x="${X0 - 4}" y="${Y1 + 4}" fill="#9AA3AD" font-size="10" text-anchor="end">255</text><text x="${X0 - 4}" y="${Y0 + 3}" fill="#9AA3AD" font-size="10" text-anchor="end">0</text>` +
+    `<polyline points="${pts("r")}" fill="none" stroke="#FF6B6B" stroke-width="2"/>` +
+    `<polyline points="${pts("g")}" fill="none" stroke="#3DDC84" stroke-width="2" stroke-dasharray="5 3"/>` +
+    [[0, "0 s"], [d.y, sec1(d.y)], [d.r, sec1(d.r)]].map(([t, l], i) => `<circle cx="${x(t)}" cy="${Y0}" r="4" fill="${["#00FF00", "#FFFF00", "#FF0000"][i]}"/><text x="${x(t)}" y="${Y0 + 15}" fill="#ECEFF3" font-size="10" text-anchor="${i ? "middle" : "start"}">${l}</text>`).join("") +
+    `<rect x="${X0}" y="${Y0 + 24}" width="${X1 - X0}" height="14" rx="4" fill="url(#gb)"/>` +
+    `<text x="${X1}" y="${Y1 + 4}" fill="#FF6B6B" font-size="10" text-anchor="end">R ───</text><text x="${X1}" y="${Y1 + 16}" fill="#3DDC84" font-size="10" text-anchor="end">G - - -</text>`;
+}
+function initGradient() {
+  $("yR").oninput = () => { gDraft = Object.assign({}, gDraft || gServer(), {y: +$("yR").value * 100}); renderGradient(); };
+  $("rR2").oninput = () => { gDraft = Object.assign({}, gDraft || gServer(), {r: +$("rR2").value * 100}); renderGradient(); };
+  $("gApply").onclick = async () => {
+    $("gApply").disabled = true; set("gState", "Wird gesendet …");
+    const r = await postConfig({yellowMs: gDraft.y, redMs: gDraft.r}, {ok: "Farbverlauf übernommen", onError: e => set("gErr", e.message)});
+    if (r && r.ok) gDraft = gServer();
+    renderGradient();
+  };
+  $("gDiscard").onclick = () => { gDraft = gServer(); renderGradient(); };
+  $("gReset").onclick = async () => {
+    if (await confirmDlg("Farbverlauf zurücksetzen?", "Gelb ab 3,0 s und Rot ab 6,0 s wiederherstellen?", "Zurücksetzen")) {
+      const r = await postConfig({reset: "gradient"}, {ok: "Standardwerte wiederhergestellt"});
+      if (r && r.ok) { gDraft = gServer(); renderGradient(); }
+    }
+  };
+  let pvRaf = 0;
+  $("pvBtn").onclick = () => {
+    if (pvRaf) { cancelAnimationFrame(pvRaf); pvRaf = 0; set("pvBtn", "▶ Abspielen"); return; }
+    const d = gDraft || gServer(), t0 = performance.now(), end = d.r + 1000;
+    set("pvBtn", "■ Stopp");
+    const step = () => {
+      const t = performance.now() - t0;
+      const c = gradient(Math.min(t, d.r), d.y, d.r);
+      $("pvSw").style.background = css(c); set("pvT", sec1(Math.min(t, end)));
+      if (t < end) pvRaf = requestAnimationFrame(step); else { pvRaf = 0; set("pvBtn", "▶ Abspielen"); }
+    };
+    pvRaf = requestAnimationFrame(step);
+  };
+}
+
+// ----- Sensor -----
+function renderSensor() {
+  const s = S.sensor, c = S.config;
+  $("sInd").classList.toggle("on", s.levelActive);
+  set("sIndTxt", s.levelActive ? "Erschütterung" : "Ruhe");
+  set("sLast", s.hasPulse ? "Letzter Impuls: vor " + sec1(s.lastPulseAgoMs) : "Noch kein Impuls seit dem Start");
+  set("sPull", S.pull.active ? "Zug aktiv · " + sec1(liveElapsed()) : "Kein Zug aktiv");
+  set("sCount", `${s.pulsesInWindow} Impulse in den letzten ${Math.round(s.windowMs / 1000)} s`);
+  const bars = $("sBars"), max = Math.max(1, ...sensorHist);
+  while (bars.children.length < 20) bars.appendChild(document.createElement("i"));
+  for (let i = 0; i < 20; i++) { const v = sensorHist[sensorHist.length - 20 + i]; bars.children[i].style.height = v == null ? "2px" : Math.max(2, v * 40 / max) + "px"; }
+  set("sSample", `Abtastung alle ${s.sampleIntervalMs} ms`);
+  if (!editing($("tR"))) { $("tR").value = c.tailMs / 50; set("tV", sec2(c.tailMs)); }
+  set("tTxt", `Zug endet nach ${sec2(+$("tR").value * 50)} ohne Impuls`);
+  if (!editing($("diag"))) $("diag").checked = c.diagnostic;
+  $("sensorWrap").classList.toggle("diag-frame", c.diagnostic);
+  const st = $("sStatus");
+  if (s.fault === "stuck_active") { st.className = "hint err"; set(st, "Dauersignal erkannt – Empfindlichkeit am Poti verringern oder Montage prüfen."); }
+  else if (!s.hasPulse) { st.className = "hint"; set(st, "Noch keine Erschütterung erkannt – Empfindlichkeit erhöhen oder Verkabelung prüfen."); }
+  else { st.className = "hint ok"; set(st, "✓ Keine Auffälligkeiten"); }
+}
+function initSensor() {
+  $("tR").oninput = () => { $("tR").dataset.dirty = "1"; set("tV", sec2(+$("tR").value * 50)); set("tTxt", `Zug endet nach ${sec2(+$("tR").value * 50)} ohne Impuls`); };
+  $("tR").onchange = () => { delete $("tR").dataset.dirty; set("tErr", ""); postConfig({tailMs: +$("tR").value * 50}, {ok: "Nachlaufzeit gespeichert", onError: e => set("tErr", e.message)}); };
+  $("diag").onchange = () => postConfig({diagnostic: $("diag").checked}, {ok: $("diag").checked ? "Diagnosemodus an" : "Diagnosemodus aus"});
+  $("resetSensor").onclick = async () => {
+    if (await confirmDlg("Sensor-Einstellungen zurücksetzen?", "Nachlaufzeit und Diagnosemodus auf Standard setzen?", "Zurücksetzen")) postConfig({reset: "sensor"}, {ok: "Standardwerte wiederhergestellt"});
+  };
+}
+
+// ----- System -----
+function renderSystem() {
+  const y = S.system || {}, na = "nicht verfügbar";
+  const rows = [
+    ["Gerät", y.deviceName || na],
+    ["WLAN", y.ssid ? y.ssid + " (offen, ohne Passwort)" : na],
+    ["IP-Adresse", y.ip || na],
+    ["Firmware", y.fwVersion ? `${y.fwVersion}${y.build ? " (Build " + y.build + ")" : ""}` : na],
+    ["Webserver", $("conn").dataset.s === "lost" ? "nicht erreichbar" : "läuft"],
+    ["LEDs", y.ledCount != null ? String(y.ledCount) : na],
+    ["Modus", MODE_TXT[S.config.mode] || na],
+    ["Laufzeit", uptime(S.uptimeMs)],
+  ];
+  if (y.clients != null) rows.push(["Verbundene Geräte", String(y.clients)]);
+  const kv = $("sysKv");
+  if (kv.children.length !== rows.length * 2) {
+    kv.textContent = "";
+    rows.forEach(() => { kv.appendChild(document.createElement("dt")); kv.appendChild(document.createElement("dd")); });
+  }
+  rows.forEach(([k, v], i) => { set(kv.children[2 * i], k); set(kv.children[2 * i + 1], v); });
+}
+function initSystem() {
+  $$("#pollRadio input").forEach(r => r.onchange = () => { pollMs = +r.value; poll(); });
+  $("resetAll").onclick = async () => {
+    if (await confirmDlg("Alle Einstellungen zurücksetzen?", "Alle Einstellungen auf Standardwerte setzen? Rangliste und Spielername bleiben erhalten.", "Zurücksetzen")) {
+      $$("input").forEach(i => delete i.dataset.dirty);
+      const r = await postConfig({reset: "all"}, {ok: "Standardwerte wiederhergestellt"});
+      if (r && r.ok) { gDraft = gServer(); render(); }
+    }
+  };
+}
+
+// ---------- Start ----------
+buildRing($("ringStart")); buildRing($("ringLicht"));
+initModeSegs(); initLicht(); initSpieler(); initGradient(); initSensor(); initSystem();
+window.addEventListener("hashchange", route);
+route();
+// Skelett bis zur ersten Antwort
+$$("#timer,#lastPull,#briLine,#curName").forEach(e => e.classList.add("skel"));
+const unskel = () => { if (S) { $$(".skel").forEach(e => e.classList.remove("skel")); } else setTimeout(unskel, 100); };
+unskel();
+setInterval(() => { if (S && S.pull.active) { renderStart(); if (L) renderLbPull(); set("sPull", "Zug aktiv · " + sec1(liveElapsed())); } }, 100);
+poll();
+</script>
+</body>
+</html>

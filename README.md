@@ -8,7 +8,8 @@
 |---|---|
 | `docs/planung/` | Planungsdokumente 01–11 (Anforderungen, Hardware, Mechanik, Firmware, Web-App, API, Wireframes, CAD, Tests, offene Punkte, Umsetzungsplan) |
 | `docs/planung/fotos/` | Fotos und Skizzen der realen Bauteile |
-| `ShishaLed/` | Firmware (Arduino-Sketch). Stand B1: Kernlogik ohne Hardwareanbindung |
+| `ShishaLed/` | Firmware (Arduino-Sketch): Sensor, LED-Ring, WLAN „ShishaLed“, HTTP-API nach 06 |
+| `web/` | Quelle der Web-App; `python3 tools/gen_web_page.py` erzeugt daraus `ShishaLed/web_page.h` |
 | `test/host/` | Host-Tests der Kernlogik (`make` im Ordner, braucht nur g++) |
 | `test/b0_hardware/` | Testsketches für die Hardware-Verifikation (B0) |
 | `cad/` | SolidCraft-Modell, Parameter, Ansichten, STL |

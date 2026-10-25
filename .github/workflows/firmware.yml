@@ -24,6 +24,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Web-App in der Firmware aktuell?
+        run: python3 tools/gen_web_page.py --check
+
       - uses: arduino/setup-arduino-cli@v2
 
       - name: ESP32-Core und Bibliotheken installieren
@@ -31,6 +34,7 @@ jobs:
           arduino-cli core update-index --additional-urls "$ESP32_INDEX"
           arduino-cli core install esp32:esp32 --additional-urls "$ESP32_INDEX"
           arduino-cli lib install "Adafruit NeoPixel"
+          arduino-cli lib install "ArduinoJson@7.4.2"
 
       - name: Kompilieren
         run: |
