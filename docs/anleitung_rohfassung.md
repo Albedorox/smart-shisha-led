@@ -6,8 +6,8 @@ Die Rohfassung ist vollständig, aber noch nicht am Gerät erprobt. Offene Punkt
 
 | Teil | Datei | Lage auf dem Bett |
 |---|---|---|
-| T1 Deckplatte | `cad/v2/stl/T1_Deckplatte_v2.stl` | Glasauflage nach oben |
-| T2 Unterschale | `cad/v1/stl/T2_Unterschale_v1.stl` | Boden auf dem Bett |
+| T1 Deckplatte | `cad/v3/stl/T1_Deckplatte_v3.stl` | Glasauflage nach oben |
+| T2 Unterschale | `cad/v3/stl/T2_Unterschale_v3.stl` | Boden auf dem Bett |
 | T4 Distanzring | `cad/v1/stl/T4_Distanzring_v1.stl` | flach |
 
 PETG oder PLA, ohne Stützmaterial. Druckeinstellungen: `docs/planung/03_mechanical_design.md` §13.
@@ -34,7 +34,7 @@ Kabel direkt anlöten, Lötstellen mit Schrumpfschlauch isolieren.
 1. Einschmelzmuttern mit dem Lötkolben setzen: 4 × M2 und 5 × M3 in T1 (von unten).
 2. Kabel an die Ring-Pads löten, durch die rechteckige Aussparung führen, Ring mit 4 × M2 verschrauben. Aussparung mit Heißkleber oder Silikon abdichten.
 3. SW-420 mit T4 als Distanzring und M3-Schraube an T1 schrauben; die zwei Stifte in T2 sichern ihn gegen Verdrehen.
-4. SuperMini in den Rahmen in T2 legen (USB zur Programmieröffnung), mit Heißkleber oder Schaumklebeband fixieren.
+4. SuperMini (ohne Stiftleisten) in den Rahmen in T2 setzen: zuerst die USB-Seite zur Programmieröffnung, dann die Antennenseite herunterdrücken, bis die Schnappzunge einrastet (ab CAD v3).
 5. Breakout mit 2 × M2,5 auf die Sockel schrauben, Platinenkante in der Wandtasche.
 6. T1 auf T2 setzen (Feder in Nut), mit 4 × M3 von unten verschrauben, Silikonfüße einkleben.
 
@@ -58,7 +58,7 @@ Am einfachsten ohne Arduino IDE direkt im Browser: siehe [flashen.md](flashen.md
 
 - Sensorpolarität: aktiv bei LOW (`SENSOR_ACTIVE_LOW`), B0 noch offen
 - Einschmelzmuttern: Bohrungen M2 Ø3,2 / M3 Ø4,0 (Coupon nicht getestet)
-- Testring v2 (Zentrierrand, Ringtasche, Aussparung) nicht gedruckt
+- Zentrierrand v3 nur nach Glasnäherung ausgelegt (Testring v3 zum Prüfen)
 - Glasabstand zu den LEDs rechnerisch ca. 1,1 mm
 - LED-Strom 20 mA je Kanal, Stromgrenze 500 mA
 - Breakout-Maße laut Datenblatt, nicht nachgemessen
