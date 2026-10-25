@@ -40,6 +40,8 @@ Kabel direkt anlöten, Lötstellen mit Schrumpfschlauch isolieren.
 
 ## 5. Firmware aufspielen
 
+Am einfachsten ohne Arduino IDE direkt im Browser: siehe [flashen.md](flashen.md). Alternativ mit der Arduino IDE:
+
 1. Arduino IDE mit ESP32-Core (Espressif) und der Bibliothek „Adafruit NeoPixel“.
 2. Board „ESP32C3 Dev Module“, „USB CDC On Boot: Enabled“.
 3. `ShishaLed/ShishaLed.ino` öffnen und hochladen (Powerbank dabei abziehen).

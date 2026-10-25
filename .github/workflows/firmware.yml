@@ -1,0 +1,70 @@
+name: Firmware
+
+# Baut ShishaLed für den ESP32-C3 SuperMini. Ergebnis: eine einzige Datei
+# ShishaLed-merged.bin, die mit einem Web-Flasher an Adresse 0x0 geschrieben wird
+# (Anleitung: docs/flashen.md). Auf main wird sie zusätzlich als Release
+# "firmware-latest" veröffentlicht.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  ESP32_INDEX: https://espressif.github.io/arduino-esp32/package_esp32_index.json
+  FQBN: esp32:esp32:esp32c3:CDCOnBoot=cdc
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: arduino/setup-arduino-cli@v2
+
+      - name: ESP32-Core und Bibliotheken installieren
+        run: |
+          arduino-cli core update-index --additional-urls "$ESP32_INDEX"
+          arduino-cli core install esp32:esp32 --additional-urls "$ESP32_INDEX"
+          arduino-cli lib install "Adafruit NeoPixel"
+
+      - name: Kompilieren
+        run: |
+          arduino-cli compile --fqbn "$FQBN" --warnings default \
+            --build-path build --output-dir out ShishaLed
+          ls -l out
+
+      - name: Eine Flash-Datei erzeugen (Bootloader, Partitionen, Firmware)
+        run: |
+          if [ -f out/ShishaLed.ino.merged.bin ]; then
+            cp out/ShishaLed.ino.merged.bin ShishaLed-merged.bin
+          else
+            ESPTOOL=$(find ~/.arduino15/packages/esp32/tools -name 'esptool*' -type f -perm -u+x | head -n1)
+            BOOT_APP0=$(find ~/.arduino15/packages/esp32/hardware -name boot_app0.bin | head -n1)
+            "$ESPTOOL" --chip esp32c3 merge_bin -o ShishaLed-merged.bin \
+              0x0 out/ShishaLed.ino.bootloader.bin \
+              0x8000 out/ShishaLed.ino.partitions.bin \
+              0xe000 "$BOOT_APP0" \
+              0x10000 out/ShishaLed.ino.bin
+          fi
+          ls -l ShishaLed-merged.bin
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ShishaLed-firmware
+          path: ShishaLed-merged.bin
+
+      - name: Als Release "firmware-latest" veröffentlichen
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete firmware-latest --yes --cleanup-tag || true
+          gh release create firmware-latest ShishaLed-merged.bin \
+            --title "Firmware (aktueller Stand von main)" \
+            --notes "Automatisch gebaut aus ${GITHUB_SHA::7}. Flashen: docs/flashen.md" \
+            --target "$GITHUB_SHA"
