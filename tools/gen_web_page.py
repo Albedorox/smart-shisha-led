@@ -7,6 +7,7 @@ Mit --check wird nur geprüft, ob web_page.h aktuell ist (für die CI).
 import gzip
 import hashlib
 import pathlib
+import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -37,15 +38,28 @@ def render() -> str:
     )
 
 
+def embedded_html() -> bytes:
+    """Entpackt die in web_page.h eingebettete Seite (leer, falls nicht lesbar)."""
+    if not DST.exists():
+        return b""
+    m = re.search(r"WEB_PAGE_GZ\[\] PROGMEM = \{(.*?)\};", DST.read_text(), re.S)
+    if not m:
+        return b""
+    try:
+        return gzip.decompress(bytes(int(x, 16) for x in re.findall(r"0x[0-9a-f]{2}", m.group(1))))
+    except OSError:
+        return b""
+
+
 def main() -> int:
-    out = render()
     if "--check" in sys.argv:
-        if not DST.exists() or DST.read_text() != out:
+        # Inhalt vergleichen, nicht die gzip-Bytes: die hängen von der zlib-Version ab
+        if embedded_html() != SRC.read_bytes():
             print("ShishaLed/web_page.h ist veraltet: python3 tools/gen_web_page.py ausführen", file=sys.stderr)
             return 1
         print("web_page.h aktuell")
         return 0
-    DST.write_text(out)
+    DST.write_text(render())
     print(f"{DST.relative_to(ROOT)} geschrieben")
     return 0
 
