@@ -2,6 +2,21 @@
 
 Erstellt mit SolidCraft (über MCP auf dem Rechner des Nutzers). Planungsgrundlage: `docs/planung/03_mechanical_design.md`, Workflow: `docs/planung/08_cad_mcp_plan.md`.
 
+## Stand v4 (2026-10-27) – nur Testring
+
+Befund des Nutzers am Testring v3: Das Glas lässt sich weiterhin ca. 6 mm hin und her schieben. Wunsch: Rand wieder so hoch wie bei v1 und 2–3 mm weiter außen.
+
+| Parameter | v3 | v4 |
+|---|---|---|
+| `center_clear` | 3 mm | 0,5 mm (Außenkante Rand r 53,05, Ø 106,1; v1: Ø 105,1) |
+| `center_rim_w` | 4,5 mm | 2,5 mm (Rand r 50,55–53,05) |
+| `center_rim_h` | 1,2 mm | 2 mm |
+| `center_rim_ch` / `center_rim_ch_w` | 0,7 / 2,5 mm (Schräge) | 1 / 1 mm (45°-Fase außen, wie v1) |
+
+Nur `v4/stl/P_Testring_v4.stl` ist neu exportiert. T1 und T2 bleiben bis zur Rückmeldung v3. Das Modell `v4/SmartShisha_Untersetzer.solidcraft` ist mit der Zeitleiste hinter dem Testring gespeichert (Marke bei Feature 29). Vor dem Export von T1/T2 also „Zeitleiste ans Ende“ ausführen.
+
+Hinweis: Der Rand von v1 (Außenkante Ø 105,1, 2 mm hoch) hat das Glas ca. 1,5 mm angehoben. v4 liegt 0,5 mm weiter außen und ist gleich hoch. Das gemessene Spiel (v2: 8 mm, v3: 6 mm) passt zu einem Glasfuß-Innen-Ø von etwa 113 mm statt 107. Wenn v4 wieder kippelt, hilft eine Messung von Innen- und Außendurchmesser des Glasfußes.
+
 ## Stand v3 (2026-10-25) – Änderungen aus dem ersten Vollteil-Druck
 
 Befund des Nutzers am gedruckten T1/T2 v2:
