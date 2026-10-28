@@ -19,7 +19,7 @@ Neu ist ein niedriger Außenring auf v5 (Bild `v6/ansicht_schnitt_aussenring.png
 
 `v6/stl/T1_Deckplatte_v6.stl` ist T1 v3 mit dem Randbereich aus Testring v6: Oberhalb z 18 ist der alte Rand entfernt und Zentrierrand plus Außenring von v6 eingesetzt. Unterhalb z 17,9 ist T1 identisch mit v3, der Bereich ab r 29,9 und z 14,4 entspricht dem Testring v6. T1 ∩ T2 v3 hat das Volumen 0. T2 (v3) und T4 (v1) bleiben unverändert.
 
-Offen: Das SolidCraft-Modell ist noch nicht nachgezogen (kein Zugriff auf den neuen SolidCraft-Arbeitsordner). Dort fehlen `center_clear` 2,55, `center_rim_w` 3,5 und der Außenring in `S_T1_Profil` (Punkte bei r 59 / 60,26 / 61 und z_top + 1,5).
+Das SolidCraft-Modell `v6/SmartShisha_Untersetzer.solidcraft` ist nachgezogen (2026-10-28) und mit der Zeitleiste am Ende gespeichert: `center_clear` 2,55, `center_rim_w` 3,5 und der Außenring in `S_T1_Profil` mit den neuen Parametern `oring_w` 2, `oring_h` 1,5 und `oring_run` (= `oring_h` · 0,8391, also 50°). Kontrolle: T1 und Testring aus SolidCraft weichen von den STLs in `v6/stl/` nur um die Facettierung ab (ca. 25 mm³ bei 64 cm³), T2 ist identisch mit v3.
 
 ## Stand v5 (2026-10-28) – nur Testring
 
