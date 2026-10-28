@@ -2,6 +2,21 @@
 
 Erstellt mit SolidCraft (über MCP auf dem Rechner des Nutzers). Planungsgrundlage: `docs/planung/03_mechanical_design.md`, Workflow: `docs/planung/08_cad_mcp_plan.md`.
 
+## Stand v6 (2026-10-28) – nur Testring
+
+Befund des Nutzers am Testring v5: Der Zentrierrand passt, das Glas ist aber zu wackelig und könnte beim Zug am Schlauch wegrutschen. Gemessen: Die Glasaufstandskante liegt 4,5 mm innerhalb der Außenkante (r ca. 58), das Glas steigt dort mit ca. 50° nach außen an.
+
+Neu ist ein niedriger Außenring auf v5 (Bild `v6/ansicht_schnitt_aussenring.png`):
+
+| | Wert |
+|---|---|
+| Lage | r 59–61 am Fuß (endet dort, wo die Außenfase beginnt) |
+| Höhe | 1,5 mm |
+| Innenseite | 50° geneigt wie das Glas, oben r 60,26; überall ca. 1 mm Luft (Spiel gesamt ca. 2 mm) |
+| Druck | Die Innenseite weicht nach oben nach außen zurück, also kein Überhang |
+
+`v6/stl/P_Testring_v6.stl` ist v5 plus Außenring (trimesh/manifold), Netz geschlossen. Das SolidCraft-Modell ist wie bei v5 noch nicht nachgezogen.
+
 ## Stand v5 (2026-10-28) – nur Testring
 
 Befund des Nutzers am Testring v4 (Außen-Ø 104): Die Höhe passt, das Glas kippelt aber minimal. Wunsch: Außen-Ø 102 statt 104.
