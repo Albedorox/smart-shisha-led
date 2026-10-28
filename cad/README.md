@@ -2,7 +2,7 @@
 
 Erstellt mit SolidCraft (über MCP auf dem Rechner des Nutzers). Planungsgrundlage: `docs/planung/03_mechanical_design.md`, Workflow: `docs/planung/08_cad_mcp_plan.md`.
 
-## Stand v6 (2026-10-28) – nur Testring
+## Stand v6 (2026-10-28) – Testring und T1
 
 Befund des Nutzers am Testring v5: Der Zentrierrand passt, das Glas ist aber zu wackelig und könnte beim Zug am Schlauch wegrutschen. Gemessen: Die Glasaufstandskante liegt 4,5 mm innerhalb der Außenkante (r ca. 58), das Glas steigt dort mit ca. 50° nach außen an.
 
@@ -15,7 +15,11 @@ Neu ist ein niedriger Außenring auf v5 (Bild `v6/ansicht_schnitt_aussenring.png
 | Innenseite | 50° geneigt wie das Glas, oben r 60,26; überall ca. 1 mm Luft (Spiel gesamt ca. 2 mm) |
 | Druck | Die Innenseite weicht nach oben nach außen zurück, also kein Überhang |
 
-`v6/stl/P_Testring_v6.stl` ist v5 plus Außenring (trimesh/manifold), Netz geschlossen. Das SolidCraft-Modell ist wie bei v5 noch nicht nachgezogen.
+`v6/stl/P_Testring_v6.stl` ist v5 plus Außenring (trimesh/manifold), Netz geschlossen. Der Nutzer hat ihn am Glas geprüft: passt.
+
+`v6/stl/T1_Deckplatte_v6.stl` ist T1 v3 mit dem Randbereich aus Testring v6: Oberhalb z 18 ist der alte Rand entfernt und Zentrierrand plus Außenring von v6 eingesetzt. Unterhalb z 17,9 ist T1 identisch mit v3, der Bereich ab r 29,9 und z 14,4 entspricht dem Testring v6. T1 ∩ T2 v3 hat das Volumen 0. T2 (v3) und T4 (v1) bleiben unverändert.
+
+Offen: Das SolidCraft-Modell ist noch nicht nachgezogen (kein Zugriff auf den neuen SolidCraft-Arbeitsordner). Dort fehlen `center_clear` 2,55, `center_rim_w` 3,5 und der Außenring in `S_T1_Profil` (Punkte bei r 59 / 60,26 / 61 und z_top + 1,5).
 
 ## Stand v5 (2026-10-28) – nur Testring
 
