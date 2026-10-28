@@ -2,6 +2,17 @@
 
 Erstellt mit SolidCraft (über MCP auf dem Rechner des Nutzers). Planungsgrundlage: `docs/planung/03_mechanical_design.md`, Workflow: `docs/planung/08_cad_mcp_plan.md`.
 
+## Stand v5 (2026-10-28) – nur Testring
+
+Befund des Nutzers am Testring v4 (Außen-Ø 104): Die Höhe passt, das Glas kippelt aber minimal. Wunsch: Außen-Ø 102 statt 104.
+
+| | v4 | v5 |
+|---|---|---|
+| Zentrierrand | r 47,5–52 (Ø 95–104) | r 47,5–51 (Ø 95–102) |
+| Höhe / Fase | 2 mm, 45°-Fase 1 mm außen | unverändert |
+
+`v5/stl/P_Testring_v5.stl` ist aus der SolidCraft-Datei von v4 abgeleitet: Nur die äußeren 1 mm des Randes sind entfernt und die Fase an der neuen Außenkante neu gesetzt (trimesh/manifold). Außerhalb des Randes ist das Netz identisch mit v4. Das SolidCraft-Modell ist noch nicht nachgezogen; dort entspricht v5 `center_clear` 2,55 und `center_rim_w` 3,5.
+
 ## Stand v4 (2026-10-27) – nur Testring
 
 Befund des Nutzers am Testring v3: Das Glas lässt sich weiterhin ca. 6 mm hin und her schieben. Wunsch: Rand wieder so hoch wie bei v1 und 2–3 mm weiter außen. Der erste v4-Stand (Innen-Ø 101,1) war zu weit außen; auf Wunsch des Nutzers ist der Innendurchmesser jetzt 95 mm, die Breite wie bei v3.
