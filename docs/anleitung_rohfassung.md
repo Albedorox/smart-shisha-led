@@ -6,7 +6,7 @@ Die Rohfassung ist vollständig, aber noch nicht am Gerät erprobt. Offene Punkt
 
 | Teil | Datei | Lage auf dem Bett |
 |---|---|---|
-| T1 Deckplatte | `cad/v3/stl/T1_Deckplatte_v3.stl` | Glasauflage nach oben |
+| T1 Deckplatte | `cad/v6/stl/T1_Deckplatte_v6.stl` | Glasauflage nach oben |
 | T2 Unterschale | `cad/v3/stl/T2_Unterschale_v3.stl` | Boden auf dem Bett |
 | T4 Distanzring | `cad/v1/stl/T4_Distanzring_v1.stl` | flach |
 
@@ -58,7 +58,7 @@ Am einfachsten ohne Arduino IDE direkt im Browser: siehe [flashen.md](flashen.md
 
 - Sensorpolarität: aktiv bei LOW (`SENSOR_ACTIVE_LOW`), B0 noch offen
 - Einschmelzmuttern: Bohrungen M2 Ø3,2 / M3 Ø4,0 (Coupon nicht getestet)
-- Zentrierrand v3 nur nach Glasnäherung ausgelegt (Testring v3 zum Prüfen)
+- Glashalterung (Zentrierrand und Außenring) mit Testring v6 am echten Glas geprüft (2026-10-28)
 - Glasabstand zu den LEDs rechnerisch ca. 1,1 mm
 - LED-Strom 20 mA je Kanal, Stromgrenze 500 mA
 - Breakout-Maße laut Datenblatt, nicht nachgemessen

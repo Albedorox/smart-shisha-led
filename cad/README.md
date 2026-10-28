@@ -2,6 +2,51 @@
 
 Erstellt mit SolidCraft (über MCP auf dem Rechner des Nutzers). Planungsgrundlage: `docs/planung/03_mechanical_design.md`, Workflow: `docs/planung/08_cad_mcp_plan.md`.
 
+## Stand v6 (2026-10-28) – Testring und T1
+
+Befund des Nutzers am Testring v5: Der Zentrierrand passt, das Glas ist aber zu wackelig und könnte beim Zug am Schlauch wegrutschen. Gemessen: Die Glasaufstandskante liegt 4,5 mm innerhalb der Außenkante (r ca. 58), das Glas steigt dort mit ca. 50° nach außen an.
+
+Neu ist ein niedriger Außenring auf v5 (Bild `v6/ansicht_schnitt_aussenring.png`):
+
+| | Wert |
+|---|---|
+| Lage | r 59–61 am Fuß (endet dort, wo die Außenfase beginnt) |
+| Höhe | 1,5 mm |
+| Innenseite | 50° geneigt wie das Glas, oben r 60,26; überall ca. 1 mm Luft (Spiel gesamt ca. 2 mm) |
+| Druck | Die Innenseite weicht nach oben nach außen zurück, also kein Überhang |
+
+`v6/stl/P_Testring_v6.stl` ist v5 plus Außenring (trimesh/manifold), Netz geschlossen. Der Nutzer hat ihn am Glas geprüft: passt.
+
+`v6/stl/T1_Deckplatte_v6.stl` ist T1 v3 mit dem Randbereich aus Testring v6: Oberhalb z 18 ist der alte Rand entfernt und Zentrierrand plus Außenring von v6 eingesetzt. Unterhalb z 17,9 ist T1 identisch mit v3, der Bereich ab r 29,9 und z 14,4 entspricht dem Testring v6. T1 ∩ T2 v3 hat das Volumen 0. T2 (v3) und T4 (v1) bleiben unverändert.
+
+Offen: Das SolidCraft-Modell ist noch nicht nachgezogen (kein Zugriff auf den neuen SolidCraft-Arbeitsordner). Dort fehlen `center_clear` 2,55, `center_rim_w` 3,5 und der Außenring in `S_T1_Profil` (Punkte bei r 59 / 60,26 / 61 und z_top + 1,5).
+
+## Stand v5 (2026-10-28) – nur Testring
+
+Befund des Nutzers am Testring v4 (Außen-Ø 104): Die Höhe passt, das Glas kippelt aber minimal. Wunsch: Außen-Ø 102 statt 104.
+
+| | v4 | v5 |
+|---|---|---|
+| Zentrierrand | r 47,5–52 (Ø 95–104) | r 47,5–51 (Ø 95–102) |
+| Höhe / Fase | 2 mm, 45°-Fase 1 mm außen | unverändert |
+
+`v5/stl/P_Testring_v5.stl` ist aus der SolidCraft-Datei von v4 abgeleitet: Nur die äußeren 1 mm des Randes sind entfernt und die Fase an der neuen Außenkante neu gesetzt (trimesh/manifold). Außerhalb des Randes ist das Netz identisch mit v4. Das SolidCraft-Modell ist noch nicht nachgezogen; dort entspricht v5 `center_clear` 2,55 und `center_rim_w` 3,5.
+
+## Stand v4 (2026-10-27) – nur Testring
+
+Befund des Nutzers am Testring v3: Das Glas lässt sich weiterhin ca. 6 mm hin und her schieben. Wunsch: Rand wieder so hoch wie bei v1 und 2–3 mm weiter außen. Der erste v4-Stand (Innen-Ø 101,1) war zu weit außen; auf Wunsch des Nutzers ist der Innendurchmesser jetzt 95 mm, die Breite wie bei v3.
+
+| Parameter | v3 | v4 |
+|---|---|---|
+| `center_clear` | 3 mm | 1,55 mm (Außenkante Rand r 52, Ø 104; v1: Ø 105,1) |
+| `center_rim_w` | 4,5 mm | 4,5 mm (Rand r 47,5–52, Innen-Ø 95; v3: 92,1, v1: 100,1) |
+| `center_rim_h` | 1,2 mm | 2 mm |
+| `center_rim_ch` / `center_rim_ch_w` | 0,7 / 2,5 mm (Schräge) | 1 / 1 mm (45°-Fase außen, wie v1) |
+
+Nur `v4/stl/P_Testring_v4.stl` ist neu exportiert. T1 und T2 bleiben bis zur Rückmeldung v3. Das Modell `v4/SmartShisha_Untersetzer.solidcraft` ist mit der Zeitleiste hinter dem Testring gespeichert (Marke bei Feature 29). Vor dem Export von T1/T2 also „Zeitleiste ans Ende“ ausführen.
+
+Hinweis: Der Rand von v1 (Außenkante Ø 105,1, 2 mm hoch) hat das Glas ca. 1,5 mm angehoben. v4 ist gleich hoch, die Außenkante liegt 0,55 mm weiter innen als bei v1. Das gemessene Spiel (v2: 8 mm, v3: 6 mm) passt zu einem Glasfuß-Innen-Ø von etwa 113 mm statt 107. Wenn v4 wieder kippelt, hilft eine Messung von Innen- und Außendurchmesser des Glasfußes.
+
 ## Stand v3 (2026-10-25) – Änderungen aus dem ersten Vollteil-Druck
 
 Befund des Nutzers am gedruckten T1/T2 v2:
