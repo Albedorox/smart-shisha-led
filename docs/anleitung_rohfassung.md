@@ -60,7 +60,7 @@ Am einfachsten ohne Arduino IDE direkt im Browser: siehe [flashen.md](flashen.md
 
 ## Annahmen (nachträglich prüfen)
 
-- Sensorpolarität: aktiv bei LOW (`SENSOR_ACTIVE_LOW`), B0 noch offen
+- Sensorpolarität am echten Aufbau geprüft (2026-11-08): SW-420 in Ruhe LOW (DO-LED an), bei Vibration HIGH, daher `SENSOR_ACTIVE_LOW = false`
 - Einschmelzmuttern: Bohrungen M2 Ø3,2 / M3 Ø4,0 (Coupon nicht getestet)
 - Glashalterung (Zentrierrand und Außenring) mit Testring v6 am echten Glas geprüft (2026-10-28)
 - Glasabstand zu den LEDs rechnerisch ca. 1,1 mm

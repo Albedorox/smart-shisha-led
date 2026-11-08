@@ -14,7 +14,7 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 
-constexpr bool     SENSOR_ACTIVE_LOW    = true;  // Ergebnis aus B0_SensorTest eintragen
+constexpr bool     SENSOR_ACTIVE_LOW    = false; // SW-420: Ruhe LOW, Vibration HIGH (2026-11-08)
 constexpr uint8_t  SENSOR_PIN           = 0;
 constexpr uint8_t  LED_PIN              = 4;
 constexpr uint16_t LED_COUNT            = 24;

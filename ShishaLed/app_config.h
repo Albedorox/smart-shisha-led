@@ -10,10 +10,10 @@ constexpr const char* FW_VERSION  = "0.3.0";
 constexpr const char* DEVICE_NAME = "Smart Shisha LED-Untersetzer";
 constexpr const char* AP_SSID     = "ShishaLed";  // offenes WLAN (Nutzer 2026-10-25, statt 06: Shisha-LED-Control)
 
-// Hardware (02 §2). SENSOR_ACTIVE_LOW nach B0 / T-HW-04 bestätigen.
+// Hardware (02 §2). SW-420 am echten Aufbau (2026-11-08): Ruhe LOW, Vibration HIGH → aktiv bei HIGH.
 constexpr uint8_t PIN_SENSOR        = 0;
 constexpr uint8_t PIN_LED           = 4;
-constexpr bool    SENSOR_ACTIVE_LOW = true;
+constexpr bool    SENSOR_ACTIVE_LOW = false;
 
 // LEDs (CR-01, D-05)
 constexpr uint16_t LED_COUNT            = 24;
