@@ -18,6 +18,10 @@ ESP32-C3 SuperMini, LED-Ring 24 × WS2812, SW-420, rotes USB-C-Breakout (5,1 kΩ
 
 ## 3. Verdrahtung
 
+![Verdrahtungsplan](verdrahtung.svg)
+
+Der Plan wird aus `tools/gen_wiring_svg.py` erzeugt; Änderungen dort machen und das Skript neu ausführen.
+
 | Von | Nach |
 |---|---|
 | Breakout VBUS | SuperMini 5V, LED-Ring 5V |
