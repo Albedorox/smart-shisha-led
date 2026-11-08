@@ -46,7 +46,7 @@ Ohne Pegelwandler funktioniert der Ring für einen kurzen Tisch-Test oft trotzde
 | Nr. | Prüfung | Ergebnis |
 |---|---|---|
 | T-HW-01 | Board startet mit angeschlossenem Sensor normal, GPIO0/GPIO4 funktionieren | |
-| T-HW-04 | Ruhepegel / `SENSOR_ACTIVE_LOW` | |
+| T-HW-04 | Ruhepegel / `SENSOR_ACTIVE_LOW` | Ruhe LOW, Vibration HIGH → `false` (2026-11-08) |
 | T-HW-04 | kürzeste / längste Impulsbreite (µs) beim Ziehen | |
 | R-02 | Züge am Glas erkannt? (z. B. 10 Züge: wie viele erkannt) | |
 | R-02 | Fehlauslösungen beim Abstellen des Glases / Klopfen auf den Tisch | |
