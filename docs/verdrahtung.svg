@@ -1,0 +1,88 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1060' height='740' viewBox='0 0 1060 740'>
+<!-- Automatisch erzeugt durch tools/gen_wiring_svg.py – nicht von Hand ändern. -->
+<rect width='1060' height='740' fill='#ffffff'/>
+<text x='40' y='32' font-family='Helvetica, Arial, sans-serif' font-size='20' text-anchor='start' font-weight='bold' fill='#212529'>Smart Shisha LED – Verdrahtung</text>
+<text x='1020' y='32' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='end' font-weight='normal' fill='#495057'>Kreuzung mit Bogen = keine Verbindung, Punkt = Verbindung</text>
+<path d='M210,160 L240,160 L240,50 L740,50' fill='none' stroke='#d6336c' stroke-width='3'/>
+<path d='M210,220 L260,220 L260,95 L594,95 A6,6 0 0 1 606,95 L720,95' fill='none' stroke='#212529' stroke-width='3'/>
+<circle cx='260' cy='95' r='5' fill='#212529'/>
+<path d='M260,220 L260,700 L740,700' fill='none' stroke='#212529' stroke-width='3'/>
+<circle cx='260' cy='220' r='5' fill='#212529'/>
+<path d='M560,200 L600,200 L600,50' fill='none' stroke='#d6336c' stroke-width='3'/>
+<circle cx='600' cy='50' r='5' fill='#d6336c'/>
+<path d='M560,245 L620,245 L620,95' fill='none' stroke='#212529' stroke-width='3'/>
+<circle cx='620' cy='95' r='5' fill='#212529'/>
+<path d='M740,50 L740,180 L780,180' fill='none' stroke='#d6336c' stroke-width='3'/>
+<path d='M720,95 L720,220 L780,220' fill='none' stroke='#212529' stroke-width='3'/>
+<path d='M560,335 L634,335 A6,6 0 0 1 646,335 L680,335 L680,260 L780,260' fill='none' stroke='#2b8a3e' stroke-width='3'/>
+<path d='M560,290 L640,290 L640,430 L780,430' fill='none' stroke='#e8590c' stroke-width='3'/>
+<path d='M560,515 L700,515 L700,470 L780,470' fill='none' stroke='#1971c2' stroke-width='3'/>
+<path d='M780,510 L740,510 L740,700' fill='none' stroke='#212529' stroke-width='3'/>
+<text x='250' y='44' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#d6336c'>5-V-Schiene</text>
+<text x='270' y='89' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>Masse (GND)</text>
+<text x='270' y='694' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>Masse (GND)</text>
+<circle cx='765' cy='180' r='5' fill='#d6336c'/><circle cx='765' cy='220' r='5' fill='#212529'/>
+<line x1='765' y1='180' x2='765' y2='195' stroke='#212529' stroke-width='2'/><line x1='756' y1='195' x2='774' y2='195' stroke='#212529' stroke-width='3'/><path d='M756,205 Q765,199 774,205' fill='none' stroke='#212529' stroke-width='3'/><line x1='765' y1='203' x2='765' y2='220' stroke='#212529' stroke-width='2'/><text x='753' y='194' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='end' font-weight='bold' fill='#212529'>+</text>
+<rect x='20' y='120' width='190' height='140' rx='8' fill='#e9ecef' stroke='#495057' stroke-width='2'/>
+<text x='85.0' y='182.0' font-family='Helvetica, Arial, sans-serif' font-size='15' text-anchor='middle' font-weight='bold' fill='#212529'>USB-C-Breakout</text>
+<text x='85.0' y='202.0' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='middle' font-weight='normal' fill='#495057'>rotes Modul</text>
+<text x='85.0' y='218.0' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='middle' font-weight='normal' fill='#495057'>5,1 kΩ an CC</text>
+<text x='85.0' y='234.0' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='middle' font-weight='normal' fill='#495057'>nur VBUS und GND</text>
+<circle cx='210' cy='160' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='198' y='164' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='end' font-weight='normal' fill='#212529'>VBUS</text>
+<circle cx='210' cy='220' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='198' y='224' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='end' font-weight='normal' fill='#212529'>GND</text>
+<rect x='340' y='160' width='220' height='400' rx='8' fill='#e9ecef' stroke='#495057' stroke-width='2'/>
+<text x='420.0' y='190' font-family='Helvetica, Arial, sans-serif' font-size='15' text-anchor='middle' font-weight='bold' fill='#212529'>ESP32-C3 SuperMini</text>
+<text x='420.0' y='210' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='middle' font-weight='normal' fill='#495057'>Stiftreihe 5V … GPIO0</text>
+<text x='420.0' y='226' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='middle' font-weight='normal' fill='#495057'>ohne Stiftleisten löten</text>
+<circle cx='560' cy='200' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='548' y='204' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='end' font-weight='normal' fill='#212529'>5V</text>
+<circle cx='560' cy='245' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='548' y='249' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='end' font-weight='normal' fill='#212529'>GND</text>
+<circle cx='560' cy='290' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='548' y='294' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='end' font-weight='normal' fill='#212529'>3V3</text>
+<circle cx='560' cy='335' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='548' y='339' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='end' font-weight='normal' fill='#212529'>GPIO4</text>
+<circle cx='560' cy='380' r='6' fill='#ced4da' stroke='#adb5bd' stroke-width='2'/>
+<text x='548' y='384' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='end' font-weight='normal' fill='#adb5bd'>GPIO3</text>
+<circle cx='560' cy='425' r='6' fill='#ced4da' stroke='#adb5bd' stroke-width='2'/>
+<text x='548' y='429' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='end' font-weight='normal' fill='#adb5bd'>GPIO2</text>
+<circle cx='560' cy='470' r='6' fill='#ced4da' stroke='#adb5bd' stroke-width='2'/>
+<text x='548' y='474' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='end' font-weight='normal' fill='#adb5bd'>GPIO1</text>
+<circle cx='560' cy='515' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='548' y='519' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='end' font-weight='normal' fill='#212529'>GPIO0</text>
+<rect x='780' y='150' width='230' height='150' rx='8' fill='#e9ecef' stroke='#495057' stroke-width='2'/>
+<text x='925.0' y='217.0' font-family='Helvetica, Arial, sans-serif' font-size='15' text-anchor='middle' font-weight='bold' fill='#212529'>LED-Ring 24 × WS2812</text>
+<text x='925.0' y='237.0' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='middle' font-weight='normal' fill='#495057'>Pads auf der Rückseite</text>
+<text x='925.0' y='253.0' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='middle' font-weight='normal' fill='#495057'>DO bleibt frei</text>
+<circle cx='780' cy='180' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='792' y='184' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>5V</text>
+<circle cx='780' cy='220' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='792' y='224' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>GND</text>
+<circle cx='780' cy='260' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='792' y='264' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>DI</text>
+<rect x='780' y='400' width='230' height='150' rx='8' fill='#e9ecef' stroke='#495057' stroke-width='2'/>
+<text x='925.0' y='467.0' font-family='Helvetica, Arial, sans-serif' font-size='15' text-anchor='middle' font-weight='bold' fill='#212529'>SW-420</text>
+<text x='925.0' y='487.0' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='middle' font-weight='normal' fill='#495057'>Vibrationssensor-Modul</text>
+<text x='925.0' y='503.0' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='middle' font-weight='normal' fill='#495057'>mit T4 an T1 geschraubt</text>
+<circle cx='780' cy='430' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='792' y='434' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>VCC</text>
+<circle cx='780' cy='470' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='792' y='474' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>DO</text>
+<circle cx='780' cy='510' r='6' fill='#fff' stroke='#212529' stroke-width='2'/>
+<text x='792' y='514' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>GND</text>
+<text x='450' y='120' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='middle' font-weight='normal' fill='#495057'>USB-C des SuperMini: nur zum Programmieren,</text>
+<text x='450' y='134' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='middle' font-weight='normal' fill='#495057'>dann Powerbank am Breakout abziehen</text>
+<text x='652' y='368' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='start' font-weight='normal' fill='#495057'>ohne Pegelwandler (Anleitung);</text>
+<text x='652' y='383' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='start' font-weight='normal' fill='#495057'>flackert der Ring: 74AHCT125</text>
+<text x='652' y='398' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='start' font-weight='normal' fill='#495057'>oder 330 Ω in Reihe</text>
+<text x='800' y='330' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='start' font-weight='normal' fill='#495057'>Elko 470–1000 µF / ≥ 6,3 V</text>
+<text x='800' y='345' font-family='Helvetica, Arial, sans-serif' font-size='11' text-anchor='start' font-weight='normal' fill='#495057'>direkt an die Ring-Pads, + an 5V</text>
+<text x='40' y='600' font-family='Helvetica, Arial, sans-serif' font-size='13' text-anchor='start' font-weight='bold' fill='#212529'>Leitungen</text>
+<line x1='40' y1='616' x2='70' y2='616' stroke='#d6336c' stroke-width='3'/><text x='78' y='620' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>5 V</text>
+<line x1='40' y1='636' x2='70' y2='636' stroke='#212529' stroke-width='3'/><text x='78' y='640' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>GND</text>
+<line x1='40' y1='656' x2='70' y2='656' stroke='#e8590c' stroke-width='3'/><text x='78' y='660' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>3,3 V</text>
+<line x1='40' y1='676' x2='70' y2='676' stroke='#2b8a3e' stroke-width='3'/><text x='78' y='680' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>LED-Daten</text>
+<line x1='40' y1='696' x2='70' y2='696' stroke='#1971c2' stroke-width='3'/><text x='78' y='700' font-family='Helvetica, Arial, sans-serif' font-size='12' text-anchor='start' font-weight='normal' fill='#212529'>Sensorsignal</text>
+</svg>
