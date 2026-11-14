@@ -6,7 +6,7 @@
 
 namespace app {
 
-constexpr const char* FW_VERSION  = "0.3.0";
+constexpr const char* FW_VERSION  = "0.3.1";
 constexpr const char* DEVICE_NAME = "Smart Shisha LED-Untersetzer";
 constexpr const char* AP_SSID     = "ShishaLed";  // offenes WLAN (Nutzer 2026-10-25, statt 06: Shisha-LED-Control)
 
@@ -14,6 +14,12 @@ constexpr const char* AP_SSID     = "ShishaLed";  // offenes WLAN (Nutzer 2026-1
 constexpr uint8_t PIN_SENSOR        = 0;
 constexpr uint8_t PIN_LED           = 4;
 constexpr bool    SENSOR_ACTIVE_LOW = false;
+
+// Wärme (Nutzer 2026-11-14: ESP-Chip im Leerlauf sehr warm). Der Zugangspunkt hält den Funk
+// dauerhaft an; weniger Sendeleistung und Takt senken die Verlustleistung. 80 MHz ist das
+// Minimum, mit dem das WLAN des ESP32-C3 läuft.
+constexpr uint32_t CPU_FREQ_MHZ       = 80;
+constexpr int8_t   WIFI_TX_POWER_QDBM = 34;   // 8,5 dBm in 0,25-dBm-Schritten (WIFI_POWER_8_5dBm)
 
 // LEDs (CR-01, D-05)
 constexpr uint16_t LED_COUNT            = 24;

@@ -65,6 +65,7 @@ void showFrame(const LedFrame& f) {
 }  // namespace
 
 void setup() {
+  setCpuFrequencyMhz(app::CPU_FREQ_MHZ);
   Serial.begin(115200);
   pinMode(app::PIN_SENSOR, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(app::PIN_SENSOR), onSensorEdge,
