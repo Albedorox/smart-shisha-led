@@ -43,10 +43,22 @@ def box(x0, x1, y0, y1, z0, z1):
     return b
 
 
+MCU_X0, MCU_X1 = -58.3, -35.6   # Platinenkanten: USB-Seite (mcu_x0) und Antennenseite
+
+
 def supermini():
-    return [(box(-55.0, -32.3, -9.05, 9.05, 3.5, 5.1), C_PCB_BLUE),          # Platine
-            (box(-56.3, -48.0, -4.5, 4.5, 5.1, 8.3), C_METAL),               # USB-C
-            (box(-45.0, -39.0, -3.0, 3.0, 5.1, 6.0), "#30343b")]             # ESP32-C3
+    return [(box(MCU_X0, MCU_X1, -9.05, 9.05, 3.5, 5.1), C_PCB_BLUE),        # Platine
+            (box(MCU_X0 - 1.3, MCU_X0 + 7.7, -4.5, 4.5, 5.1, 8.3), C_METAL),  # USB-C
+            (box(-49.0, -43.0, -3.0, 3.0, 5.1, 6.0), "#30343b")]             # ESP32-C3
+
+
+def breakout_screws():
+    parts = []
+    for y in (-8, 8):
+        c = trimesh.creation.cylinder(radius=2.2, height=1.2)
+        c.apply_translation([57.6, y, 5.7])
+        parts.append((c, C_METAL))
+    return parts
 
 
 def breakout():
@@ -166,6 +178,11 @@ class View:
                          bbox=dict(boxstyle="round,pad=0.25", fc="white", ec="none", alpha=0.85),
                          arrowprops=dict(arrowstyle="-", color=color, lw=1.6, shrinkA=0, shrinkB=3))
 
+    def zoom(self, x0, x1, y0, y1, z0, z1, pad=8):
+        pts = np.array([self.p((x, y, z)) for x in (x0, x1) for y in (y0, y1) for z in (z0, z1)])
+        self.ax.set_xlim(pts[:, 0].min() - pad, pts[:, 0].max() + pad)
+        self.ax.set_ylim(pts[:, 1].min() - pad, pts[:, 1].max() + pad)
+
     def save(self, name):
         self.fig.savefig(OUT / f"{name}.png", dpi=120, facecolor="white", bbox_inches="tight",
                          pad_inches=0.08)
@@ -177,15 +194,17 @@ ISO = (0.55, -0.95, 0.85)
 
 
 def bild_uebersicht():
+    """Nummern wie in der Tabelle „Auf einen Blick“."""
     v = View((0.3, -1, 0.95), size=(8, 9))
     v.draw([(T2, C_T2)], supermini() + breakout(), lift([(T4, C_T4)], 22), lift(sensor(), 22),
            lift([(T1, C_T1)], 46), lift(ring_pcb(), 46), lift(ring_top(), 46))
-    v.label((-43, 0, 65.6), "LED-Ring", -30, 22)
-    v.label((52, 30, 66), "T1 Deckplatte", 26, 18)
-    v.label((20, -47, 28), "SW-420 mit T4\n(an T1 geschraubt)", 46, -2, SEN)
-    v.label((-44, 0, 5.1), "ESP32-C3 SuperMini", -14, -34, C_PCB_BLUE)
-    v.label((54, 0, 5.1), "USB-C-Breakout", 14, -40, C_PCB_RED)
-    v.label((-40, -45, 8), "T2 Unterschale", -24, -18)
+    v.label((-43, 0, 65.6), "1  LED-Ring", -30, 22)
+    v.label((52, 30, 66), "2  T1 Deckplatte", 26, 18)
+    v.label((14, -47, 28), "3  SW-420 (hängt unter T1)", 40, -22, SEN)
+    v.label((-2, -47, 31), "4  T4 Distanzring (verdeckt)", 6, -44, M3)
+    v.label((-47, 0, 5.1), "5  ESP32-C3 SuperMini", -20, 22, C_PCB_BLUE)
+    v.label((56, 4, 5.1), "6  USB-C-Breakout", 26, 10, C_PCB_RED)
+    v.label((-44, -40, 8), "7  T2 Unterschale", -26, -10)
     v.save("00_uebersicht")
 
 
@@ -243,15 +262,54 @@ def bild_sensor():
     v.save("04_sensor")
 
 
+def bild_t2_plaetze():
+    v = View((0.0, -0.6, 1))
+    v.draw([(T2, C_T2)])
+    x, y = v.p(((MCU_X0 + MCU_X1) / 2, 0, 3.5))
+    v.ax.add_patch(plt.Rectangle((x - 12.2, y - 8.2), 24.4, 16.4, fill=False, ec=C_PCB_BLUE, lw=2.4, ls="--",
+                                 zorder=5))
+    v.label((MCU_X0, 0, 3.5), "5  Rahmen SuperMini", -2, 40, C_PCB_BLUE)
+    v.label((-62.5, 0, 7), "Programmier-Öffnung", -4, -34, C_PCB_BLUE)
+    for yy in (-8, 8):
+        v.ring_at((57.6, yy, 3.5), C_PCB_RED, r=3.4)
+    v.label((57.6, 8, 3.5), "6  zwei Sockel Breakout", 0, 40, C_PCB_RED)
+    v.label((62.5, 0, 7), "USB-C-Öffnung", 2, -34, C_PCB_RED)
+    for xx, yy in M3_PTS:
+        v.ring_at((xx, yy, 12), GREY, r=4.6, lw=2)
+    v.label((33.2, 33.2, 12), "Schraubdome", -26, 20, GREY)
+    v.label((15, -47, 10.5), "Sensorstifte", -38, -18, SEN)
+    v.save("05_t2_plaetze")
+
+
+def bild_supermini_detail():
+    v = View((0.45, -0.75, 1), size=(8, 5.2))
+    v.draw([(T2, C_T2)], supermini())
+    v.zoom(-63, -30, -14, 14, 0, 9, pad=6)
+    v.label((MCU_X0 - 1.3, 0, 6.7), "USB-C zur Programmier-Öffnung", -10, 16, C_PCB_BLUE, size=11.5)
+    v.label((MCU_X1 + 0.6, 0, 5.75), "Schnappzunge (Antennenseite)", 14, -14, GREY, size=11.5)
+    v.label((-46, -9.05, 5.1), "Bauteilseite oben", -6, -16, C_PCB_BLUE, size=11.5)
+    v.save("05a_supermini")
+
+
+def bild_breakout_detail():
+    v = View((-0.45, -0.75, 1), size=(8, 5.2))
+    pcb, usb = breakout()
+    v.draw([(T2, C_T2)], [pcb], [usb], breakout_screws())
+    v.zoom(44, 63, -15, 15, 0, 9, pad=6)
+    v.label((57.6, -8, 6.3), "2 × Blechschraube 2,5 × 4\nin die Sockel (ohne Mutter)", -14, -16, C_PCB_RED,
+            size=11.5)
+    v.label((60.5, 0, 8.3), "USB-C-Buchse oben,\nzeigt nach außen in die Wandöffnung", 2, 14, C_PCB_RED, size=11.5)
+    v.label((60.1, 9, 4.3), "Platinenkante in der Wandtasche", -16, -4, GREY, size=11.5, ha="right")
+    v.save("05b_breakout")
+
+
 def bild_t2_elektronik():
     v = View((0.0, -0.6, 1))
-    v.draw([(T2, C_T2)], supermini() + breakout())
-    v.label((-56.3, 0, 7), "USB des SuperMini\n(nur Programmieren)", -4, 34, C_PCB_BLUE)
-    v.label((-36, 4, 5.1), "Bauteilseite oben,\nAntennenseite rastet ein", 30, 36, C_PCB_BLUE)
-    v.label((61.5, 0, 7), "USB-C Strom\n(Powerbank)", 4, 34, C_PCB_RED)
-    v.label((50, -9, 5.1), "2 × M2,5 × 6\nselbstschneidend", 2, -34, C_PCB_RED)
+    v.draw([(T2, C_T2)], supermini() + breakout(), breakout_screws())
+    v.label((MCU_X0 - 1.3, 0, 7), "5  SuperMini", -4, 34, C_PCB_BLUE)
+    v.label((61.5, 0, 7), "6  Breakout", 4, 34, C_PCB_RED)
     v.label((15, -38.6, 10.5), "Sensorstifte", -38, -22, SEN)
-    v.save("05_t2_elektronik")
+    v.save("06_t2_elektronik")
 
 
 def bild_t2_unten():
@@ -265,7 +323,7 @@ def bild_t2_unten():
     v.label((-50, 0, 0), "4 × Silikonfuß Ø10", 30, 10, GREY)
     v.label((21, -51, 0), "Ablauf", 12, -12, GREY)
     v.ax.text(*v.p((0, 70, 0)), "T2 von unten gesehen", ha="center", va="center", fontsize=11, color=GREY)
-    v.save("06_t2_unten")
+    v.save("07_t2_unten")
 
 
 if __name__ == "__main__":
@@ -275,5 +333,8 @@ if __name__ == "__main__":
     bild_t1_unten()
     bild_ring()
     bild_sensor()
+    bild_t2_plaetze()
+    bild_supermini_detail()
+    bild_breakout_detail()
     bild_t2_elektronik()
     bild_t2_unten()
