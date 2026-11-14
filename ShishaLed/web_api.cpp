@@ -363,6 +363,7 @@ void webBegin(WebContext* c) {
   ctx = c;
   WiFi.mode(WIFI_AP);
   WiFi.softAP(app::AP_SSID);  // offen, ohne Passwort (01 SAF-01)
+  WiFi.setTxPower(static_cast<wifi_power_t>(app::WIFI_TX_POWER_QDBM));  // erst nach softAP wirksam
 
   static const char* headers[] = {"Content-Type", "If-None-Match"};
   server.collectHeaders(headers, 2);
