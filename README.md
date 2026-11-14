@@ -6,6 +6,7 @@
 
 | Ordner | Inhalt |
 |---|---|
+| `docs/bauanleitung.md` | Bauanleitung mit Bildern: Teile, Einschmelzmuttern, Montage, Verdrahtung, Test, Fehlersuche |
 | `docs/planung/` | Planungsdokumente 01–11 (Anforderungen, Hardware, Mechanik, Firmware, Web-App, API, Wireframes, CAD, Tests, offene Punkte, Umsetzungsplan) |
 | `docs/planung/fotos/` | Fotos und Skizzen der realen Bauteile |
 | `ShishaLed/` | Firmware (Arduino-Sketch): Sensor, LED-Ring, WLAN „ShishaLed“, HTTP-API nach 06 |
