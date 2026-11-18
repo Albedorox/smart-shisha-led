@@ -1,6 +1,8 @@
 # Smart Shisha LED – Bauanleitung
 
-Stand 2026-11-14 · Teile T1 v6, T2 v3, T4 v1 · Firmware ab 0.3.1
+Stand 2026-11-18 · Teile T1 v6, T2 v7, T4 v1 · Firmware ab 0.3.1
+
+Die Bilder zeigen noch T2 v3. In T2 v7 ist nur die SuperMini-Halterung geändert (kleinere USB-Öffnung, Schnappnase über der Antenne), die Einbauschritte bleiben gleich.
 
 Die Bilder sind aus den STL-Dateien gerendert, die Elektronik ist als vereinfachte Quader dargestellt. Neu erzeugen mit `python3 tools/gen_bauanleitung_bilder.py`. Alle Maße und Schraubenlängen sind aus dem CAD berechnet; was noch nicht am Gerät geprüft ist, steht unter [Annahmen](#annahmen).
 
@@ -41,7 +43,7 @@ Die Bilder sind aus den STL-Dateien gerendert, die Elektronik ist als vereinfach
 | Teil | Datei | Lage auf dem Bett |
 |---|---|---|
 | T1 Deckplatte | `cad/v6/stl/T1_Deckplatte_v6.stl` | Glasauflage nach oben |
-| T2 Unterschale | `cad/v3/stl/T2_Unterschale_v3.stl` | Boden auf dem Bett |
+| T2 Unterschale | `cad/v7/stl/T2_Unterschale_v7.stl` | Boden auf dem Bett |
 | T4 Distanzring | `cad/v1/stl/T4_Distanzring_v1.stl` | flach |
 
 PETG oder PLA, ohne Stützmaterial. Druckeinstellungen: [`planung/03_mechanical_design.md`](planung/03_mechanical_design.md), Abschnitt 13.
@@ -172,7 +174,7 @@ Jetzt testen, solange noch alles zugänglich ist. T1 liegt dabei mit dem Ring na
 
 1. Den SuperMini mit der **Bauteilseite nach oben** halten, die USB-Buchse zeigt zur Wand mit der kleinen **Programmier-Öffnung**.
 2. Zuerst die USB-Seite schräg in den Rahmen schieben, bis die Buchse in der Öffnung sitzt.
-3. Dann die andere Seite (Antennenseite, zur Gehäusemitte) herunterdrücken, bis die **Schnappzunge** hörbar einrastet. Keine Schraube, kein Kleber.
+3. Dann die andere Seite (Antennenseite, zur Gehäusemitte) herunterdrücken, bis die **Schnappzunge** hörbar einrastet. Ihre Nase hält die Platine über der Antenne. Keine Schraube, kein Kleber.
 4. Zum Ausbauen die Schnappzunge mit einem kleinen Schraubendreher zur Mitte drücken und die Platine an der Antennenseite anheben.
 
 ### 7b. USB-C-Breakout (Nr. 6)
