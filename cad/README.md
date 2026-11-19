@@ -2,6 +2,27 @@
 
 Erstellt mit SolidCraft (über MCP auf dem Rechner des Nutzers). Planungsgrundlage: `docs/planung/03_mechanical_design.md`, Workflow: `docs/planung/08_cad_mcp_plan.md`.
 
+## Stand v7 (2026-11-18) – T2: SuperMini-Halterung
+
+Befund des Nutzers an T2 v3: Der SuperMini hat zu viel Spiel nach oben und vor/zurück, der hintere Anschlag sitzt ca. 1 mm zu weit hinten, die Schnappnase trifft mitten in die Antenne (statt darüber einzuklippen), und die USB-Öffnung ist unnötig groß (die Buchse steht weit genug vor; die Öffnung des Breakouts passt gut).
+
+| | v6 (= T2 v3) | v7 |
+|---|---|---|
+| Lage SuperMini (`mcu_x0`) | −58,3: Buchse 0,5 mm vor der Innenwand, Platinenecken 1,1 mm vor der runden Wand | −59,21: Platinenecken 0,2 mm vor der runden Innenwand (`mcu_front_gap`), Buchse ca. 0,6 mm in der Wand. Rahmen, Anschlag und Schnapper wandern 0,91 mm mit nach vorn. |
+| Spiel vor/zurück | ca. 1,4 mm (vorn 1,1 + hinten 0,3) | ca. 0,5 mm (vorn 0,2 an den Ecken + hinten 0,3) |
+| USB-Öffnung (`prog_w` × `prog_h`) | 12,5 × 7,5 mm (für die Stecker-Umspritzung) | 9,8 × 4,2 mm (Buchse ca. 9 × 3,2 plus Spiel; Breakout: 10 × 4,6). Hält das USB-Ende auch nach oben und zur Seite. |
+| Schnappnase | Unterkante 0,15 mm über der Platine, 0,4 mm Überdeckung | Unterkante 0,1 mm über der Antenne (`mcu_ant_h` 1,1 mm, Annahme), 0,5 mm Überdeckung (`mcu_snap_over`). Die Zunge ist dafür 1,05 mm höher (Oberkante z 6,8). |
+
+Neue Parameter: `mcu_front_gap` 0,2, `mcu_ant_h` 1,1 (bitte an der Antenne nachmessen), `mcu_snap_over` 0,5. `mcu_x0` hängt jetzt von `outer_r`, `wall_t` und `mcu_w` ab.
+
+| Datei | Inhalt |
+|---|---|
+| `v7/SmartShisha_Untersetzer.solidcraft` | Quellmodell v7 (Zeitleiste am Ende) |
+| `v7/stl/T2_Unterschale_v7.stl` | Unterschale v7 (Boden auf dem Bett) |
+| `v7/ansicht_esp32_halter_v7.png` | SuperMini-Halterung und USB-Öffnung |
+
+T1 bleibt v6, T4 bleibt v1, Testring bleibt v6 (unverändert im Modell). T2 v7 ist geschlossen; Volumen 35 549 mm³ (v3: 35 415).
+
 ## Stand v6 (2026-10-28) – Testring und T1
 
 Befund des Nutzers am Testring v5: Der Zentrierrand passt, das Glas ist aber zu wackelig und könnte beim Zug am Schlauch wegrutschen. Gemessen: Die Glasaufstandskante liegt 4,5 mm innerhalb der Außenkante (r ca. 58), das Glas steigt dort mit ca. 50° nach außen an.
