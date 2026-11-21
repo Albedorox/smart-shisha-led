@@ -56,3 +56,82 @@ Ohne Pegelwandler funktioniert der Ring für einen kurzen Tisch-Test oft trotzde
 | T-HW-05 | Strom Leerlauf / Weiß 32 / 64 / 128 (mA) | |
 | M-10 | Powerbank bleibt im Ruhezustand an (Modell, Dauer) | |
 | – | Poti-Stellung, die am besten funktioniert hat (Foto genügt) | |
+
+## B0_Beschleunigung: LIS2DW12 statt SW-420
+
+Prüft, ob der Beschleunigungssensor LIS2DW12 das Blubbern beim Ziehen durch Glas und Deckplatte erkennt. Hintergrund und Rechnung: `docs/planung/12_vibrationssensor_bewertung.md` (§7). Der SW-420 darf angeschlossen bleiben, er läuft zum Vergleich mit.
+
+### Anschluss
+
+| LIS2DW12-Modul | SuperMini | Bemerkung |
+|---|---|---|
+| VCC | 3V3 | Modul hat einen eigenen Regler, 3,3 V reichen |
+| GND | GND | |
+| SDA | GPIO6 | Pull-ups 10 kΩ sind auf dem Modul |
+| SCL | GPIO7 | |
+| CS, SDO, IT1, IT2 | offen lassen | SDO offen → I²C-Adresse 0x19 (an GND: 0x18, wird auch gefunden) |
+
+LED-Ring (GPIO4) und SW-420 (GPIO0) bleiben wie in der Firmware.
+
+### Befestigen
+
+- Unterseite der Deckplatte, **direkt unter dem Auflagering des Glases** (Ø ca. 109 mm), Bauteilseite nach unten.
+- **Flach** aufkleben, damit die Z-Achse senkrecht steht. Der Sketch prüft das und meldet es.
+- **Dünnes, hartes** doppelseitiges Klebeband (Folienband) oder ein Tropfen Sekundenkleber/Heißkleber. **Kein Schaumklebeband**, das federt die Vibration weg.
+- Kabel lose verlegen, sie dürfen nicht am Modul ziehen.
+
+### Flashen
+
+Wie in `docs/flashen.md`, nur mit einer anderen Datei:
+
+- aus dem Pull Request: **Actions** → Lauf „Testsketch Beschleunigung“ → **Artifacts** → `B0_Beschleunigung-firmware` (ZIP entpacken), oder
+- nach dem Merge: **Releases** → **test-beschleunigung** → `B0_Beschleunigung-merged.bin`.
+
+Adresse `0x0`. Gespeicherte Einstellungen der Firmware bleiben erhalten. **Nach dem Test wieder `firmware-latest` flashen.**
+
+Alternativ in der Arduino IDE öffnen und hochladen (Einstellungen oben, Bibliothek „Adafruit NeoPixel“).
+
+### Was der LED-Ring zeigt
+
+| Anzeige | Bedeutung |
+|---|---|
+| ein weißer Punkt läuft im Kreis | Ruhemessung (10 s): nichts berühren, nicht ziehen |
+| grüner Balken | Vibrationspegel unter der Schwelle (8 LEDs = doppelt so stark wie Ruhe) |
+| blauer Balken | Pegel über der Schwelle, das wäre ein erkannter Zug |
+| eine schwach rote LED | Lage der Schwelle (Start: 2-fache Ruhe) |
+| ganzer Ring blinkt rot | kein Sensor gefunden: Verdrahtung prüfen |
+| ganzer Ring blinkt orange | falscher Chip (z. B. LIS2DS12): Modul zurückschicken |
+
+Der Ring funktioniert auch ohne Computer an der Powerbank: Leuchtet beim Ziehen ein blauer Balken auf, der beim Abstellen des Glases oder Anfassen des Schlauchs nicht kommt, ist das schon ein gutes Zeichen.
+
+### Ablauf mit seriellem Monitor (115200 Baud)
+
+1. Nach dem Start prüft der Sketch die Chip-Kennung: **`WHO_AM_I = 0x44 -> LIS2DW12 erkannt`** muss erscheinen.
+2. 10 s Ruhemessung. Danach meldet er den Ruhepegel, das zu erwartende Sensorrauschen (ca. 1 mg auf Z) und ob der Sensor flach liegt.
+3. Ab dann kommt jede Sekunde eine Zeile mit dem Pegel. Ein Zug wird als `Zug #n: Dauer, Pegel, Hauptfrequenz` gemeldet, Klopfer als `kurzer Stoß`.
+4. Abschnitte markieren (Taste + Enter):
+   - `1` direkt vor einem Zug, `0` direkt danach. **5 Züge**, normal stark.
+   - `2` und dann den Schlauch anfassen und bewegen, ohne zu ziehen, danach `0`.
+   - `3` und dann zwei-, dreimal auf den Tisch tippen, danach `0`.
+   - zwischendurch einmal `f` während eines Zugs: zeigt das Spektrum (bei welcher Frequenz es blubbert).
+5. `e` zeigt die **Auswertung**: Pegel je Abschnitt, Faktor zur Ruhe, Anteil über der Schwelle, SW-420-Flanken zum Vergleich und ein Ergebnis:
+   - Zug ≥ 3-mal Ruhe: reicht mit Reserve
+   - 2- bis 3-mal: reicht knapp
+   - unter 2-mal: Montage verbessern, sonst stärkerer Sensor
+6. Bitte die komplette Ausgabe kopieren und zurückgeben, mindestens die Auswertung.
+
+Weitere Tasten: `+`/`-` Schwelle, `a` Z-Achse oder alle Achsen, `k` Ruhe neu messen, `p` Plotter (Werkzeuge → Serieller Plotter), `r` Rohdaten mit 400 Hz, `q` nur Ereignisse, `h` Hilfe.
+
+### Messprotokoll LIS2DW12
+
+| Nr. | Prüfung | Ergebnis |
+|---|---|---|
+| S-01 | WHO_AM_I (0x44 erwartet), I²C-Adresse | |
+| S-02 | Ruhepegel Z (mg) und erwartetes Sensorrauschen laut Sketch | |
+| S-03 | Lage: liegt flach (Z ≈ ±1000 mg)? | |
+| S-04 | Faktor Zug/Ruhe aus `e` | |
+| S-05 | 5 Züge: wie viele als `Zug #n` erkannt? | |
+| S-06 | Hauptfrequenz beim Ziehen | |
+| S-07 | Schlauch anfassen / Tisch tippen: als Zug erkannt? | |
+| S-08 | SW-420-Flanken bei Zug / Schlauch / Tisch (Vergleich) | |
+| S-09 | Befestigung (Klebeband, Kleber) und Ort | |

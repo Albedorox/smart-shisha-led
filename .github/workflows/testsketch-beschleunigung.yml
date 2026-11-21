@@ -1,0 +1,76 @@
+name: Testsketch Beschleunigung
+
+# Baut den B0-Testsketch für den LIS2DW12 als eine Flash-Datei
+# B0_Beschleunigung-merged.bin (Adresse 0x0, Anleitung: test/b0_hardware/README.md).
+# Auf main zusätzlich als Release "test-beschleunigung".
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'test/b0_hardware/B0_Beschleunigung/**'
+      - '.github/workflows/testsketch-beschleunigung.yml'
+  pull_request:
+    paths:
+      - 'test/b0_hardware/B0_Beschleunigung/**'
+      - '.github/workflows/testsketch-beschleunigung.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  ESP32_INDEX: https://espressif.github.io/arduino-esp32/package_esp32_index.json
+  FQBN: esp32:esp32:esp32c3:CDCOnBoot=cdc
+  SKETCH: test/b0_hardware/B0_Beschleunigung
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: arduino/setup-arduino-cli@v2
+
+      - name: ESP32-Core und Bibliotheken installieren
+        run: |
+          arduino-cli core update-index --additional-urls "$ESP32_INDEX"
+          arduino-cli core install esp32:esp32 --additional-urls "$ESP32_INDEX"
+          arduino-cli lib install "Adafruit NeoPixel"
+
+      - name: Kompilieren
+        run: |
+          arduino-cli compile --fqbn "$FQBN" --warnings default \
+            --build-path build --output-dir out "$SKETCH"
+          ls -l out
+
+      - name: Eine Flash-Datei erzeugen (Bootloader, Partitionen, Sketch)
+        run: |
+          if [ -f out/B0_Beschleunigung.ino.merged.bin ]; then
+            cp out/B0_Beschleunigung.ino.merged.bin B0_Beschleunigung-merged.bin
+          else
+            ESPTOOL=$(find ~/.arduino15/packages/esp32/tools -name 'esptool*' -type f -perm -u+x | head -n1)
+            BOOT_APP0=$(find ~/.arduino15/packages/esp32/hardware -name boot_app0.bin | head -n1)
+            "$ESPTOOL" --chip esp32c3 merge_bin -o B0_Beschleunigung-merged.bin \
+              0x0 out/B0_Beschleunigung.ino.bootloader.bin \
+              0x8000 out/B0_Beschleunigung.ino.partitions.bin \
+              0xe000 "$BOOT_APP0" \
+              0x10000 out/B0_Beschleunigung.ino.bin
+          fi
+          ls -l B0_Beschleunigung-merged.bin
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: B0_Beschleunigung-firmware
+          path: B0_Beschleunigung-merged.bin
+
+      - name: Als Release "test-beschleunigung" veröffentlichen
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete test-beschleunigung --yes --cleanup-tag || true
+          gh release create test-beschleunigung B0_Beschleunigung-merged.bin \
+            --title "Testsketch Beschleunigung LIS2DW12" \
+            --notes "Automatisch gebaut aus ${GITHUB_SHA::7}. Flashen wie docs/flashen.md, Ablauf: test/b0_hardware/README.md. Danach wieder firmware-latest flashen." \
+            --prerelease --target "$GITHUB_SHA"
