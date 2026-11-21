@@ -15,6 +15,7 @@ Stand: 2026-10-24 (Rev. 2: Messwerte, 24 LEDs, SolidCraft geprüft) · Grundlage
 | 09_test_plan.md | Hardware-, Firmware-, API-, UI-, Langzeit- und CAD-Tests |
 | 10_open_questions.md | offene Fragen, Änderungsanträge CR-01…03, Entscheidungen D-01…D-31, Annahmen, Messaufgaben, Risiken |
 | 11_implementation_plan.md | Arbeitspakete B0–B8, Abhängigkeiten, Freigabepunkte G0–G5 |
+| 12_vibrationssensor_bewertung.md | Blubber-Erkennung: Abschätzung der Vibration, SW-420 vs. Piezo vs. Beschleunigungssensoren, Messtest LIS2DW12 |
 
 Einstieg: zuerst `10_open_questions.md` §1 (offene Fragen), dann 05/07 (Web-App) und 03 (Mechanik).
 
