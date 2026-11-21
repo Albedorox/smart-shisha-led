@@ -90,6 +90,14 @@ struct Biquad {
   }
 };
 
+// Spektrum (Typ steht vor der ersten Funktion, sonst stolpern die
+// automatisch erzeugten Prototypen der Arduino-IDE darüber)
+struct Spectrum {
+  float peakHz[3] = {0, 0, 0}, peakMg[3] = {0, 0, 0};   // Amplitude (Spitze) in mg
+  float band[5] = {0, 0, 0, 0, 0};                       // Effektivwert in mg
+};
+const float BAND_EDGES[6] = {5, 20, 50, 100, 150, 200};
+
 // Butterworth 2. Ordnung (Audio-EQ-Cookbook, Q = 0,7071)
 Biquad makeBiquad(float f0, bool highpass) {
   const float w0 = 2.0f * (float)M_PI * f0 / FS_HZ;
@@ -201,7 +209,7 @@ bool probe(uint8_t addr) {
   return Wire.endTransmission() == 0;
 }
 
-void IRAM_ATTR onSw420() { swEdges++; }
+void IRAM_ATTR onSw420() { swEdges = swEdges + 1; }
 
 // ---------- LED-Ring ----------
 void ringFill(uint32_t color) {
@@ -318,12 +326,6 @@ void fft(float* re, float* im, int n) {
     }
   }
 }
-
-struct Spectrum {
-  float peakHz[3] = {0, 0, 0}, peakMg[3] = {0, 0, 0};   // Amplitude (Spitze) in mg
-  float band[5] = {0, 0, 0, 0, 0};                       // Effektivwert in mg
-};
-const float BAND_EDGES[6] = {5, 20, 50, 100, 150, 200};
 
 // Z-Achse der letzten 1,28 s (roh, Mittelwert abgezogen, Hann-Fenster)
 Spectrum computeSpectrum() {
